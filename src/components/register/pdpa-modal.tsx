@@ -17,11 +17,11 @@ export default function PDPAModal({ onAccept, onDecline }: PDPAModalProps) {
   }, [])
 
   return (
-    <div className="pdpa-modal">
-      <div className="pdpa-content">
-        <h2 className="text-xl font-semibold text-blue-600 mb-4">ข้อตกลงการใช้บริการ</h2>
-        <div className="mb-6 text-sm text-gray-700">
-          <p className="mb-4">
+    <div className="pdpa-modal mb-flex-center mb-fixed mb-pl-21 mb-pr-21 mb-pt-87 mb-pb-87">
+      <div className="pdpa-content mb-relative mb-w-full mb-h-full mb-rounded-49">
+        <p className="headText-pdpa mb-inline mb-font-size-29 mb-font-normal mb-mb-40">ข้อตกลงการใช้บริการ</p>
+        <div className="text-pdpa font-light mb-mb-30  mb-overflow-y-auto mb-font-size-23">
+          <p className="mb-mb-10">
             ธุรกิจของเราเก็บรวบรวมข้อมูลส่วนตัวของคุณ เพื่อนำมาพัฒนาผลิตภัณฑ์ สินค้า บริการต่างๆ และวิเคราะห์ข้อมูล (KYC) ที่จะนำมาพัฒนาผลิตภัณฑ์
             บริการ ความพึงพอใจของลูกค้า ในการนำเสนอผลิตภัณฑ์ บริการ การนำเสนอสิทธิประโยชน์ที่ท่านจะได้รับ กิจกรรมส่งเสริมการขาย ข้อเสนอพิเศษ
             ข่าวสารต่างๆ ตามที่ท่านสนใจ ข้อมูลการเข้าร่วมกิจกรรมต่างๆ ความชื่นชอบ พฤติกรรมการใช้บริการ หรือข้อมูลอื่นใด ที่เกี่ยวข้องกับท่าน
