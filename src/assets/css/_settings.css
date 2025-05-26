@@ -1,0 +1,14 @@
+:root {
+  --font-family: "Kanit", sans-serif;
+  --bg-blue: #3283e8;
+  --bg-red: #dc3545;
+  --bg-green: #28a745;
+  --bg-yellow: #ffc107;
+  --bg-purple: #6f42c1;
+  --bg-pink: #e83e8c;
+
+  --text-blue: #3283e8;
+  --text-midnight-black: #010101;
+}
+
+/*# sourceMappingURL=_settings.css.map */
