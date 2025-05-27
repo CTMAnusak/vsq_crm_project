@@ -6,9 +6,15 @@
   --bg-yellow: #ffc107;
   --bg-purple: #6f42c1;
   --bg-pink: #e83e8c;
+  
+  --color-blue: #3283e8;
+  --color-blue-deep: #445b99 ;
+  --color-midnight-black: #010101;
+  --color-gray-soft: #cbcbcb;
+  --color-gray-medium: #949494;
+  --color-light-surface: #f5f8fa;
+  --color-red: #dc3545;
 
-  --text-blue: #3283e8;
-  --text-midnight-black: #010101;
 }
 
 /*# sourceMappingURL=_settings.css.map */

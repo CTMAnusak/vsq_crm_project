@@ -27,9 +27,22 @@ const mockExistingUsers = [
   { firstName: "วิชัย", lastName: "สุขสันต์", phone: "0978901234" },
 ]
 
+const customerTabs = [
+  {
+    id: "existing",
+    title: "ลูกค้า V Square",
+    subtitle: "เคยรับบริการแล้ว"
+  },
+  {
+    id: "new",
+    title: "สมัครสมาชิก",
+    subtitle: "ลูกค้าใหม่"
+  }
+];
+
 export default function RegistrationForm() {
   const router = useRouter()
-  const [activeTab, setActiveTab] = useState<TabType | null>(null)
+  const [activeTab, setActiveTab] = useState<TabType>("existing")
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
@@ -159,138 +172,90 @@ export default function RegistrationForm() {
           onDecline={handleDeclinePDPA}
         />
       )}
-      {activeTab === null ? (
-        <div className="text-center mb-6">
-          <div className="grid grid-cols-2 gap-4 mb-6">
-            <button
-              className="border rounded-md p-4 flex items-center hover:border-blue-500 transition-colors"
-              onClick={() => handleTabChange("existing")}
-            >
-              <div className="checkbox-container mr-2">
-                <span className="sr-only"></span>
-              </div>
-              <span>
-                ลูกค้า V Square
-                <br />
-                เคยรับบริการแล้ว
-              </span>
-            </button>
-            <button
-              className="border rounded-md p-4 flex items-center hover:border-blue-500 transition-colors"
-              onClick={() => handleTabChange("new")}
-            >
-              <div className="checkbox-container mr-2">
-                <span className="sr-only"></span>
-              </div>
-              <span>
-                สมัครสมาชิก
-                <br />
-                ลูกค้าใหม่
-              </span>
-            </button>
-          </div>
-          <p className="text-gray-500">เพื่อสิทธิพิเศษของท่าน กรุณาเลือกรูปแบบการใช้บริการ</p>
-        </div>
-      ) : (
-        <>
-          <div className="grid grid-cols-2 gap-4 mb-6">
-            <button
-              className={`border rounded-md p-4 flex items-center ${
-                activeTab === "existing" ? "border-blue-500" : "border-gray-200"
+      <div className="mb-flex-center-start mb-gap-16">
+        {customerTabs.map((tab) => (
+          <button
+            key={tab.id}
+            className={`${
+              activeTab === tab.id ? "customer-tab-active" : "customer-tab"
+            } mb-relative mb-w-319 mb-h-121 mb-rounded-10 mb-bg-white mb-overflow-hidden`}
+            onClick={() => handleTabChange(tab.id as TabType)}
+          >
+            <div
+              className={`checkbox-container mb-absolute mb-top-0 mb-left-0 mb-flex-center mb-w-40 mb-h-40 ${
+                activeTab === tab.id ? "checkbox-checked" : "checkbox-unchecked"
               }`}
-              onClick={() => handleTabChange("existing")}
             >
-              <div
-                className={`checkbox-container mr-2 ${
-                  activeTab === "existing" ? "checkbox-checked" : "checkbox-unchecked"
-                }`}
-              >
-                {activeTab === "existing" && <CheckIcon className="h-3 w-3 text-white" />}
-              </div>
-              <span className={activeTab === "existing" ? "text-blue-600" : "text-gray-500"}>
-                ลูกค้า V Square
-                <br />
-                เคยรับบริการแล้ว
-              </span>
-            </button>
-            <button
-              className={`border rounded-md p-4 flex items-center ${
-                activeTab === "new" ? "border-blue-500" : "border-gray-200"
-              }`}
-              onClick={() => handleTabChange("new")}
-            >
-              <div
-                className={`checkbox-container mr-2 ${activeTab === "new" ? "checkbox-checked" : "checkbox-unchecked"}`}
-              >
-                {activeTab === "new" && <CheckIcon className="h-3 w-3 text-white" />}
-              </div>
-              <span className={activeTab === "new" ? "text-blue-600" : "text-gray-500"}>
-                สมัครสมาชิก
-                <br />
-                ลูกค้าใหม่
-              </span>
-            </button>
-          </div>
-
-          <form onSubmit={handleSubmit}>
-            <div className="space-y-4">
-              <div>
-                <label htmlFor="firstName">ชื่อ*</label>
-                <input
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleInputChange}
-                  placeholder="ชื่อ"
-                  className={errors.firstName ? "input-error" : ""}
-                />
-                {errors.firstName && <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>}
-              </div>
-
-              <div>
-                <label htmlFor="lastName">นามสกุล*</label>
-                <input
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleInputChange}
-                  placeholder="นามสกุล"
-                  className={errors.lastName ? "input-error" : ""}
-                />
-                {errors.lastName && <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>}
-              </div>
-
-              <div>
-                <label htmlFor="phone">เบอร์โทรศัพท์*</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  placeholder="เบอร์โทรศัพท์"
-                  className={errors.phone ? "input-error" : ""}
-                />
-                {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
-              </div>
-
-              {notFound && <p className="text-red-500 text-sm">*ไม่พบข้อมูล กรุณาตรวจสอบข้อมูลใหม่</p>}
-
-              <button
-                type="submit"
-                className={isFormValid ? "btn-primary w-full" : "btn-disabled w-full"}
-                disabled={!isFormValid}
-              >
-                {activeTab === "existing" ? "ยืนยันข้อมูล" : "ถัดไป"}
-              </button>
+              {activeTab === tab.id && <CheckIcon className="mb-h-24px mb-w-31 text-white" />}
             </div>
-          </form>
+            <p className={`customer-tab-text mb-absolute mb-contents mb-top-1-2 mb-left-1-2 mb-font-light mb-font-size-30 mb-line-12 ${
+              activeTab === tab.id ? "customer-tab-text-active" : ""
+            }`}>
+              {tab.title}
+              <br />
+              {tab.subtitle}
+            </p>
+          </button>
+        ))}
+      </div>
 
-          <p className="text-xs text-gray-500 mt-4">*ชื่อ - นามสกุล คือ ลูกค้าเจ้าของเบอร์ ที่มาบริการ V Square Clinic</p>
-        </>
-      )}
+      <form className="register-form" onSubmit={handleSubmit}>
+        <div className="mb-flex mb-mt-21 mb-bg-white mb-items-stretch mb-text-center mb-justify-start mb-flex-col mb-pt-32 mb-pl-48 mb-pr-48 mb-pb-46">
+          <div>
+            <label htmlFor="firstName" className="mb-font-size-35 mb-font-normal">ชื่อ*</label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleInputChange}
+              placeholder="ชื่อ"
+              className={errors.firstName ? "input-error" : ""}
+            />
+            {errors.firstName && <p className="error-text text-sm mt-1">{errors.firstName}</p>}
+          </div>
+
+          <div>
+            <label htmlFor="lastName" className="mb-font-size-35 mb-font-normal">นามสกุล*</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleInputChange}
+              placeholder="นามสกุล"
+              className={errors.lastName ? "input-error" : ""}
+            />
+            {errors.lastName && <p className="error-text text-sm mt-1">{errors.lastName}</p>}
+          </div>
+
+          <div>
+            <label htmlFor="phone" className="mb-font-size-35 mb-font-normal">เบอร์โทรศัพท์*</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+              placeholder="เบอร์โทรศัพท์"
+              className={errors.phone ? "input-error" : ""}
+            />
+            {errors.phone && <p className="error-text text-sm mt-1">{errors.phone}</p>}
+          </div>
+
+          {notFound && <p className="error-text text-sm">*ไม่พบข้อมูล กรุณาตรวจสอบข้อมูลใหม่</p>}
+
+          <button
+            type="submit"
+            className={isFormValid ? "btn-primary w-full" : "btn-disabled w-full"}
+            disabled={!isFormValid}
+          >
+            {activeTab === "existing" ? "ยืนยันข้อมูล" : "ถัดไป"}
+          </button>
+        </div>
+      </form>
+
+      <p className="text-xs text-gray-500 mt-4">*ชื่อ - นามสกุล คือ ลูกค้าเจ้าของเบอร์ ที่มาบริการ V Square Clinic</p>
     </div>
   )
 }
