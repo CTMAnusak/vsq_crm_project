@@ -17,4 +17,15 @@
 
 }
 
-/*# sourceMappingURL=_settings.css.map */
+.text-blue {
+  color: var(--color-blue);
+}
+.bg-blue {
+  background-color: var(--color-blue);
+}
+.text-blue-deep {
+  color: var(--color-blue-deep);
+}
+.bg-gray-soft {
+  background-color: var(--color-gray-soft);
+}

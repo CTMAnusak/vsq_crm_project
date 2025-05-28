@@ -51,6 +51,8 @@ export default function RegistrationForm() {
   const [errors, setErrors] = useState<Partial<FormData>>({})
   const [notFound, setNotFound] = useState(false)
   const [showPDPA, setShowPDPA] = useState(false)
+  const [notFoundFields, setNotFoundFields] = useState<string[]>([])
+  const [isDataMismatch, setIsDataMismatch] = useState(false)
 
   useEffect(() => {
     // ตรวจสอบว่ายอมรับ PDPA แล้วหรือยัง
@@ -112,22 +114,45 @@ export default function RegistrationForm() {
 
   const validateForm = () => {
     const newErrors: Partial<FormData> = {}
+    const errorMessages: string[] = []
 
-    if (!formData.firstName) {
-      newErrors.firstName = "กรุณากรอกชื่อ"
-    }
-
-    if (!formData.lastName) {
-      newErrors.lastName = "กรุณากรอกนามสกุล"
-    }
-
-    if (!formData.phone) {
-      newErrors.phone = "กรุณากรอกเบอร์โทรศัพท์"
-    } else if (!/^\d{10}$/.test(formData.phone)) {
-      newErrors.phone = "เบอร์โทรศัพท์ต้องเป็นตัวเลข 10 หลัก"
+    if (activeTab === "new") {
+      // ตรวจสอบเฉพาะเบอร์โทรศัพท์
+      if (!formData.phone) {
+        newErrors.phone = "กรุณากรอกเบอร์โทรศัพท์"
+        errorMessages.push("เบอร์โทรศัพท์")
+      } else if (!/^\d{10}$/.test(formData.phone)) {
+        newErrors.phone = "เบอร์โทรศัพท์ต้องเป็นตัวเลข 10 หลัก"
+        errorMessages.push("เบอร์โทรศัพท์")
+      }
+    } else {
+      // ตรวจสอบทุกฟิลด์สำหรับลูกค้าเดิม
+      if (!formData.firstName) {
+        newErrors.firstName = "กรุณากรอกชื่อ"
+        errorMessages.push("ชื่อ")
+      }
+      if (!formData.lastName) {
+        newErrors.lastName = "กรุณากรอกนามสกุล"
+        errorMessages.push("นามสกุล")
+      }
+      if (!formData.phone) {
+        newErrors.phone = "กรุณากรอกเบอร์โทรศัพท์"
+        errorMessages.push("เบอร์โทรศัพท์")
+      } else if (!/^\d{10}$/.test(formData.phone)) {
+        newErrors.phone = "เบอร์โทรศัพท์ต้องเป็นตัวเลข 10 หลัก"
+        errorMessages.push("เบอร์โทรศัพท์")
+      }
     }
 
     setErrors(newErrors)
+    
+    // ถ้ามี error ให้แสดงข้อความรวม
+    if (errorMessages.length > 0) {
+      setNotFoundFields(errorMessages)
+      setNotFound(true)
+      setIsDataMismatch(false)
+    }
+
     return Object.keys(newErrors).length === 0
   }
 
@@ -140,13 +165,36 @@ export default function RegistrationForm() {
 
     if (activeTab === "existing") {
       // ตรวจสอบว่ามีข้อมูลในระบบหรือไม่
-      const userExists = mockExistingUsers.some(
-        (user) =>
-          user.firstName === formData.firstName && user.lastName === formData.lastName && user.phone === formData.phone,
+      const notFound: string[] = []
+      
+      if (!mockExistingUsers.some(user => user.firstName === formData.firstName)) {
+        notFound.push("ชื่อ")
+      }
+      if (!mockExistingUsers.some(user => user.lastName === formData.lastName)) {
+        notFound.push("นามสกุล")
+      }
+      if (!mockExistingUsers.some(user => user.phone === formData.phone)) {
+        notFound.push("เบอร์โทรศัพท์")
+      }
+
+      if (notFound.length > 0) {
+        setNotFoundFields(notFound)
+        setNotFound(true)
+        setIsDataMismatch(false)
+        return
+      }
+
+      // ตรวจสอบความถูกต้องของข้อมูล
+      const isDataValid = mockExistingUsers.some(
+        user => 
+          user.firstName === formData.firstName && 
+          user.lastName === formData.lastName && 
+          user.phone === formData.phone
       )
 
-      if (!userExists) {
-        setNotFound(true)
+      if (!isDataValid) {
+        setIsDataMismatch(true)
+        setNotFound(false)
         return
       }
     }
@@ -186,7 +234,7 @@ export default function RegistrationForm() {
                 activeTab === tab.id ? "checkbox-checked" : "checkbox-unchecked"
               }`}
             >
-              {activeTab === tab.id && <CheckIcon className="mb-h-24px mb-w-31 text-white" />}
+              {activeTab === tab.id && <CheckIcon className="text-white" />}
             </div>
             <p className={`customer-tab-text mb-absolute mb-contents mb-top-1-2 mb-left-1-2 mb-font-light mb-font-size-30 mb-line-12 ${
               activeTab === tab.id ? "customer-tab-text-active" : ""
@@ -199,8 +247,8 @@ export default function RegistrationForm() {
         ))}
       </div>
 
-      <form className="register-form" onSubmit={handleSubmit}>
-        <div className="mb-flex mb-mt-21 mb-bg-white mb-items-stretch mb-text-center mb-justify-start mb-flex-col mb-pt-32 mb-pl-48 mb-pr-48 mb-pb-46">
+      <form className="register-form mb-flex-start-center mb-flex-col" onSubmit={handleSubmit}>
+        <div className="mb-bg-white mb-flex-start-center mb-text-center mb-flex-col mb-mt-21 mb-pt-32 mb-pl-48 mb-pr-48 mb-pb-46 mb-rounded-10">
           <div>
             <label htmlFor="firstName" className="mb-font-size-35 mb-font-normal">ชื่อ*</label>
             <input
@@ -210,11 +258,13 @@ export default function RegistrationForm() {
               value={formData.firstName}
               onChange={handleInputChange}
               placeholder="ชื่อ"
-              className={errors.firstName ? "input-error" : ""}
+              className={`register-form-input ${
+                errors.firstName || 
+                notFoundFields.includes("ชื่อ") || 
+                isDataMismatch ? "input-error" : ""
+              }`}
             />
-            {errors.firstName && <p className="error-text text-sm mt-1">{errors.firstName}</p>}
           </div>
-
           <div>
             <label htmlFor="lastName" className="mb-font-size-35 mb-font-normal">นามสกุล*</label>
             <input
@@ -224,11 +274,13 @@ export default function RegistrationForm() {
               value={formData.lastName}
               onChange={handleInputChange}
               placeholder="นามสกุล"
-              className={errors.lastName ? "input-error" : ""}
+              className={`register-form-input ${
+                errors.lastName || 
+                notFoundFields.includes("นามสกุล") || 
+                isDataMismatch ? "input-error" : ""
+              }`}
             />
-            {errors.lastName && <p className="error-text text-sm mt-1">{errors.lastName}</p>}
           </div>
-
           <div>
             <label htmlFor="phone" className="mb-font-size-35 mb-font-normal">เบอร์โทรศัพท์*</label>
             <input
@@ -238,24 +290,64 @@ export default function RegistrationForm() {
               value={formData.phone}
               onChange={handleInputChange}
               placeholder="เบอร์โทรศัพท์"
-              className={errors.phone ? "input-error" : ""}
+              className={`register-form-input ${
+                errors.phone || 
+                notFoundFields.includes("เบอร์โทรศัพท์") || 
+                isDataMismatch ? "input-error" : ""
+              }`}
             />
-            {errors.phone && <p className="error-text text-sm mt-1">{errors.phone}</p>}
           </div>
-
-          {notFound && <p className="error-text text-sm">*ไม่พบข้อมูล กรุณาตรวจสอบข้อมูลใหม่</p>}
-
-          <button
-            type="submit"
-            className={isFormValid ? "btn-primary w-full" : "btn-disabled w-full"}
-            disabled={!isFormValid}
-          >
-            {activeTab === "existing" ? "ยืนยันข้อมูล" : "ถัดไป"}
-          </button>
         </div>
+        <div className="mb-text-center mb-h-64 flex-center flex-col">
+          {activeTab === "new" && errors.phone && (
+            <p className="text-error text-sm">
+              *{errors.phone}
+            </p>
+          )}
+          {activeTab === "existing" && errors.phone && notFound && (
+            <>
+              <p className="text-error text-sm">
+                *{errors.phone}
+              </p>
+              <p className="text-error text-sm">
+                *ไม่พบข้อมูล "{notFoundFields.length > 1 ? notFoundFields.slice(0, -1).join(", ") + " และ" + notFoundFields.slice(-1) : notFoundFields[0]}" กรุณากรอกข้อมูลใหม่
+              </p>
+            </>
+          )}
+          {activeTab === "existing" && errors.phone && !notFound && (
+            <p className="text-error text-sm">
+              *{errors.phone}
+            </p>
+          )}
+          {activeTab === "existing" && !errors.phone && notFound && (
+            <p className="text-error text-sm">
+              *ไม่พบข้อมูล "{notFoundFields.length > 1 ? notFoundFields.slice(0, -1).join(", ") + " และ" + notFoundFields.slice(-1) : notFoundFields[0]}" กรุณากรอกข้อมูลใหม่
+            </p>
+          )}
+          {activeTab === "existing" && isDataMismatch && (
+            <p className="text-error text-sm">
+              *ข้อมูลไม่ตรงกัน กรุณากรอกข้อมูลใหม่
+            </p>
+          )}
+        </div>
+        <button
+          type="submit"
+          className={
+            `${isFormValid ? "bg-blue" : "bg-gray-soft"} mb-w-553 mb-h-84 mb-rounded-17 mb-font-light mb-font-size-30 text-white` +
+            (activeTab === "new" ? " mb-mb-84 " : "")
+          }
+          disabled={!isFormValid}
+        >
+          {activeTab === "existing" ? "ยืนยันข้อมูล" : "ถัดไป"}
+        </button>
       </form>
 
-      <p className="text-xs text-gray-500 mt-4">*ชื่อ - นามสกุล คือ ลูกค้าเจ้าของเบอร์ ที่มาบริการ V Square Clinic</p>
+      {activeTab === "existing" && (
+        <p className="text-after-confirm mb-relative mb-top-0 mb-text-center mb-left-1-2 text-blue-deep mb-font-light mb-font-size-26 mb-mt-24 mb-mb-26">
+          *ชื่อ – นามสกุล ผิด ลูกค้าแจ้งแก้ไขได้ ที่หน้าสาขา V Square Clinic
+        </p>
+      )}
+
     </div>
   )
 }

@@ -1,6 +1,6 @@
 /* ===== Layout ===== */
 .page-screen {
-  height: 100dvh;
+  height: calc(var(--vh) * 100);
   width: 768px;
 }
 
@@ -15,6 +15,7 @@
 input,
 select,
 textarea {
+  font-family: var(--font-family);
   width: 100%;
   padding: 0.75rem 1rem;
   border: 1px solid #d1d5db;
@@ -38,8 +39,12 @@ label {
 }
 
 
-.input-error {
+.input-error,
+.register-form-input.input-error:not(:placeholder-shown) {
   border-color: #ef4444;
+}
+.text-error {
+  color: #ef4444;
 }
 
 .input-error:focus {
@@ -51,12 +56,6 @@ label {
 button {
   transition: all 0.2s;
   font-family: var(--font-family);
-}
-
-.btn-disabled {
-  background-color: #d1d5db;
-  color: #6b7280;
-  cursor: not-allowed;
 }
 
 .btn-link {
@@ -79,7 +78,7 @@ button {
 /* ===== Specific Components ===== */
 .register-container {
   background-color: var(--color-light-surface);
-  height: 100dvh;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -124,6 +123,11 @@ button {
   color: var(--color-blue);
 }
 
+.text-after-confirm {
+  width: calc(100% + 80px);
+  transform: translateX(-50%);
+}
+
 /* Tabs */
 .tab-active {
   border-color: #3b82f6;
@@ -135,10 +139,10 @@ button {
   color: #6b7280;
 }
 .customer-tab{
-  border: 2px solid var(--color-gray-soft);
+  border: 3px solid var(--color-gray-soft);
 }
 .customer-tab-active {
-  border: 2px solid var(--color-blue);
+  border: 3px solid var(--color-blue);
 }
 .customer-tab-text {
   color: var(--color-gray-medium);
@@ -168,12 +172,47 @@ button {
   border-color: var(--color-gray-soft);
   color: var(--color-blue);
 }
-
-/* Register Form */
-.error-text {
-  color: var(--color-red);
+.checkbox-checked svg{
+  stroke-width: 3px;
+  width: 24px;
+  height: 30px;
 }
 
+/* Register Form */
+.register-form label {
+  color: var(--color-blue-deep);
+}
+.register-form-input {
+  width: 557px;
+  height: 88px;
+  border-radius: 17px;
+  border: 3px solid var(--color-gray-soft);
+  color: var(--color-blue) !important;
+  transition: border-color 0.2s ease, color 0.2s ease;
+  font-size: 35px;
+  font-weight: 400;
+  text-align: center;
+}
+/* Placeholder: สีเทา */
+.register-form-input::placeholder,
+.register-form-input::-webkit-input-placeholder,
+.register-form-input:-moz-placeholder,
+.register-form-input::-moz-placeholder,
+.register-form-input:-ms-input-placeholder,
+.register-form-input::-ms-input-placeholder {
+  color: var(--color-gray-medium);
+  transition: color 0.2s ease;
+}
+/* เมื่อ focus → ทุกอย่างเป็นสีฟ้า */
+.register-form-input:focus {
+  color: var(--color-blue) !important;
+}
+/* ถ้าไม่ได้แสดง placeholder = มี value แล้ว */
+.register-form-input:not(:placeholder-shown) {
+  border-color: var(--color-blue);
+  color: var(--color-blue) !important;
+  outline: none;
+}
 
 /* OTP Input */
 .otp-input {
@@ -394,5 +433,28 @@ button {
   border-radius: 0.375rem;
   text-align: center;
   font-size: 0.875rem;
+}
+
+/* สำหรับ Chrome/Safari autofill */
+input.register-form-input:-webkit-autofill,
+input.register-form-input:-webkit-autofill:focus,
+input.register-form-input:-webkit-autofill:hover,
+input.register-form-input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--color-blue) !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* สำหรับกรณี browser suggestion */
+input.register-form-input {
+  color: var(--color-blue) !important;
+}
+
+.register-form-input::selection {
+  background: #b3d4fc;
+  color: var(--color-blue);
+}
+.register-form-input::-webkit-selection {
+  background: #b3d4fc;
+  color: var(--color-blue);
 }
 
