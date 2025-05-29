@@ -64,7 +64,7 @@ export default function ConfirmPage() {
         <div className="register-content mb-w-656 mb-mx-auto mb-mt-15">
           <div className="mb-flex-start-center mb-flex-col mb-text-center mb-mb-24">
             <h2 className="register-title">เข้าร่วม V Prestige Club</h2>
-            <p className="register-subtitle mb-font-size-35 mb-font-normal mb-line-12">
+            <p className="text-color-blue mb-font-size-35 mb-font-normal mb-line-12">
               พบกับสิทธิประโยชน์ และรางวัลสุดพิเศษ<br />
               สำหรับสมาชิกเท่านั้น !
             </p>
@@ -74,18 +74,18 @@ export default function ConfirmPage() {
             <div className="grid grid-cols-2 gap-y-4">
               {confirmFields.map((item, idx) => (
                 <React.Fragment key={idx}>
-                  <div className="mb-font-size-30 mb-font-light text-blue-deep text-left">{item.label}</div>
-                  <div className="mb-font-size-30 mb-font-light text-blue text-left">{item.value}</div>
+                  <div className="confirm-text mb-font-size-30 mb-font-light text-color-blue-deep text-left">{item.label}</div>
+                  <div className="confirm-data mb-font-size-30 mb-font-light text-color-blue text-left">{item.value}</div>
                 </React.Fragment>
               ))}
             </div>
           </div>
           {/* ปุ่ม */}
-          <div className="mb-flex-center mb-gap-24">
-            <button onClick={handleConfirm} className="bg-blue text-white mb-w-270 mb-h-70 mb-rounded-17 mb-font-light mb-font-size-30">
+          <div className="mb-flex-start-center mb-flex-col mb-gap-7 mb-mb-84">
+            <button onClick={handleConfirm} className="confirm-btn bg-color-blue mb-w-553 mb-h-84 mb-rounded-17 mb-font-light mb-font-size-30 text-white">
               ยืนยันข้อมูล
             </button>
-            <button onClick={handleEdit} className="bg-white text-blue mb-w-270 mb-h-70 mb-rounded-17 mb-font-light mb-font-size-30 border border-blue">
+            <button onClick={handleEdit} className="edit-btn bg-white mb-w-553 mb-h-84 mb-rounded-17 mb-font-light mb-font-size-30 text-color-blue">
               แก้ไขข้อมูล
             </button>
           </div>

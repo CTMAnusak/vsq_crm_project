@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback, useMemo, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { CheckIcon, InfoIcon } from "lucide-react"
 import PDPAModal from "./pdpa-modal"
@@ -43,6 +43,7 @@ const customerTabs = [
 export default function RegistrationForm() {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<TabType>("existing")
+  const [isTabLoading, setIsTabLoading] = useState(false)
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
@@ -53,6 +54,7 @@ export default function RegistrationForm() {
   const [showPDPA, setShowPDPA] = useState(false)
   const [notFoundFields, setNotFoundFields] = useState<string[]>([])
   const [isDataMismatch, setIsDataMismatch] = useState(false)
+  const formRef = useRef<HTMLFormElement>(null)
 
   useEffect(() => {
     // ตรวจสอบว่ายอมรับ PDPA แล้วหรือยัง
@@ -88,14 +90,32 @@ export default function RegistrationForm() {
     router.push("/")
   }
 
-  const isFormValid = formData.firstName && formData.lastName && formData.phone
-
-  const handleTabChange = (tab: TabType) => {
+  const handleTabChange = useCallback((tab: TabType) => {
+    // ป้องกันการ scroll อัตโนมัติ
+    const currentScroll = window.scrollY
+    
+    // อัพเดท state โดยไม่ใช้ transition
     setActiveTab(tab)
-    setFormData({ firstName: "", lastName: "", phone: "" })
     setErrors({})
     setNotFound(false)
-  }
+    setNotFoundFields([])
+    setIsDataMismatch(false)
+
+    // ป้องกันการ scroll อัตโนมัติ
+    requestAnimationFrame(() => {
+      window.scrollTo({
+        top: currentScroll,
+        behavior: 'instant'
+      })
+    })
+  }, [])
+
+  const isFormValid = useMemo(() => {
+    if (activeTab === "new") {
+      return formData.phone.length === 10
+    }
+    return formData.firstName && formData.lastName && formData.phone.length === 10
+  }, [activeTab, formData.firstName, formData.lastName, formData.phone])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -117,13 +137,36 @@ export default function RegistrationForm() {
     const errorMessages: string[] = []
 
     if (activeTab === "new") {
-      // ตรวจสอบเฉพาะเบอร์โทรศัพท์
+      // ตรวจสอบความถูกต้องของเบอร์โทรศัพท์
       if (!formData.phone) {
         newErrors.phone = "กรุณากรอกเบอร์โทรศัพท์"
         errorMessages.push("เบอร์โทรศัพท์")
       } else if (!/^\d{10}$/.test(formData.phone)) {
         newErrors.phone = "เบอร์โทรศัพท์ต้องเป็นตัวเลข 10 หลัก"
         errorMessages.push("เบอร์โทรศัพท์")
+      } else {
+        // ตรวจสอบความซ้ำซ้อนของข้อมูล
+        const existingPhone = mockExistingUsers.some(user => user.phone === formData.phone)
+        const existingName = mockExistingUsers.some(
+          user => user.firstName === formData.firstName && user.lastName === formData.lastName
+        )
+        const existingAll = mockExistingUsers.some(
+          user => 
+            user.firstName === formData.firstName && 
+            user.lastName === formData.lastName && 
+            user.phone === formData.phone
+        )
+
+        if (existingAll) {
+          newErrors.phone = "ข้อมูลนี้ถูกใช้งานแล้ว"
+          errorMessages.push("ข้อมูลนี้ถูกใช้งานแล้ว")
+        } else if (existingName) {
+          newErrors.phone = "ชื่อและนามสกุลถูกใช้งานแล้ว"
+          errorMessages.push("ชื่อและนามสกุลถูกใช้งานแล้ว")
+        } else if (existingPhone) {
+          newErrors.phone = "เบอร์โทรศัพท์ถูกใช้งานแล้ว"
+          errorMessages.push("เบอร์โทรศัพท์ถูกใช้งานแล้ว")
+        }
       }
     } else {
       // ตรวจสอบทุกฟิลด์สำหรับลูกค้าเดิม
@@ -212,6 +255,92 @@ export default function RegistrationForm() {
     router.push("/register/confirm")
   }
 
+  const renderFormFields = () => {
+    return (
+      <>
+        <div>
+          <label htmlFor="firstName" className="mb-font-size-35 mb-font-normal">ชื่อ*</label>
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            value={formData.firstName}
+            onChange={handleInputChange}
+            placeholder="ชื่อ"
+            className={`register-form-input ${
+              errors.firstName || 
+              notFoundFields.includes("ชื่อ") || 
+              isDataMismatch ? "input-error" : ""
+            }`}
+          />
+        </div>
+        <div>
+          <label htmlFor="lastName" className="mb-font-size-35 mb-font-normal">นามสกุล*</label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            value={formData.lastName}
+            onChange={handleInputChange}
+            placeholder="นามสกุล"
+            className={`register-form-input mb-w-557 mb-h-88 mb-rounded-17 text-color-blue mb-font-size-35 mb-font-normal text-center ${
+              errors.lastName || 
+              notFoundFields.includes("นามสกุล") || 
+              isDataMismatch ? "input-error" : ""
+            }`}
+          />
+        </div>
+        <div>
+          <label htmlFor="phone" className="mb-font-size-35 mb-font-normal">เบอร์โทรศัพท์*</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleInputChange}
+            placeholder="เบอร์โทรศัพท์"
+            className={`register-form-input ${
+              errors.phone || 
+              notFoundFields.includes("เบอร์โทรศัพท์") || 
+              isDataMismatch ? "input-error" : ""
+            }`}
+          />
+        </div>
+      </>
+    )
+  }
+
+  const TabButton = useMemo(() => {
+    return ({ tab }: { tab: typeof customerTabs[0] }) => (
+      <button
+        key={tab.id}
+        className={`${
+          activeTab === tab.id ? "customer-tab-active" : "customer-tab"
+        } mb-relative mb-w-319 mb-h-121 mb-rounded-10 mb-bg-white mb-overflow-hidden`}
+        onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          handleTabChange(tab.id as TabType)
+        }}
+      >
+        <div
+          className={`checkbox-container mb-absolute mb-top-0 mb-left-0 mb-flex-center mb-w-40 mb-h-40 ${
+            activeTab === tab.id ? "checkbox-checked" : "checkbox-unchecked"
+          }`}
+        >
+          {activeTab === tab.id && <CheckIcon className="text-white" />}
+        </div>
+        <p className={`customer-tab-text mb-absolute mb-contents mb-top-1-2 mb-left-1-2 mb-font-light mb-font-size-30 mb-line-12 ${
+          activeTab === tab.id ? "customer-tab-text-active" : ""
+        }`}>
+          {tab.title}
+          <br />
+          {tab.subtitle}
+        </p>
+      </button>
+    )
+  }, [activeTab, handleTabChange])
+
   return (
     <div>
       {showPDPA && (
@@ -222,81 +351,13 @@ export default function RegistrationForm() {
       )}
       <div className="mb-flex-center-start mb-gap-16">
         {customerTabs.map((tab) => (
-          <button
-            key={tab.id}
-            className={`${
-              activeTab === tab.id ? "customer-tab-active" : "customer-tab"
-            } mb-relative mb-w-319 mb-h-121 mb-rounded-10 mb-bg-white mb-overflow-hidden`}
-            onClick={() => handleTabChange(tab.id as TabType)}
-          >
-            <div
-              className={`checkbox-container mb-absolute mb-top-0 mb-left-0 mb-flex-center mb-w-40 mb-h-40 ${
-                activeTab === tab.id ? "checkbox-checked" : "checkbox-unchecked"
-              }`}
-            >
-              {activeTab === tab.id && <CheckIcon className="text-white" />}
-            </div>
-            <p className={`customer-tab-text mb-absolute mb-contents mb-top-1-2 mb-left-1-2 mb-font-light mb-font-size-30 mb-line-12 ${
-              activeTab === tab.id ? "customer-tab-text-active" : ""
-            }`}>
-              {tab.title}
-              <br />
-              {tab.subtitle}
-            </p>
-          </button>
+          <TabButton key={tab.id} tab={tab} />
         ))}
       </div>
 
-      <form className="register-form mb-flex-start-center mb-flex-col" onSubmit={handleSubmit}>
+      <form ref={formRef} className="register-form mb-flex-start-center mb-flex-col" onSubmit={handleSubmit}>
         <div className="mb-bg-white mb-flex-start-center mb-text-center mb-flex-col mb-mt-21 mb-pt-32 mb-pl-48 mb-pr-48 mb-pb-46 mb-rounded-10">
-          <div>
-            <label htmlFor="firstName" className="mb-font-size-35 mb-font-normal">ชื่อ*</label>
-            <input
-              type="text"
-              id="firstName"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleInputChange}
-              placeholder="ชื่อ"
-              className={`register-form-input ${
-                errors.firstName || 
-                notFoundFields.includes("ชื่อ") || 
-                isDataMismatch ? "input-error" : ""
-              }`}
-            />
-          </div>
-          <div>
-            <label htmlFor="lastName" className="mb-font-size-35 mb-font-normal">นามสกุล*</label>
-            <input
-              type="text"
-              id="lastName"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleInputChange}
-              placeholder="นามสกุล"
-              className={`register-form-input ${
-                errors.lastName || 
-                notFoundFields.includes("นามสกุล") || 
-                isDataMismatch ? "input-error" : ""
-              }`}
-            />
-          </div>
-          <div>
-            <label htmlFor="phone" className="mb-font-size-35 mb-font-normal">เบอร์โทรศัพท์*</label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleInputChange}
-              placeholder="เบอร์โทรศัพท์"
-              className={`register-form-input ${
-                errors.phone || 
-                notFoundFields.includes("เบอร์โทรศัพท์") || 
-                isDataMismatch ? "input-error" : ""
-              }`}
-            />
-          </div>
+          {renderFormFields()}
         </div>
         <div className="mb-text-center mb-h-64 flex-center flex-col">
           {activeTab === "new" && errors.phone && (
@@ -333,7 +394,7 @@ export default function RegistrationForm() {
         <button
           type="submit"
           className={
-            `${isFormValid ? "bg-blue" : "bg-gray-soft"} mb-w-553 mb-h-84 mb-rounded-17 mb-font-light mb-font-size-30 text-white` +
+            `${isFormValid ? "bg-color-blue " : "bg-color-gray-soft"} mb-w-553 mb-h-84 mb-rounded-17 mb-font-light mb-font-size-30 text-white` +
             (activeTab === "new" ? " mb-mb-84 " : "")
           }
           disabled={!isFormValid}
@@ -343,7 +404,7 @@ export default function RegistrationForm() {
       </form>
 
       {activeTab === "existing" && (
-        <p className="text-after-confirm mb-relative mb-top-0 mb-text-center mb-left-1-2 text-blue-deep mb-font-light mb-font-size-26 mb-mt-24 mb-mb-26">
+        <p className="text-after-confirm mb-relative mb-top-0 mb-text-center mb-left-1-2 text-color-blue-deep mb-font-light mb-font-size-26 mb-mt-24 mb-mb-26">
           *ชื่อ – นามสกุล ผิด ลูกค้าแจ้งแก้ไขได้ ที่หน้าสาขา V Square Clinic
         </p>
       )}

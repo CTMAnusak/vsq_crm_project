@@ -48,7 +48,7 @@ export default function RegisterPage() {
         <div className="register-content mb-w-656 mb-mx-auto mb-mt-15">
           <div className="mb-flex-start-center mb-flex-col mb-text-center mb-mb-24">
             <h2 className="register-title">เข้าร่วม V Club</h2>
-            <p className="register-subtitle mb-font-size-35 mb-font-normal mb-line-12">
+            <p className="text-color-blue mb-font-size-35 mb-font-normal mb-line-12">
             พบกับสิทธิประโยชน์ และรางวัลสุดพิเศษ
               <br />
               สำหรับสมาชิกเท่านั้น !

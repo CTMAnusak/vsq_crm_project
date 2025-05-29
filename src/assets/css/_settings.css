@@ -1,7 +1,6 @@
 :root {
   --font-family: "Kanit", sans-serif;
-  --bg-blue: #3283e8;
-  --bg-red: #dc3545;
+
   --bg-green: #28a745;
   --bg-yellow: #ffc107;
   --bg-purple: #6f42c1;
@@ -14,18 +13,31 @@
   --color-gray-medium: #949494;
   --color-light-surface: #f5f8fa;
   --color-red: #dc3545;
+  --color-red-soft: #FADADD;
 
 }
 
-.text-blue {
+.text-color-blue {
   color: var(--color-blue);
 }
-.bg-blue {
+.bg-color-blue {
   background-color: var(--color-blue);
 }
-.text-blue-deep {
+.text-color-blue-deep {
   color: var(--color-blue-deep);
 }
-.bg-gray-soft {
+.bg-color-blue-deep {
+  background-color: var(--color-blue-deep);
+}
+.bg-color-gray-soft {
   background-color: var(--color-gray-soft);
+}
+.text-color--gray-soft {
+  color: var(--color-gray-soft);
+}
+.text-color-red-soft {
+  color: var(--color-red-soft);
+}
+.bg-color-red-soft {
+  background-color: var(--color-red-soft);
 }

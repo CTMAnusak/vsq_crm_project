@@ -40,8 +40,9 @@ label {
 
 
 .input-error,
-.register-form-input.input-error:not(:placeholder-shown) {
-  border-color: #ef4444;
+.register-form-input.input-error:not(:placeholder-shown),
+.otp-input.input-error {
+  border-color: #ef4444 !important;
 }
 .text-error {
   color: #ef4444;
@@ -54,7 +55,7 @@ label {
 
 /* ===== Buttons ===== */
 button {
-  transition: all 0.2s;
+  transition: all 0.1s;
   font-family: var(--font-family);
 }
 
@@ -78,10 +79,14 @@ button {
 /* ===== Specific Components ===== */
 .register-container {
   background-color: var(--color-light-surface);
-  height: auto;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-font-smoothing: antialiased;
 }
 
 .register-header {
@@ -117,10 +122,6 @@ button {
   font-weight: 600;
   color: #2563eb;
   margin-bottom: 0.25rem;
-}
-
-.register-subtitle {
-  color: var(--color-blue);
 }
 
 .text-after-confirm {
@@ -179,19 +180,19 @@ button {
 }
 
 /* Register Form */
+.register-form {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
+  -webkit-font-smoothing: antialiased;
+}
 .register-form label {
   color: var(--color-blue-deep);
 }
 .register-form-input {
-  width: 557px;
-  height: 88px;
-  border-radius: 17px;
   border: 3px solid var(--color-gray-soft);
-  color: var(--color-blue) !important;
-  transition: border-color 0.2s ease, color 0.2s ease;
-  font-size: 35px;
-  font-weight: 400;
-  text-align: center;
+  transition: border-color 0.1s ease, color 0.1s ease;
 }
 /* Placeholder: สีเทา */
 .register-form-input::placeholder,
@@ -201,7 +202,7 @@ button {
 .register-form-input:-ms-input-placeholder,
 .register-form-input::-ms-input-placeholder {
   color: var(--color-gray-medium);
-  transition: color 0.2s ease;
+  transition: color 0.1s ease;
 }
 /* เมื่อ focus → ทุกอย่างเป็นสีฟ้า */
 .register-form-input:focus {
@@ -216,18 +217,18 @@ button {
 
 /* OTP Input */
 .otp-input {
-  width: 100%;
-  height: 3rem;
-  text-align: center;
-  font-size: 1.25rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
+  border: 3px solid var(--color-blue); 
+  transition: border-color 0.1s ease, color 0.1s ease;
 }
-
 .otp-input:focus {
   outline: none;
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+.otp-input::placeholder {
+  color: #3b82f6; /* สี placeholder ฟ้า */
+  opacity: 1; /* เพื่อให้แสดงสีชัดเจนในบาง Browser */
 }
 
 /* PDPA Modal */
@@ -341,26 +342,12 @@ button {
 
 /* Confirmation Page */
 .confirm-data {
-  background-color: #f9fafb;
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  margin-bottom: 1.5rem;
+  margin-left: -10px;
+}
+.edit-btn {
+  border: 3px solid var(--color-blue);
 }
 
-.confirm-data-item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-}
-
-.confirm-data-label {
-  color: #4b5563;
-}
-
-.confirm-data-value {
-  font-weight: 500;
-  color: #2563eb;
-}
 
 /* Example Data Table */
 .example-data {
@@ -441,7 +428,7 @@ input.register-form-input:-webkit-autofill:focus,
 input.register-form-input:-webkit-autofill:hover,
 input.register-form-input:-webkit-autofill:active {
   -webkit-text-fill-color: var(--color-blue) !important;
-  transition: background-color 9999s ease-in-out 0s;
+  transition: background-color 1s ease-in-out 0s;
 }
 
 /* สำหรับกรณี browser suggestion */
@@ -457,4 +444,49 @@ input.register-form-input {
   background: #b3d4fc;
   color: var(--color-blue);
 }
+
+.customer-tab {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  transition: border-color 0.1s ease;
+}
+
+.customer-tab-active {
+  border: 3px solid var(--color-blue);
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.register-form-input {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  transition: border-color 0.1s ease, color 0.1s ease;
+}
+
+/* ปรับปรุง transition ของ tab */
+.customer-tab,
+.customer-tab-active {
+  transition: all 0.1s ease;
+  transform: translateZ(0);
+  will-change: transform, border-color;
+}
+
+/* ปรับปรุง transition ของ checkbox */
+.checkbox-container {
+  transition: all 0.1s ease;
+  will-change: transform, background-color, border-color;
+}
+
+/* ปรับปรุง transition ของ text */
+.customer-tab-text {
+  transition: color 0.1s ease;
+  will-change: color;
+}
+
+
+
+/* class input-error จะใช้กำหนด border สีแดงเมื่อมี error */
 
