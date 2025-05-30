@@ -10,7 +10,7 @@ export default function RegisterHeader() {
         </div>
       </div>
       <div className="register-profile-img mb-absolute mb-top-0 mb-left-1-2 mb-mx-auto mb-w-226 mb-h-226 mb-rounded-circle mb-overflow-hidden ">
-        <Image src="/images/anime_fairy.jpg" alt="Profile" width={96} height={96} className="object-cover" />
+        <Image src="/assets/images/anime_fairy.jpg" alt="Profile" width={96} height={96} className="object-cover" />
       </div>
     </div>
   )

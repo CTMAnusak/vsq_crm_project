@@ -3,33 +3,17 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import RegistrationForm from "../../components/register/registration-form"
-import PDPAModal from "../../components/register/pdpa-modal"
 import RegisterHeader from "../../components/register/register-header"
 import { useRouter } from "next/navigation"
 
 
 export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(true)
-  const [showPDPA, setShowPDPA] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
     setIsLoading(false)
-    // ตรวจสอบว่ายอมรับ PDPA แล้วหรือยัง
-    const pdpaAccepted = localStorage.getItem("vsquare_pdpa_accepted")
-    if (!pdpaAccepted) {
-      setShowPDPA(true)
-    }
   }, [])
-
-  const handleAcceptPDPA = () => {
-    localStorage.setItem("vsquare_pdpa_accepted", "true")
-    setShowPDPA(false)
-  }
-
-  const handleDeclinePDPA = () => {
-    router.push("/")
-  }
 
   if (isLoading) {
     return (
@@ -58,12 +42,6 @@ export default function RegisterPage() {
           <RegistrationForm />
         </div>
       </div>
-      {showPDPA && (
-        <PDPAModal
-          onAccept={handleAcceptPDPA}
-          onDecline={handleDeclinePDPA}
-        />
-      )}
     </div>
   )
 }

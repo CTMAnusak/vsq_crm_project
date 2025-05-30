@@ -114,12 +114,21 @@ export default function RegistrationForm() {
     if (activeTab === "new") {
       return formData.phone.length === 10
     }
-    return formData.firstName && formData.lastName && formData.phone.length === 10
+    // สำหรับลูกค้าเดิม ต้องกรอกข้อมูลครบทุกช่อง
+    return formData.firstName.trim() !== "" && 
+           formData.lastName.trim() !== "" && 
+           formData.phone.length === 10
   }, [activeTab, formData.firstName, formData.lastName, formData.phone])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
+    
+    if (name === "phone") {
+      const numericValue = value.replace(/[^0-9]/g, "")
+      setFormData((prev) => ({ ...prev, [name]: numericValue }))
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }))
+    }
 
     // Clear error when user types
     if (errors[name as keyof FormData]) {
@@ -267,7 +276,7 @@ export default function RegistrationForm() {
             value={formData.firstName}
             onChange={handleInputChange}
             placeholder="ชื่อ"
-            className={`register-form-input ${
+            className={`register-form-input mb-w-557 mb-h-88 mb-rounded-17 text-color-blue mb-font-size-35 mb-font-normal text-center ${
               errors.firstName || 
               notFoundFields.includes("ชื่อ") || 
               isDataMismatch ? "input-error" : ""
@@ -299,10 +308,8 @@ export default function RegistrationForm() {
             value={formData.phone}
             onChange={handleInputChange}
             placeholder="เบอร์โทรศัพท์"
-            className={`register-form-input ${
-              errors.phone || 
-              notFoundFields.includes("เบอร์โทรศัพท์") || 
-              isDataMismatch ? "input-error" : ""
+            className={`register-form-input mb-w-557 mb-h-88 mb-rounded-17 text-color-blue mb-font-size-35 mb-font-normal text-center ${
+              (errors.phone || notFoundFields.includes("เบอร์โทรศัพท์") || isDataMismatch) ? "border-red-500" : ""
             }`}
           />
         </div>
@@ -365,24 +372,9 @@ export default function RegistrationForm() {
               *{errors.phone}
             </p>
           )}
-          {activeTab === "existing" && errors.phone && notFound && (
-            <>
-              <p className="text-error text-sm">
-                *{errors.phone}
-              </p>
-              <p className="text-error text-sm">
-                *ไม่พบข้อมูล "{notFoundFields.length > 1 ? notFoundFields.slice(0, -1).join(", ") + " และ" + notFoundFields.slice(-1) : notFoundFields[0]}" กรุณากรอกข้อมูลใหม่
-              </p>
-            </>
-          )}
-          {activeTab === "existing" && errors.phone && !notFound && (
+          {activeTab === "existing" && notFound && (
             <p className="text-error text-sm">
-              *{errors.phone}
-            </p>
-          )}
-          {activeTab === "existing" && !errors.phone && notFound && (
-            <p className="text-error text-sm">
-              *ไม่พบข้อมูล "{notFoundFields.length > 1 ? notFoundFields.slice(0, -1).join(", ") + " และ" + notFoundFields.slice(-1) : notFoundFields[0]}" กรุณากรอกข้อมูลใหม่
+              *ไม่พบข้อมูล "{notFoundFields.length > 1 ? notFoundFields.slice(0, -1).join(", ") + " และ " + notFoundFields.slice(-1) : notFoundFields[0]}" กรุณากรอกข้อมูลใหม่
             </p>
           )}
           {activeTab === "existing" && isDataMismatch && (

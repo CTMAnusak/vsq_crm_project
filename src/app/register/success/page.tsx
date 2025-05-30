@@ -41,23 +41,35 @@ export default function SuccessPage() {
           }}
         />
       ))}
-      <div className="register-card">
+      <div className="register-card mb-flex-center mb-flex-col mb-mt-24">
         <Image
-          src="/images/VSquare_CLINIC_Logo.png"
+          src="/assets/images/anime_fairy.jpg"
           alt="VSquare Clinic Logo"
           width={200}
-          height={100}
+          height={200}
           className="mx-auto mb-8"
         />
         <div className="register-content mb-w-656 mb-mx-auto mb-mt-15">
           <div className="p-8 flex flex-col items-center">
-            <div className="w-32 h-32 rounded-full bg-color-blue flex items-center justify-center mb-6 relative">
-              <div className="w-24 h-24 rounded-full bg-color-blue-deep flex items-center justify-center success-animation">
-                <CheckIcon className="h-12 w-12 text-white" />
-              </div>
+
+            <div className="check-icon">
+              <span className="ripple"></span>
+              <div className="circle-container">
+                <div className="ripple"></div>
+                <div className="outer-circle">
+                  <div className="middle-circle">
+                    <div className="inner-circle">
+                      <CheckIcon className="mb-h-50 mb-w-50 text-white" />
+                    </div>
+                  </div>
+                </div>
             </div>
 
-            <h1 className="text-2xl font-bold text-color-blue-deep mb-6 text-center">
+            <div className="shadow-bar "></div>
+          </div>
+
+
+            <h1 className="text-color-blue-deep mb-mb-28 mb-font-size-20 mb-font-normal mb-line-12 text-center">
               การลงทะเบียนสมาชิก
               <br />
               เสร็จสมบูรณ์
@@ -65,29 +77,15 @@ export default function SuccessPage() {
 
             <hr className="mb-border-t mb-border-gray-light mb-w-full mb-mb-6" />
 
-            <p className="text-center text-gray-600 mb-8">
+            <p className="text-center text-color-blue mb-mb-28 mb-font-size-20 mb-font-normal mb-line-12">
               V Square Clinic ขอขอบคุณ
               <br />
-              ที่ตามสิทธิสุดพิเศษกับเรา !
+              ติดตามสิทธิสุดพิเศษได้เลย !
               <br />
               ทาง LINE@ V Square Clinic
             </p>
 
-            <Link href="#" className="btn-primary w-full flex items-center justify-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="mr-2"
-              >
-                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-              </svg>
+            <Link href="#" className="mb-flex-center bg-color-blue mb-w-553 mb-h-84 mb-rounded-17 mb-font-light mb-font-size-30 text-white">
               เข้าสู่ LINE@ V Square Clinic
             </Link>
           </div>
