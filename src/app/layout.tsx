@@ -15,7 +15,9 @@ export default function RootLayout({
   return (
     <html lang="th">
       <body>
-        <main className="page-screen">{children}</main>
+        <div className="relative w-full max-w-768 mb-max-w-768 mx-auto overflow-x-hidden">
+          {children}
+          </div>
       </body>
     </html>
   )

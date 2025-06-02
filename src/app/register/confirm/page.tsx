@@ -57,35 +57,35 @@ export default function ConfirmPage() {
   ];
 
   return (
-    <div className="register-container">
+    <div className="register-container h-auto flex-start-center flex-col">
       <div className="register-card">
         {/* Header เหมือนหน้า register */}
         <RegisterHeader />
-        <div className="register-content mb-w-656 mb-mx-auto mb-mt-15">
-          <div className="mb-flex-start-center mb-flex-col mb-text-center mb-mb-24">
-            <h2 className="register-title">เข้าร่วม V Prestige Club</h2>
-            <p className="text-color-blue mb-font-size-35 mb-font-normal mb-line-12">
+        <div className="register-content w-656 mx-auto mt-23 mb-273  mb-w-656 mb-mx-auto mb-mt-23 mb-mb-273">
+          <div className="flex-start-center flex-col text-center mb-24 mb-mb-24">
+            <h2 className="register-title text-color-blue-deep">เข้าร่วม V Prestige Club</h2>
+            <p className="text-color-blue font-size-35 mb-font-size-35 font-normal line-12">
               พบกับสิทธิประโยชน์ และรางวัลสุดพิเศษ<br />
               สำหรับสมาชิกเท่านั้น !
             </p>
           </div>
           {/* กล่องแสดงข้อมูลยืนยัน */}
-          <div className="mb-bg-white mb-mb-32 mb-pt-32 mb-pl-48 mb-pr-48 mb-pb-46 mb-rounded-10">
-            <div className="grid grid-cols-2 gap-y-4">
+          <div className="bg-white w-651 mb-59 pt-115 pl-71 pr-71 pb-135 rounded-10  mb-w-651 mb-mb-59 mb-pt-115 mb-pl-71 mb-pr-71 mb-pb-135 mb-rounded-10">
+            <div className="confirm-data-box grid grid-cols-2">
               {confirmFields.map((item, idx) => (
                 <React.Fragment key={idx}>
-                  <div className="confirm-text mb-font-size-30 mb-font-light text-color-blue-deep text-left">{item.label}</div>
-                  <div className="confirm-data mb-font-size-30 mb-font-light text-color-blue text-left">{item.value}</div>
+                  <div className="confirm-text font-size-35 mb-font-size-35 font-normal text-color-blue-deep text-left">{item.label}</div>
+                  <div className="confirm-data font-size-35 mb-font-size-35 font-normal text-color-blue text-left">{item.value}</div>
                 </React.Fragment>
               ))}
             </div>
           </div>
           {/* ปุ่ม */}
-          <div className="mb-flex-start-center mb-flex-col mb-gap-7 mb-mb-84">
-            <button onClick={handleConfirm} className="confirm-btn bg-color-blue mb-w-553 mb-h-84 mb-rounded-17 mb-font-light mb-font-size-30 text-white">
+          <div className="flex-start-center flex-col gap-18 mb-gap-18">
+            <button onClick={handleConfirm} className="confirm-btn bg-color-blue font-light text-white w-553 h-84 rounded-17 font-size-30  mb-w-553 mb-h-84 mb-rounded-17  mb-font-size-30">
               ยืนยันข้อมูล
             </button>
-            <button onClick={handleEdit} className="edit-btn bg-white mb-w-553 mb-h-84 mb-rounded-17 mb-font-light mb-font-size-30 text-color-blue">
+            <button onClick={handleEdit} className="edit-btn bg-white font-light text-color-blue w-553 h-84 rounded-17 font-size-30  mb-w-553 mb-h-84 mb-rounded-17 mb-font-size-30 ">
               แก้ไขข้อมูล
             </button>
           </div>

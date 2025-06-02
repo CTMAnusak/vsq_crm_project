@@ -93,6 +93,7 @@ a[href^=tel] {
 }
 
 body {
+  min-height: 100dvh;
   font-family: var(--font-family);
   line-height: 1.6;
   font-weight: normal;

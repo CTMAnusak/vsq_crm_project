@@ -107,7 +107,7 @@ export default function OTPPage() {
   const correctBorderClass = useMemo(() => {
     // ถ้าไม่มี error และกรอกครบ 6 หลัก และถูกต้อง
     if (!error && otp.length === 6 && otp === "856900") {
-      return "border-blue-500"; // ใช้ class ของ Tailwind สำหรับ border สีน้ำเงิน
+      return "otp-input"; // ใช้ class ของ Tailwind สำหรับ border สีน้ำเงิน
     } else {
       return ""; // ไม่มี class เพิ่มเติมสำหรับ default หรือ error
     }
@@ -124,23 +124,23 @@ export default function OTPPage() {
   }
 
   return (
-    <div className="register-container">
+    <div className="register-container h-auto flex-start-center flex-col">
       <div className="register-card">
         <RegisterHeader />
-        <div className="register-content mb-w-656 mb-mt-15 mb-flex-start-center mb-flex-col mb-mx-auto">
-          <div className="mb-flex-start-center mb-flex-col mb-text-center mb-mb-24">
-            <h2 className="register-title">ยืนยันรหัส OTP</h2>
+        <div className="register-content flex-start-center flex-col mx-auto w-656 mt-15 mb-w-656 mb-mt-15">
+          <div className="flex-start-center flex-col text-center mb-24  mb-mb-24">
+            <h2 className="register-title font-normal font-size-60 mb-font-size-60 text-color-blue-deep">ยืนยันรหัส <span className="text-color-blue">OTP</span></h2>
           </div>
 
-          <div className="mb-bg-white mb-mb-32 mb-pt-32 mb-pl-48 mb-pr-48 mb-pb-46 mb-rounded-10">
+          <div className="bg-white mb-32 pt-32 pl-48 pr-48 pb-46 rounded-10  mb-mb-32 mb-pt-32 mb-pl-48 mb-pr-48 mb-pb-46 mb-rounded-10">
             {formData && (
-                <p className="mb-pb-42 text-color-blue-deep mb-font-size-14 mb-font-normal mb-line-12 text-center">
+                <p className="pb-42 font-size-30  mb-pb-42 mb-font-size-30 text-color-blue-deep font-light text-center">
                   กรุณาใส่รหัส OTP 6 หลัก
                   <br />
                   ที่ส่งไปที่หมายเลข {formData.phone}
                 </p>
               )}
-            <div className="mb-4">
+            <div>
               <input
                 ref={inputRef}
                 type="text"
@@ -148,7 +148,7 @@ export default function OTPPage() {
                 onChange={handleOtpChange}
                 onBlur={handleOtpBlur} // เพิ่ม onBlur handler
                 // ใช้ class otp-input เป็นพื้นฐาน และเพิ่ม input-error เมื่อมี error หรือ correctBorderClass เมื่อถูกต้อง
-                className={`otp-input mb-w-557 mb-h-88 mb-rounded-17 text-color-blue mb-font-size-35 mb-font-normal text-center 
+                className={`otp-input text-color-blue font-normal text-center w-557 h-88 rounded-17 font-size-35  mb-w-557 mb-h-88 mb-rounded-17 mb-font-size-35 
                   ${error ? "input-error" : correctBorderClass}`}
                 placeholder="• • • • • •"
                 maxLength={6} // เพิ่ม maxLength เพื่อจำกัดจำนวนตัวอักษรใน input
@@ -156,13 +156,13 @@ export default function OTPPage() {
             </div>
 
             {/* Request OTP */}
-            <div>
-              <p className="mb-pt-42 text-color-blue-deep mb-font-size-24 mb-font-normal mb-line-12 text-center">
+            <div className="text-exceeds-w-box relative top-0 left-1-2  mb-top-0 mb-left-1-2">
+              <p className="pt-42 font-size-30  mb-pt-55 mb-font-size-30 text-color-blue-deep font-light text-center">
                 กรณีไม่ได้รับรหัส SMS OTP ให้กด{" "}
                 <button
                   type="button"
                   onClick={handleRequestOTP}
-                  className={`text-color-blue mb-underline mb-font-size-24 mb-font-normal ${countdown > 0 ? "opacity-50 cursor-not-allowed text-color--gray-soft" : ""}`}
+                  className={`text-color-blue underline font-size-30  mb-font-size-30 font-normal ${countdown > 0 ? "opacity-50 cursor-not-allowed text-color-gray-soft" : ""}`}
                   disabled={countdown > 0 || isResending}
                 >
                   Request OTP
@@ -182,7 +182,7 @@ export default function OTPPage() {
           </div>
             {/* Error Message */}
             {error && ( // แสดง error ถ้ามี
-              <div className="mb-flex-center mb-w-557 mb-h-88 mb-rounded-17 bg-color-red-soft text-error mb-font-size-24 mb-font-normal text-center ">
+              <div className="flex-center bg-color-red-soft text-error font-normal text-center mb-55 w-557 h-88 rounded-17 font-size-24  mb-mb-55 mb-w-557 mb-h-88 mb-rounded-17 mb-font-size-24">
                 {error}
               </div>
             )}

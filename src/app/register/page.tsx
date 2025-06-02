@@ -26,22 +26,25 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="register-container">
-      <div className="register-card">
-        <RegisterHeader />
-        <div className="register-content mb-w-656 mb-mx-auto mb-mt-15">
-          <div className="mb-flex-start-center mb-flex-col mb-text-center mb-mb-24">
-            <h2 className="register-title">เข้าร่วม V Club</h2>
-            <p className="text-color-blue mb-font-size-35 mb-font-normal mb-line-12">
-            พบกับสิทธิประโยชน์ และรางวัลสุดพิเศษ
-              <br />
-              สำหรับสมาชิกเท่านั้น !
-            </p>
-          </div>
+    <main className="w-full">
+      <div className="register-container h-auto flex-start-center flex-col">
+        <div className="register-card">
+          <RegisterHeader />
+          <div className="register-content w-656 mx-auto mt-15 mb-w-656 mb-mx-auto mb-mt-15">
+            <div className="flex-start-center flex-col text-center mb-24 mb-flex-start-center mb-flex-col mb-text-center mb-mb-24">
+              <h2 className="register-title">เข้าร่วม V Club</h2>
+              <p className="text-color-blue font-normal line-12 font-size-35 mb-font-size-35 ">
+              พบกับสิทธิประโยชน์ และรางวัลสุดพิเศษ
+                <br />
+                สำหรับสมาชิกเท่านั้น !
+              </p>
+            </div>
 
-          <RegistrationForm />
+            <RegistrationForm />
+          </div>
         </div>
       </div>
-    </div>
+    </main>
+    
   )
 }

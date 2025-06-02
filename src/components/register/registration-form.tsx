@@ -268,7 +268,7 @@ export default function RegistrationForm() {
     return (
       <>
         <div>
-          <label htmlFor="firstName" className="mb-font-size-35 mb-font-normal">ชื่อ*</label>
+          <label htmlFor="firstName" className="font-size-35 mb-font-size-35 font-normal">ชื่อ*</label>
           <input
             type="text"
             id="firstName"
@@ -276,7 +276,7 @@ export default function RegistrationForm() {
             value={formData.firstName}
             onChange={handleInputChange}
             placeholder="ชื่อ"
-            className={`register-form-input mb-w-557 mb-h-88 mb-rounded-17 text-color-blue mb-font-size-35 mb-font-normal text-center ${
+            className={`register-form-input text-color-blue font-normal text-center w-557 h-88 rounded-17 font-size-35 mb-w-557 mb-h-88 mb-rounded-17 mb-font-size-35  ${
               errors.firstName || 
               notFoundFields.includes("ชื่อ") || 
               isDataMismatch ? "input-error" : ""
@@ -284,7 +284,7 @@ export default function RegistrationForm() {
           />
         </div>
         <div>
-          <label htmlFor="lastName" className="mb-font-size-35 mb-font-normal">นามสกุล*</label>
+          <label htmlFor="lastName" className="font-size-35 mb-font-size-35 font-normal">นามสกุล*</label>
           <input
             type="text"
             id="lastName"
@@ -292,7 +292,7 @@ export default function RegistrationForm() {
             value={formData.lastName}
             onChange={handleInputChange}
             placeholder="นามสกุล"
-            className={`register-form-input mb-w-557 mb-h-88 mb-rounded-17 text-color-blue mb-font-size-35 mb-font-normal text-center ${
+            className={`register-form-input text-color-blue font-normal text-center w-557 h-88 rounded-17 font-size-35 mb-w-557 mb-h-88 mb-rounded-17 mb-font-size-35 ${
               errors.lastName || 
               notFoundFields.includes("นามสกุล") || 
               isDataMismatch ? "input-error" : ""
@@ -300,7 +300,7 @@ export default function RegistrationForm() {
           />
         </div>
         <div>
-          <label htmlFor="phone" className="mb-font-size-35 mb-font-normal">เบอร์โทรศัพท์*</label>
+          <label htmlFor="phone" className="font-size-35 mb-font-size-35 font-normal">เบอร์โทรศัพท์*</label>
           <input
             type="tel"
             id="phone"
@@ -308,8 +308,8 @@ export default function RegistrationForm() {
             value={formData.phone}
             onChange={handleInputChange}
             placeholder="เบอร์โทรศัพท์"
-            className={`register-form-input mb-w-557 mb-h-88 mb-rounded-17 text-color-blue mb-font-size-35 mb-font-normal text-center ${
-              (errors.phone || notFoundFields.includes("เบอร์โทรศัพท์") || isDataMismatch) ? "border-red-500" : ""
+            className={`register-form-input text-color-blue font-normal text-center w-557 h-88 rounded-17 font-size-35 mb-w-557 mb-h-88 mb-rounded-17 mb-font-size-35 ${
+              (errors.phone || notFoundFields.includes("เบอร์โทรศัพท์") || isDataMismatch) ? "input-error" : ""
             }`}
           />
         </div>
@@ -323,7 +323,7 @@ export default function RegistrationForm() {
         key={tab.id}
         className={`${
           activeTab === tab.id ? "customer-tab-active" : "customer-tab"
-        } mb-relative mb-w-319 mb-h-121 mb-rounded-10 mb-bg-white mb-overflow-hidden`}
+        } relative bg-white overflow-hidden w-319 h-121 rounded-10 mb-w-319 mb-h-121 mb-rounded-10`}
         onClick={(e) => {
           e.preventDefault()
           e.stopPropagation()
@@ -331,13 +331,13 @@ export default function RegistrationForm() {
         }}
       >
         <div
-          className={`checkbox-container mb-absolute mb-top-0 mb-left-0 mb-flex-center mb-w-40 mb-h-40 ${
+          className={`checkbox-container absolute flex-center top-0 left-0 w-40 h-40 mb-top-0 mb-left-0 mb-w-40 mb-h-40 ${
             activeTab === tab.id ? "checkbox-checked" : "checkbox-unchecked"
           }`}
         >
           {activeTab === tab.id && <CheckIcon className="text-white" />}
         </div>
-        <p className={`customer-tab-text mb-absolute mb-contents mb-top-1-2 mb-left-1-2 mb-font-light mb-font-size-30 mb-line-12 ${
+        <p className={`customer-tab-text absolute contents line-12 font-light top-1-2 left-1-2 font-size-30 mb-top-1-2 mb-left-1-2  mb-font-size-30  ${
           activeTab === tab.id ? "customer-tab-text-active" : ""
         }`}>
           {tab.title}
@@ -356,17 +356,17 @@ export default function RegistrationForm() {
           onDecline={handleDeclinePDPA}
         />
       )}
-      <div className="mb-flex-center-start mb-gap-16">
+      <div className="flex-center-start gap-16 mb-gap-16">
         {customerTabs.map((tab) => (
           <TabButton key={tab.id} tab={tab} />
         ))}
       </div>
 
-      <form ref={formRef} className="register-form mb-flex-start-center mb-flex-col" onSubmit={handleSubmit}>
-        <div className="mb-bg-white mb-flex-start-center mb-text-center mb-flex-col mb-mt-21 mb-pt-32 mb-pl-48 mb-pr-48 mb-pb-46 mb-rounded-10">
+      <form ref={formRef} className="register-form flex-start-center flex-col" onSubmit={handleSubmit}>
+        <div className="bg-white flex-start-center text-center flex-col mt-21 pt-32 pl-48 pr-48 pb-46 rounded-10 mb-mt-21 mb-pt-32 mb-pl-48 mb-pr-48 mb-pb-46 mb-rounded-10">
           {renderFormFields()}
         </div>
-        <div className="mb-text-center mb-h-64 flex-center flex-col">
+        <div className="text-center h-64 mb-h-64 flex-center flex-col">
           {activeTab === "new" && errors.phone && (
             <p className="text-error text-sm">
               *{errors.phone}
@@ -386,8 +386,8 @@ export default function RegistrationForm() {
         <button
           type="submit"
           className={
-            `${isFormValid ? "bg-color-blue " : "bg-color-gray-soft"} mb-w-553 mb-h-84 mb-rounded-17 mb-font-light mb-font-size-30 text-white` +
-            (activeTab === "new" ? " mb-mb-84 " : "")
+            `${isFormValid ? "bg-color-blue " : "bg-color-gray-soft"} w-553 h-84 rounded-17 font-size-30 mb-w-553 mb-h-84 mb-rounded-17 mb-font-size-30 font-light  text-white` +
+            (activeTab === "new" ? " mb-84 mb-mb-84 " : "")
           }
           disabled={!isFormValid}
         >
@@ -396,7 +396,7 @@ export default function RegistrationForm() {
       </form>
 
       {activeTab === "existing" && (
-        <p className="text-after-confirm mb-relative mb-top-0 mb-text-center mb-left-1-2 text-color-blue-deep mb-font-light mb-font-size-26 mb-mt-24 mb-mb-26">
+        <p className="text-exceeds-w-box relative text-center text-color-blue-deep font-light top-0 left-1-2 font-size-26 mt-24 mb-26 mb-top-0 mb-left-1-2  mb-font-size-26 mb-mt-24 mb-mb-26">
           *ชื่อ – นามสกุล ผิด ลูกค้าแจ้งแก้ไขได้ ที่หน้าสาขา V Square Clinic
         </p>
       )}
