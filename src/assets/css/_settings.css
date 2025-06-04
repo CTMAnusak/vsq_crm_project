@@ -1,5 +1,6 @@
 :root {
   --font-family: "Kanit", sans-serif;
+  --font-gotham: "Gotham", sans-serif;
 
   --bg-green: #28a745;
   --bg-yellow: #ffc107;
@@ -18,6 +19,9 @@
 }
 .font-kanit {
   font-family: var(--font-family);
+}
+.font-gotham {
+  font-family: var(--font-gotham);
 }
 .text-color-blue {
   color: var(--color-blue);
