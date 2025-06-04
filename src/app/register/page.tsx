@@ -32,7 +32,7 @@ export default function RegisterPage() {
           <RegisterHeader />
           <div className="register-content w-656 mx-auto mt-15 mb-w-656 mb-mx-auto mb-mt-15">
             <div className="flex-start-center flex-col text-center mb-24 mb-flex-start-center mb-flex-col mb-text-center mb-mb-24">
-              <h2 className="font-kanit text-color-blue-deep font-normal font-size-47 mb-font-size-47">เข้าร่วม <span className="font-gotham font-medium">V Club</span></h2>
+              <p className="font-kanit text-color-blue-deep font-normal font-size-47 mb-font-size-47">เข้าร่วม <span className="font-gotham font-medium">V Club</span></p>
               <p className="text-color-blue font-normal line-12 font-size-35 mb-font-size-35 ">
               พบกับสิทธิประโยชน์ และรางวัลสุดพิเศษ
                 <br />

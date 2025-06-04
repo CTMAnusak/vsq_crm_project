@@ -1,8 +1,14 @@
 "use client"
 
 import Link from "next/link"
+import { useEffect } from "react"
 
 export default function Home() {
+  useEffect(() => {
+    // Reset PDPA status when app starts
+    localStorage.removeItem("vsquare_pdpa_accepted")
+  }, [])
+
   return (
     <main className="w-full">
       <div className="flex flex-col items-center justify-center min-h-screen p-4">

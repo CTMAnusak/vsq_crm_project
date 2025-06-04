@@ -64,7 +64,7 @@ export default function ConfirmPage() {
         <RegisterHeader />
         <div className="register-content w-656 mx-auto mt-23 mb-273  mb-w-656 mb-mx-auto mb-mt-23 mb-mb-273">
           <div className="flex-start-center flex-col text-center mb-24 mb-mb-24">
-            <h2 className="register-title text-color-blue-deep">เข้าร่วม V Prestige Club</h2>
+            <p className="font-kanit text-color-blue-deep font-normal font-size-47 mb-font-size-47">เข้าร่วม <span className="font-gotham font-medium">V Club</span></p>
             <p className="text-color-blue font-size-35 mb-font-size-35 font-normal line-12">
               พบกับสิทธิประโยชน์ และรางวัลสุดพิเศษ<br />
               สำหรับสมาชิกเท่านั้น !

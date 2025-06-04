@@ -219,35 +219,46 @@ export default function RegistrationForm() {
     if (activeTab === "existing") {
       // ตรวจสอบว่ามีข้อมูลในระบบหรือไม่
       const notFound: string[] = []
-      
-      if (!mockExistingUsers.some(user => user.firstName === formData.firstName)) {
-        notFound.push("ชื่อ")
-      }
-      if (!mockExistingUsers.some(user => user.lastName === formData.lastName)) {
-        notFound.push("นามสกุล")
-      }
-      if (!mockExistingUsers.some(user => user.phone === formData.phone)) {
-        notFound.push("เบอร์โทรศัพท์")
-      }
+      const hasFirstName = mockExistingUsers.some(user => user.firstName === formData.firstName)
+      const hasLastName = mockExistingUsers.some(user => user.lastName === formData.lastName)
+      const hasPhone = mockExistingUsers.some(user => user.phone === formData.phone)
 
-      if (notFound.length > 0) {
-        setNotFoundFields(notFound)
-        setNotFound(true)
-        setIsDataMismatch(false)
-        return
-      }
+      // ตรวจสอบว่าชื่อและนามสกุลตรงกันหรือไม่
+      const hasMatchingName = mockExistingUsers.some(
+        user => user.firstName === formData.firstName && user.lastName === formData.lastName
+      )
 
-      // ตรวจสอบความถูกต้องของข้อมูล
-      const isDataValid = mockExistingUsers.some(
+      // ตรวจสอบว่าข้อมูลทั้งหมดตรงกันหรือไม่
+      const hasMatchingData = mockExistingUsers.some(
         user => 
           user.firstName === formData.firstName && 
           user.lastName === formData.lastName && 
           user.phone === formData.phone
       )
 
-      if (!isDataValid) {
-        setIsDataMismatch(true)
-        setNotFound(false)
+      if (!hasFirstName) {
+        notFound.push("ชื่อ")
+      }
+      if (!hasLastName) {
+        notFound.push("นามสกุล")
+      }
+      if (!hasPhone) {
+        notFound.push("เบอร์โทรศัพท์")
+      }
+
+      // กรณีที่ชื่อและนามสกุลตรงกัน แต่เบอร์โทรศัพท์ไม่ตรง
+      if (hasMatchingName && !hasPhone) {
+        setNotFoundFields(["เบอร์โทรศัพท์ถูกใช้ไปแล้ว กรุณาติดต่อสาขาที่ท่านใช้บริการ"])
+        setNotFound(true)
+        setIsDataMismatch(false)
+        return
+      }
+
+      // กรณีอื่นๆ ที่ไม่ตรงตามเงื่อนไข
+      if (notFound.length > 0 || !hasMatchingData) {
+        setNotFoundFields(notFound)
+        setNotFound(true)
+        setIsDataMismatch(false)
         return
       }
     }
@@ -274,7 +285,11 @@ export default function RegistrationForm() {
         placeholder: "ชื่อ",
         type: "text",
         value: formData.firstName,
-        error: errors.firstName || notFoundFields.includes("ชื่อ") || isDataMismatch
+        error: errors.firstName || 
+               notFoundFields.includes("ชื่อ") || 
+               isDataMismatch || 
+               (activeTab === "existing" && notFound) ||
+               (activeTab === "existing" && notFoundFields[0]?.includes("ถูกใช้ไปแล้ว"))
       },
       {
         id: "lastName",
@@ -283,7 +298,11 @@ export default function RegistrationForm() {
         placeholder: "นามสกุล",
         type: "text",
         value: formData.lastName,
-        error: errors.lastName || notFoundFields.includes("นามสกุล") || isDataMismatch
+        error: errors.lastName || 
+               notFoundFields.includes("นามสกุล") || 
+               isDataMismatch || 
+               (activeTab === "existing" && notFound) ||
+               (activeTab === "existing" && notFoundFields[0]?.includes("ถูกใช้ไปแล้ว"))
       },
       {
         id: "phone",
@@ -292,7 +311,11 @@ export default function RegistrationForm() {
         placeholder: "เบอร์โทรศัพท์",
         type: "tel",
         value: formData.phone,
-        error: errors.phone || notFoundFields.includes("เบอร์โทรศัพท์") || isDataMismatch
+        error: errors.phone || 
+               notFoundFields.includes("เบอร์โทรศัพท์") || 
+               isDataMismatch || 
+               (activeTab === "existing" && notFound) ||
+               (activeTab === "existing" && notFoundFields[0]?.includes("ถูกใช้ไปแล้ว"))
       }
     ]
 
@@ -371,17 +394,19 @@ export default function RegistrationForm() {
         </div>
         <div className="text-center h-64 mb-h-64 flex-center flex-col">
           {activeTab === "new" && errors.phone && (
-            <p className="text-error text-sm">
+            <p className="text-error">
               *{errors.phone}
             </p>
           )}
           {activeTab === "existing" && notFound && (
-            <p className="text-error text-sm">
-              *ไม่พบข้อมูล "{notFoundFields.length > 1 ? notFoundFields.slice(0, -1).join(", ") + " และ " + notFoundFields.slice(-1) : notFoundFields[0]}" กรุณากรอกข้อมูลใหม่
+            <p className="text-error">
+              {notFoundFields[0]?.includes("ถูกใช้ไปแล้ว") 
+                ? `*${notFoundFields[0]}`
+                : `*ไม่พบข้อมูลนี้ กรุณากรอกข้อมูลใหม่อีกครั้ง`}
             </p>
           )}
           {activeTab === "existing" && isDataMismatch && (
-            <p className="text-error text-sm">
+            <p className="text-error">
               *ข้อมูลไม่ตรงกัน กรุณากรอกข้อมูลใหม่
             </p>
           )}
