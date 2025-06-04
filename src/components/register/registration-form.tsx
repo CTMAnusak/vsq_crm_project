@@ -6,6 +6,7 @@ import { useState, useEffect, useCallback, useMemo, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { CheckIcon, InfoIcon } from "lucide-react"
 import PDPAModal from "./pdpa-modal"
+import ButtonSubmit from "./button-submit"
 
 type TabType = "existing" | "new"
 type FormData = {
@@ -265,55 +266,57 @@ export default function RegistrationForm() {
   }
 
   const renderFormFields = () => {
+    const formFields = [
+      {
+        id: "firstName",
+        name: "firstName",
+        label: "ชื่อ*",
+        placeholder: "ชื่อ",
+        type: "text",
+        value: formData.firstName,
+        error: errors.firstName || notFoundFields.includes("ชื่อ") || isDataMismatch
+      },
+      {
+        id: "lastName",
+        name: "lastName",
+        label: "นามสกุล*",
+        placeholder: "นามสกุล",
+        type: "text",
+        value: formData.lastName,
+        error: errors.lastName || notFoundFields.includes("นามสกุล") || isDataMismatch
+      },
+      {
+        id: "phone",
+        name: "phone",
+        label: "เบอร์โทรศัพท์*",
+        placeholder: "เบอร์โทรศัพท์",
+        type: "tel",
+        value: formData.phone,
+        error: errors.phone || notFoundFields.includes("เบอร์โทรศัพท์") || isDataMismatch
+      }
+    ]
+
     return (
-      <>
-        <div>
-          <label htmlFor="firstName" className="font-size-35 mb-font-size-35 font-normal">ชื่อ*</label>
-          <input
-            type="text"
-            id="firstName"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleInputChange}
-            placeholder="ชื่อ"
-            className={`register-form-input text-color-blue font-normal text-center w-557 h-88 rounded-17 font-size-35 mb-w-557 mb-h-88 mb-rounded-17 mb-font-size-35  ${
-              errors.firstName || 
-              notFoundFields.includes("ชื่อ") || 
-              isDataMismatch ? "input-error" : ""
-            }`}
-          />
-        </div>
-        <div>
-          <label htmlFor="lastName" className="font-size-35 mb-font-size-35 font-normal">นามสกุล*</label>
-          <input
-            type="text"
-            id="lastName"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleInputChange}
-            placeholder="นามสกุล"
-            className={`register-form-input text-color-blue font-normal text-center w-557 h-88 rounded-17 font-size-35 mb-w-557 mb-h-88 mb-rounded-17 mb-font-size-35 ${
-              errors.lastName || 
-              notFoundFields.includes("นามสกุล") || 
-              isDataMismatch ? "input-error" : ""
-            }`}
-          />
-        </div>
-        <div>
-          <label htmlFor="phone" className="font-size-35 mb-font-size-35 font-normal">เบอร์โทรศัพท์*</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleInputChange}
-            placeholder="เบอร์โทรศัพท์"
-            className={`register-form-input text-color-blue font-normal text-center w-557 h-88 rounded-17 font-size-35 mb-w-557 mb-h-88 mb-rounded-17 mb-font-size-35 ${
-              (errors.phone || notFoundFields.includes("เบอร์โทรศัพท์") || isDataMismatch) ? "input-error" : ""
-            }`}
-          />
-        </div>
-      </>
+      <div>
+        {formFields.map((field) => (
+          <div key={field.id}>
+            <label htmlFor={field.id} className="font-size-35 mb-font-size-35 font-normal">
+              {field.label}
+            </label>
+            <input
+              type={field.type}
+              id={field.id}
+              name={field.name}
+              value={field.value}
+              onChange={handleInputChange}
+              placeholder={field.placeholder}
+              className={`register-form-input text-color-blue font-normal text-center w-557 h-88 rounded-17 font-size-35 mb-w-557 mb-h-88 mb-rounded-17 mb-font-size-35 ${
+                field.error ? "input-error" : ""
+              }`}
+            />
+          </div>
+        ))}
+      </div>
     )
   }
 
@@ -383,16 +386,14 @@ export default function RegistrationForm() {
             </p>
           )}
         </div>
-        <button
+        <ButtonSubmit
           type="submit"
-          className={
-            `${isFormValid ? "bg-color-blue " : "bg-color-gray-soft"} w-553 h-84 rounded-17 font-size-30 mb-w-553 mb-h-84 mb-rounded-17 mb-font-size-30 font-light  text-white` +
-            (activeTab === "new" ? " mb-84 mb-mb-84 " : "")
-          }
-          disabled={!isFormValid}
+          variant={isFormValid ? "blue_bg" : "gray_bg"}
+          className={`w-553 h-84 mb-w-553 mb-h-84 ${activeTab === "new" ? "mb-84 mb-mb-84" : ""}`}
+          isDisabled={!isFormValid}
         >
           {activeTab === "existing" ? "ยืนยันข้อมูล" : "ถัดไป"}
-        </button>
+        </ButtonSubmit>
       </form>
 
       {activeTab === "existing" && (

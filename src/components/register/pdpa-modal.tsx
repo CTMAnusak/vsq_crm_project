@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
+import ButtonSubmit from "./button-submit"
 
 interface PDPAModalProps {
   onAccept: () => void
@@ -38,12 +39,20 @@ export default function PDPAModal({ onAccept, onDecline }: PDPAModalProps) {
           </div>
         </div>
         <div className="pdpa-confirm-box flex-center">
-          <button onClick={onDecline} className="pdpa-btn-decline">
+        <ButtonSubmit 
+            variant="blue_border"
+            className="w-283 h-81 mb-w-283 mb-h-81"
+            onClick={onDecline}
+          >
             ไม่ยอมรับ
-          </button>
-          <button onClick={onAccept} className="pdpa-btn-accept">
+          </ButtonSubmit>
+          <ButtonSubmit 
+            variant="blue_bg"
+            className="w-283 h-81 mb-w-283 mb-h-81"
+            onClick={onAccept}
+          >
             ยอมรับ
-          </button>
+          </ButtonSubmit>
         </div>
       </div>
     </div>

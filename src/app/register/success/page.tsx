@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { CheckIcon } from "lucide-react"
 import Image from "next/image"
+import ButtonSubmit from "../../../components/register/button-submit"
 
 export default function SuccessPage() {
   return (
@@ -44,9 +45,13 @@ export default function SuccessPage() {
               ทาง LINE@ V Square Clinic
             </p>
 
-            <Link href="#" className="flex-center bg-color-blue font-light text-white w-553 h-84 rounded-17 font-size-30   mb-w-553 mb-h-84 mb-rounded-17 mb-font-size-30 ">
+            <ButtonSubmit 
+              href="#"
+              variant="blue_bg"
+              className="w-553 h-84 mb-w-553 mb-h-84"
+            >
               เข้าสู่ LINE@ V Square Clinic
-            </Link>
+            </ButtonSubmit>
           </div>
         </div>
       </div>

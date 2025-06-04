@@ -5,6 +5,7 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import RegisterHeader from "../../../components/register/register-header"
+import ButtonSubmit from "../../../components/register/button-submit"
 
 type FormData = {
   firstName: string
@@ -82,12 +83,20 @@ export default function ConfirmPage() {
           </div>
           {/* ปุ่ม */}
           <div className="flex-start-center flex-col gap-18 mb-gap-18">
-            <button onClick={handleConfirm} className="confirm-btn bg-color-blue font-light text-white w-553 h-84 rounded-17 font-size-30  mb-w-553 mb-h-84 mb-rounded-17  mb-font-size-30">
+            <ButtonSubmit 
+              onClick={handleConfirm} 
+              variant="blue_bg"
+              className="w-553 h-84 mb-w-553 mb-h-84"
+            >
               ยืนยันข้อมูล
-            </button>
-            <button onClick={handleEdit} className="edit-btn bg-white font-light text-color-blue w-553 h-84 rounded-17 font-size-30  mb-w-553 mb-h-84 mb-rounded-17 mb-font-size-30 ">
+            </ButtonSubmit>
+            <ButtonSubmit 
+              onClick={handleEdit} 
+              variant="blue_border"
+              className="w-553 h-84 mb-w-553 mb-h-84"
+            >
               แก้ไขข้อมูล
-            </button>
+            </ButtonSubmit>
           </div>
         </div>
       </div>
