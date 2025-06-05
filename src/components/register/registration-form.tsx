@@ -12,20 +12,26 @@ type TabType = "existing" | "new"
 type FormData = {
   firstName: string
   lastName: string
+  email: string
   phone: string
   isExistingCustomer?: boolean // เพิ่มฟิลด์เพื่อระบุว่าเป็นลูกค้าเดิมหรือลูกค้าใหม่
 }
 
 // จำลองข้อมูลผู้ใช้ที่มีอยู่ในระบบ
 const mockExistingUsers = [
-  { firstName: "อารียา", lastName: "บุญประเสริฐ", phone: "0845984512" },
-  { firstName: "สมชาย", lastName: "ใจดี", phone: "0812345678" },
-  { firstName: "วิภาวดี", lastName: "รักเรียน", phone: "0898765432" },
-  { firstName: "ธนพล", lastName: "มั่งมี", phone: "0923456789" },
-  { firstName: "กมลวรรณ", lastName: "สวัสดี", phone: "0834567890" },
-  { firstName: "ปิยะ", lastName: "รักสวย", phone: "0956789012" },
-  { firstName: "นภา", lastName: "ใจงาม", phone: "0867890123" },
-  { firstName: "วิชัย", lastName: "สุขสันต์", phone: "0978901234" },
+  {
+    firstName: "สมชาย",
+    lastName: "รักเรียน",
+    email: "somchai@example.com",
+    phone: "0812345678"
+  },
+  {
+    firstName: "สมหญิง",
+    lastName: "รักเรียน",
+    email: "somying@example.com",
+    phone: "0898765432"
+  },
+
 ]
 
 const customerTabs = [
@@ -41,13 +47,18 @@ const customerTabs = [
   }
 ];
 
-export default function RegistrationForm() {
+interface RegistrationFormProps {
+  onTabChange: (tab: TabType) => void
+}
+
+export default function RegistrationForm({ onTabChange }: RegistrationFormProps) {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<TabType>("existing")
   const [isTabLoading, setIsTabLoading] = useState(false)
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
+    email: "",
     phone: "",
   })
   const [errors, setErrors] = useState<Partial<FormData>>({})
@@ -97,6 +108,7 @@ export default function RegistrationForm() {
     
     // อัพเดท state โดยไม่ใช้ transition
     setActiveTab(tab)
+    onTabChange(tab)
     setErrors({})
     setNotFound(false)
     setNotFoundFields([])
@@ -109,7 +121,7 @@ export default function RegistrationForm() {
         behavior: 'instant'
       })
     })
-  }, [])
+  }, [onTabChange])
 
   const isFormValid = useMemo(() => {
     if (activeTab === "new") {
@@ -147,6 +159,23 @@ export default function RegistrationForm() {
     const errorMessages: string[] = []
 
     if (activeTab === "new") {
+      // ตรวจสอบความถูกต้องของอีเมล
+      if (!formData.firstName) {
+        newErrors.firstName = "กรุณากรอกชื่อ"
+        errorMessages.push("ชื่อ")
+      }
+      if (!formData.lastName) {
+        newErrors.lastName = "กรุณากรอกนามสกุล"
+        errorMessages.push("นามสกุล")
+      }
+      if (!formData.email) {
+        newErrors.email = "กรุณากรอกอีเมล"
+        errorMessages.push("อีเมล")
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+        newErrors.email = "รูปแบบอีเมลไม่ถูกต้อง"
+        errorMessages.push("อีเมล")
+      }
+
       // ตรวจสอบความถูกต้องของเบอร์โทรศัพท์
       if (!formData.phone) {
         newErrors.phone = "กรุณากรอกเบอร์โทรศัพท์"
@@ -157,6 +186,7 @@ export default function RegistrationForm() {
       } else {
         // ตรวจสอบความซ้ำซ้อนของข้อมูล
         const existingPhone = mockExistingUsers.some(user => user.phone === formData.phone)
+        const existingEmail = mockExistingUsers.some(user => user.email === formData.email)
         const existingName = mockExistingUsers.some(
           user => user.firstName === formData.firstName && user.lastName === formData.lastName
         )
@@ -164,18 +194,25 @@ export default function RegistrationForm() {
           user => 
             user.firstName === formData.firstName && 
             user.lastName === formData.lastName && 
-            user.phone === formData.phone
+            user.phone === formData.phone &&
+            user.email === formData.email
         )
 
         if (existingAll) {
-          newErrors.phone = "ข้อมูลนี้ถูกใช้งานแล้ว"
-          errorMessages.push("ข้อมูลนี้ถูกใช้งานแล้ว")
+          newErrors.email = "ข้อมูลซ้ำกับในระบบ กรุณากรอกข้อมูลใหม่อีกครั้ง"
+          newErrors.phone = "ข้อมูลซ้ำกับในระบบ กรุณากรอกข้อมูลใหม่อีกครั้ง"
+          errorMessages.push("ข้อมูลซ้ำกับในระบบ") // General error message
         } else if (existingName) {
-          newErrors.phone = "ชื่อและนามสกุลถูกใช้งานแล้ว"
-          errorMessages.push("ชื่อและนามสกุลถูกใช้งานแล้ว")
+          newErrors.firstName = "ข้อมูลซ้ำกับในระบบ กรุณากรอกข้อมูลใหม่อีกครั้ง"
+          newErrors.lastName = "ข้อมูลซ้ำกับในระบบ กรุณากรอกข้อมูลใหม่อีกครั้ง"
+          errorMessages.push("ข้อมูลซ้ำกับในระบบ")
+        } else if (existingEmail) {
+          newErrors.email = "ข้อมูลซ้ำกับในระบบ กรุณากรอกข้อมูลใหม่อีกครั้ง"
+          errorMessages.push("ข้อมูลซ้ำกับในระบบ")
         } else if (existingPhone) {
-          newErrors.phone = "เบอร์โทรศัพท์ถูกใช้งานแล้ว"
-          errorMessages.push("เบอร์โทรศัพท์ถูกใช้งานแล้ว")
+          // Specific error for phone if only phone is duplicated
+          newErrors.phone = "เบอร์โทรศัพท์นี้ถูกใช้ไปแล้ว กรุณาติดต่อสาขาที่ท่านใช้บริการ"
+          errorMessages.push("เบอร์โทรศัพท์ถูกใช้ไปแล้ว") // Specific error message
         }
       }
     } else {
@@ -187,6 +224,13 @@ export default function RegistrationForm() {
       if (!formData.lastName) {
         newErrors.lastName = "กรุณากรอกนามสกุล"
         errorMessages.push("นามสกุล")
+      }
+      if (!formData.email) {
+        newErrors.email = "กรุณากรอกอีเมล"
+        errorMessages.push("อีเมล")
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+        newErrors.email = "รูปแบบอีเมลไม่ถูกต้อง"
+        errorMessages.push("อีเมล")
       }
       if (!formData.phone) {
         newErrors.phone = "กรุณากรอกเบอร์โทรศัพท์"
@@ -204,6 +248,11 @@ export default function RegistrationForm() {
       setNotFoundFields(errorMessages)
       setNotFound(true)
       setIsDataMismatch(false)
+    } else {
+      // Clear errors if no errors were found
+      setNotFoundFields([]);
+      setNotFound(false);
+      setIsDataMismatch(false);
     }
 
     return Object.keys(newErrors).length === 0
@@ -213,66 +262,89 @@ export default function RegistrationForm() {
     e.preventDefault()
 
     if (!validateForm()) {
-      return
+      // If validation fails, set notFound and notFoundFields based on errors
+      return;
     }
 
     if (activeTab === "existing") {
-      // ตรวจสอบว่ามีข้อมูลในระบบหรือไม่
-      const notFound: string[] = []
-      const hasFirstName = mockExistingUsers.some(user => user.firstName === formData.firstName)
-      const hasLastName = mockExistingUsers.some(user => user.lastName === formData.lastName)
-      const hasPhone = mockExistingUsers.some(user => user.phone === formData.phone)
+      // *** START: Initial check if each individual field value exists in the system ***
+      const notFound: string[] = [];
+      const hasFirstName = mockExistingUsers.some(user => user.firstName === formData.firstName);
+      const hasLastName = mockExistingUsers.some(user => user.lastName === formData.lastName);
+      const hasEmail = mockExistingUsers.some(user => user.email === formData.email);
+      const hasPhone = mockExistingUsers.some(user => user.phone === formData.phone);
 
-      // ตรวจสอบว่าชื่อและนามสกุลตรงกันหรือไม่
-      const hasMatchingName = mockExistingUsers.some(
-        user => user.firstName === formData.firstName && user.lastName === formData.lastName
-      )
+      if (!hasFirstName) notFound.push("ชื่อ");
+      if (!hasLastName) notFound.push("นามสกุล");
+      if (!hasEmail) notFound.push("อีเมล");
+      if (!hasPhone) notFound.push("เบอร์โทรศัพท์");
 
-      // ตรวจสอบว่าข้อมูลทั้งหมดตรงกันหรือไม่
-      const hasMatchingData = mockExistingUsers.some(
-        user => 
-          user.firstName === formData.firstName && 
-          user.lastName === formData.lastName && 
+      if (notFound.length > 0) {
+        setNotFoundFields(notFound);
+        setNotFound(true);
+        setIsDataMismatch(false);
+        return; // Stop here if any field value is not found in the system at all
+      }
+      // *** END: Initial check ***
+
+      // --- Logic below runs only if all individual fields exist in the system ---
+      // Find if any user matches ALL four fields
+      const foundUser = mockExistingUsers.find(
+        user =>
+          user.firstName === formData.firstName &&
+          user.lastName === formData.lastName &&
+          user.email === formData.email &&
           user.phone === formData.phone
-      )
+      );
 
-      if (!hasFirstName) {
-        notFound.push("ชื่อ")
-      }
-      if (!hasLastName) {
-        notFound.push("นามสกุล")
-      }
-      if (!hasPhone) {
-        notFound.push("เบอร์โทรศัพท์")
-      }
+      if (foundUser) {
+        // If user found, proceed
+        const dataToSave = {
+          ...formData,
+          isExistingCustomer: true,
+        };
+        localStorage.setItem("registrationData", JSON.stringify(dataToSave));
+        router.push("/register/confirm");
+      } else {
+        // If user not found with all fields matching, check specific mismatch cases
 
-      // กรณีที่ชื่อและนามสกุลตรงกัน แต่เบอร์โทรศัพท์ไม่ตรง
-      if (hasMatchingName && !hasPhone) {
-        setNotFoundFields(["เบอร์โทรศัพท์ถูกใช้ไปแล้ว กรุณาติดต่อสาขาที่ท่านใช้บริการ"])
-        setNotFound(true)
-        setIsDataMismatch(false)
-        return
-      }
+        // Case: Name, Email match, but Phone doesn't match that specific user
+        const nameEmailMatchButPhoneMismatch = mockExistingUsers.some(
+          user =>
+            user.firstName === formData.firstName &&
+            user.lastName === formData.lastName &&
+            user.email === formData.email &&
+            user.phone !== formData.phone
+        );
 
-      // กรณีอื่นๆ ที่ไม่ตรงตามเงื่อนไข
-      if (notFound.length > 0 || !hasMatchingData) {
-        setNotFoundFields(notFound)
-        setNotFound(true)
-        setIsDataMismatch(false)
-        return
+        if (nameEmailMatchButPhoneMismatch) {
+          setNotFoundFields(["เบอร์โทรศัพท์ถูกใช้ไปแล้ว กรุณาติดต่อสาขาที่ท่านใช้บริการ"]);
+          setNotFound(true);
+          setIsDataMismatch(false);
+        } else {
+          // This else block should ideally not be reached if the initial check passes
+          // but as a fallback, we can keep the data mismatch error if needed.
+          // For now, we expect the initial check or the specific mismatch cases to handle all scenarios
+           setNotFoundFields(["ข้อมูลไม่ตรงกัน กรุณากรอกข้อมูลใหม่"]);
+           setNotFound(true);
+           setIsDataMismatch(true);
+        }
       }
+      return; // Exit handleSubmit after handling existing user checks
     }
 
-    // เพิ่มข้อมูลว่าเป็นลูกค้าเดิมหรือลูกค้าใหม่
+    // Logic for activeTab === "new" remains below
+
+    // Add isExistingCustomer flag for new users
     const dataToSave = {
       ...formData,
-      isExistingCustomer: activeTab === "existing",
+      isExistingCustomer: false, // This will be false for new users
     }
 
-    // บันทึกข้อมูลลงใน localStorage เพื่อใช้ในหน้าถัดไป
+    // Save data to localStorage for next page
     localStorage.setItem("registrationData", JSON.stringify(dataToSave))
 
-    // ไปยังหน้ายืนยันข้อมูล
+    // Navigate to confirmation page
     router.push("/register/confirm")
   }
 
@@ -285,11 +357,6 @@ export default function RegistrationForm() {
         placeholder: "ชื่อ",
         type: "text",
         value: formData.firstName,
-        error: errors.firstName || 
-               notFoundFields.includes("ชื่อ") || 
-               isDataMismatch || 
-               (activeTab === "existing" && notFound) ||
-               (activeTab === "existing" && notFoundFields[0]?.includes("ถูกใช้ไปแล้ว"))
       },
       {
         id: "lastName",
@@ -298,11 +365,14 @@ export default function RegistrationForm() {
         placeholder: "นามสกุล",
         type: "text",
         value: formData.lastName,
-        error: errors.lastName || 
-               notFoundFields.includes("นามสกุล") || 
-               isDataMismatch || 
-               (activeTab === "existing" && notFound) ||
-               (activeTab === "existing" && notFoundFields[0]?.includes("ถูกใช้ไปแล้ว"))
+      },
+      {
+        id: "email",
+        name: "email",
+        label: "อีเมล*",
+        placeholder: "อีเมล",
+        type: "email",
+        value: formData.email,
       },
       {
         id: "phone",
@@ -311,36 +381,51 @@ export default function RegistrationForm() {
         placeholder: "เบอร์โทรศัพท์",
         type: "tel",
         value: formData.phone,
-        error: errors.phone || 
-               notFoundFields.includes("เบอร์โทรศัพท์") || 
-               isDataMismatch || 
-               (activeTab === "existing" && notFound) ||
-               (activeTab === "existing" && notFoundFields[0]?.includes("ถูกใช้ไปแล้ว"))
       }
     ]
 
     return (
       <div>
-        {formFields.map((field) => (
-          <div key={field.id}>
-            <label htmlFor={field.id} className="font-size-35 mb-font-size-35 font-normal">
-              {field.label}
-            </label>
-            <input
-              type={field.type}
-              id={field.id}
-              name={field.name}
-              value={field.value}
-              onChange={handleInputChange}
-              placeholder={field.placeholder}
-              className={`register-form-input text-color-blue font-normal text-center w-557 h-88 rounded-17 font-size-35 mb-w-557 mb-h-88 mb-rounded-17 mb-font-size-35 ${
-                field.error ? "input-error" : ""
-              }`}
-            />
-          </div>
-        ))}
+        {formFields.map((field) => {
+          // Determine the error state for the current field
+          let hasError = false;
+          if (errors[field.name as keyof FormData]) {
+            hasError = true; // Field has a specific validation error
+          } else if (activeTab === "existing") {
+            // Check existing user specific errors
+            if (notFoundFields.includes(field.label.replace("*", ""))) {
+              hasError = true; // Data not found for this field
+            } else if (notFound && notFoundFields[0]?.includes("ถูกใช้ไปแล้ว") && field.name === "phone") {
+              hasError = true; // Phone used error specific to phone field
+            }
+          } else if (activeTab === "new") {
+            // Check new user specific errors (primarily duplicate checks handled in validateForm)
+            if (notFound && notFoundFields.includes(field.label.replace("*", ""))) {
+              hasError = true; // Error indicated for this field in notFoundFields
+            }
+          }
+
+          return (
+            <div key={field.id} className="mb-4">
+              <label htmlFor={field.id} className="font-size-35 mb-font-size-35 font-normal">
+                {field.label}
+              </label>
+              <input
+                type={field.type}
+                id={field.id}
+                name={field.name}
+                value={field.value}
+                onChange={handleInputChange}
+                placeholder={field.placeholder}
+                className={`register-form-input text-color-blue font-normal text-center w-557 h-88 rounded-17 font-size-35 mb-w-557 mb-h-88 mb-rounded-17 mb-font-size-35 ${
+                  hasError ? "input-error" : ""
+                }`}
+              />
+            </div>
+          );
+        })}
       </div>
-    )
+    );
   }
 
   const TabButton = useMemo(() => {
@@ -393,11 +478,6 @@ export default function RegistrationForm() {
           {renderFormFields()}
         </div>
         <div className="text-center h-64 mb-h-64 flex-center flex-col">
-          {activeTab === "new" && errors.phone && (
-            <p className="text-error">
-              *{errors.phone}
-            </p>
-          )}
           {activeTab === "existing" && notFound && (
             <p className="text-error">
               {notFoundFields[0]?.includes("ถูกใช้ไปแล้ว") 
@@ -408,6 +488,11 @@ export default function RegistrationForm() {
           {activeTab === "existing" && isDataMismatch && (
             <p className="text-error">
               *ข้อมูลไม่ตรงกัน กรุณากรอกข้อมูลใหม่
+            </p>
+          )}
+          {activeTab === "new" && notFound && notFoundFields.length > 0 && (
+            <p className="text-error">
+              *{notFoundFields[0]}
             </p>
           )}
         </div>
