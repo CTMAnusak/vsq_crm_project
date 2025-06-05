@@ -42,7 +42,7 @@ label {
   color: #ef4444;
 }
 
-.input-error:focus {
+.input-error:focus , .otp-input.input-error:focus {
   border-color: #ef4444;
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5);
 }

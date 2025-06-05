@@ -135,11 +135,17 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    
+
     if (name === "phone") {
+      // จำกัดให้กรอกได้แค่ตัวเลข
       const numericValue = value.replace(/[^0-9]/g, "")
       setFormData((prev) => ({ ...prev, [name]: numericValue }))
-    } else {
+    } else if (name === "firstName" || name === "lastName") {
+      // จำกัดให้กรอกได้แค่ตัวอักษร (ไทยและอังกฤษ) เท่านั้น ไม่รวมเว้นวรรคและอักษรพิเศษ
+      const alphabeticValue = value.replace(/[^a-zA-Z\u0E00-\u0E7F]/g, "")
+      setFormData((prev) => ({ ...prev, [name]: alphabeticValue }))
+    }
+    else {
       setFormData((prev) => ({ ...prev, [name]: value }))
     }
 
@@ -184,7 +190,7 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
         newErrors.phone = "เบอร์โทรศัพท์ต้องเป็นตัวเลข 10 หลัก"
         errorMessages.push("เบอร์โทรศัพท์")
       } else {
-        // ตรวจสอบความซ้ำซ้อนของข้อมูล
+        // ตรวจสอบความซ้ำซ้อนของข้อมูล ตามเงื่อนไขที่ผู้ใช้กำหนด
         const existingPhone = mockExistingUsers.some(user => user.phone === formData.phone)
         const existingEmail = mockExistingUsers.some(user => user.email === formData.email)
         const existingName = mockExistingUsers.some(
@@ -198,22 +204,40 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
             user.email === formData.email
         )
 
-        if (existingAll) {
-          newErrors.email = "ข้อมูลซ้ำกับในระบบ กรุณากรอกข้อมูลใหม่อีกครั้ง"
-          newErrors.phone = "ข้อมูลซ้ำกับในระบบ กรุณากรอกข้อมูลใหม่อีกครั้ง"
-          errorMessages.push("ข้อมูลซ้ำกับในระบบ") // General error message
-        } else if (existingName) {
-          newErrors.firstName = "ข้อมูลซ้ำกับในระบบ กรุณากรอกข้อมูลใหม่อีกครั้ง"
-          newErrors.lastName = "ข้อมูลซ้ำกับในระบบ กรุณากรอกข้อมูลใหม่อีกครั้ง"
-          errorMessages.push("ข้อมูลซ้ำกับในระบบ")
-        } else if (existingEmail) {
-          newErrors.email = "ข้อมูลซ้ำกับในระบบ กรุณากรอกข้อมูลใหม่อีกครั้ง"
-          errorMessages.push("ข้อมูลซ้ำกับในระบบ")
-        } else if (existingPhone) {
-          // Specific error for phone if only phone is duplicated
-          newErrors.phone = "เบอร์โทรศัพท์นี้ถูกใช้ไปแล้ว กรุณาติดต่อสาขาที่ท่านใช้บริการ"
-          errorMessages.push("เบอร์โทรศัพท์ถูกใช้ไปแล้ว") // Specific error message
+        // *** เงื่อนไขการตรวจสอบข้อมูลซ้ำเมื่อ activeTab === "new" ตามที่ผู้ใช้กำหนด ***
+
+        // กรณีที่ 2: เบอร์โทรศัพท์ซ้ำเพียงอย่างเดียว (ชื่อ-นามสกุล และอีเมลไม่ซ้ำ)
+        if (existingPhone && !existingName && !existingEmail) {
+            newErrors.phone = "เบอร์โทรศัพท์นี้ถูกใช้ไปแล้ว กรุณาติดต่อสาขาที่ท่านใช้บริการ";
+            // เพิ่มเฉพาะข้อความรวมสำหรับกรณีนี้ หากยังไม่มีข้อความนี้อยู่ใน list
+            if (errorMessages.indexOf("เบอร์โทรศัพท์นี้ถูกใช้ไปแล้ว กรุณาติดต่อสาขาที่ท่านใช้บริการ") === -1) {
+               errorMessages.push("เบอร์โทรศัพท์นี้ถูกใช้ไปแล้ว กรุณาติดต่อสาขาที่ท่านใช้บริการ");
+            }
         }
+        // กรณีที่ 1: ข้อมูลซ้ำกับในระบบ (เงื่อนไขอื่นๆ ที่นอกเหนือจากกรณีที่ 2)
+        else if (existingAll || existingEmail || existingName) {
+            const errorMessage = "ข้อมูลซ้ำกับในระบบ กรุณากรอกข้อมูลใหม่อีกครั้ง";
+            // ตั้งค่า error สำหรับ fields ที่ซ้ำจริงในกลุ่มนี้ เพื่อให้ไฮไลท์
+            if (existingName || existingAll) {
+                newErrors.firstName = errorMessage;
+                newErrors.lastName = errorMessage;
+            }
+            if (existingEmail || existingAll) {
+                newErrors.email = errorMessage;
+            }
+             // เพิ่มเงื่อนไขนี้เพื่อให้เบอร์โทรศัพท์ถูกไฮไลท์ เมื่อเบอร์โทรศัพท์ซ้ำและเข้าเงื่อนไขกรณีที่ 1
+             if (existingPhone && (existingName || existingEmail || existingAll)) {
+                 newErrors.phone = errorMessage;
+             }
+
+
+            // เพิ่มเฉพาะข้อความรวมสำหรับกรณีนี้ หากยังไม่มีข้อความนี้อยู่ใน list
+            if (errorMessages.indexOf(errorMessage) === -1) {
+               errorMessages.push(errorMessage);
+            }
+        }
+         // สิ้นสุดเงื่อนไขการตรวจสอบข้อมูลซ้ำ
+
       }
     } else {
       // ตรวจสอบทุกฟิลด์สำหรับลูกค้าเดิม

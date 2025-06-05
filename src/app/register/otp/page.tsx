@@ -107,7 +107,7 @@ export default function OTPPage() {
   const correctBorderClass = useMemo(() => {
     // ถ้าไม่มี error และกรอกครบ 6 หลัก และถูกต้อง
     if (!error && otp.length === 6 && otp === "856900") {
-      return "otp-input"; // ใช้ class ของ Tailwind สำหรับ border สีน้ำเงิน
+      return "otp-input"; // ใช้ class สำหรับ border สีน้ำเงิน
     } else {
       return ""; // ไม่มี class เพิ่มเติมสำหรับ default หรือ error
     }
