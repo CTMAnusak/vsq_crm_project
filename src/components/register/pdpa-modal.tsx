@@ -18,7 +18,7 @@ export default function PDPAModal({ onAccept, onDecline }: PDPAModalProps) {
   }, [])
 
   return (
-    <div className="pdpa-modal flex-center fixed pl-21 pr-21 pt-87 pb-87  mb-flex-center mb-fixed mb-pl-21 mb-pr-21 mb-pt-87 mb-pb-87">
+    <div className="pdpa-modal flex-center fixed w-768 mb-w-768 mx-auto pl-21 pr-21 pt-87 pb-87  mb-flex-center mb-fixed mb-pl-21 mb-pr-21 mb-pt-87 mb-pb-87">
       <div className="pdpa-content relative w-full h-full rounded-49 pt-45 pl-40 pr-40  mb-rounded-49 mb-pt-45 mb-pl-40 mb-pr-40">
         <p className="headText-pdpa inline font-size-29 mb-font-size-29 font-normal ">ข้อตกลงการใช้บริการ</p>
         <div className="box-text-pdpa pt-33 mb-pt-33">

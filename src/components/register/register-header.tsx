@@ -3,7 +3,7 @@ import Image from "next/image"
 export default function RegisterHeader() {
   return (
     <div className="register-header-bar relative">
-      <div className="register-header">
+      <div className="register-header w-768 h-353 mb-w-768 mb-h-353">
         <div className="flex-start-center pl-27 pt-27 mb-pl-27 mb-pt-27">
           <div className="bg-white w-18 h-18 mr-19 mb-w-18 mb-h-18 mb-mr-19"></div>
           <span className="font-gotham font-size-30 mb-font-size-30 font-light text-white">REGISTER</span>

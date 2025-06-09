@@ -4,26 +4,32 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import RegistrationForm from "../../components/register/registration-form"
 import RegisterHeader from "../../components/register/register-header"
+import RegisterSkeleton from "../../components/register/register-skeleton/register-skeleton"
+import PDPAModal from "../../components/register/pdpa-modal"
 import { useRouter } from "next/navigation"
 
 
 export default function RegisterPage() {
-  const [isLoading, setIsLoading] = useState(true)
+  const [pdpaStatus, setPdpaStatus] = useState<'checking' | 'accepted' | 'declined'>('checking');
   const [activeTab, setActiveTab] = useState<"existing" | "new">("existing")
   const router = useRouter()
 
   useEffect(() => {
-    setIsLoading(false)
+    const pdpaAccepted = localStorage.getItem("vsquare_pdpa_accepted")
+    if (pdpaAccepted === "true") {
+      setPdpaStatus('accepted')
+    } else {
+      setPdpaStatus('declined')
+    }
   }, [])
 
-  if (isLoading) {
-    return (
-      <div className="loading-container">
-        <div className="loading-card">
-          <p className="text-center">กำลังโหลดข้อมูล...</p>
-        </div>
-      </div>
-    )
+  const handleAcceptPDPA = () => {
+    localStorage.setItem("vsquare_pdpa_accepted", "true")
+    setPdpaStatus('accepted')
+  }
+
+  const handleDeclinePDPA = () => {
+    router.push("/")
   }
 
   return (
@@ -49,6 +55,9 @@ export default function RegisterPage() {
           </div>
         </div>
       </div>
+      {pdpaStatus !== 'accepted' && (
+        <PDPAModal onAccept={handleAcceptPDPA} onDecline={handleDeclinePDPA} />
+      )}
     </main>
     
   )

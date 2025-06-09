@@ -81,8 +81,6 @@ button {
 }
 
 .register-header {
-  height: 353px;
-  width: 768px; 
   background-image: url('../../../public/register/swan_head.png');
   background-size: 100% auto;
   background-position: bottom center; 
@@ -141,7 +139,7 @@ button {
 /* Checkbox */
 .checkbox-container {
   border-style: solid;
-  border-width: 0 2px 2px 0px;
+  border-width: 0;
   border-color: var(--color-gray-soft);
   border-radius: 0 0 10px 0;
 }

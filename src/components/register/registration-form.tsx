@@ -69,12 +69,6 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
   const formRef = useRef<HTMLFormElement>(null)
 
   useEffect(() => {
-    // ตรวจสอบว่ายอมรับ PDPA แล้วหรือยัง
-    const pdpaAccepted = localStorage.getItem("vsquare_pdpa_accepted")
-    if (!pdpaAccepted) {
-      setShowPDPA(true)
-    }
-
     // ตรวจสอบว่ามีข้อมูลที่กำลังแก้ไขหรือไม่
     const editingData = localStorage.getItem("editingRegistrationData")
     if (editingData) {
@@ -92,15 +86,6 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
       localStorage.removeItem("editingRegistrationData")
     }
   }, [])
-
-  const handleAcceptPDPA = () => {
-    localStorage.setItem("vsquare_pdpa_accepted", "true")
-    setShowPDPA(false)
-  }
-
-  const handleDeclinePDPA = () => {
-    router.push("/")
-  }
 
   const handleTabChange = useCallback((tab: TabType) => {
     // ป้องกันการ scroll อัตโนมัติ
@@ -485,12 +470,6 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
 
   return (
     <div>
-      {showPDPA && (
-        <PDPAModal
-          onAccept={handleAcceptPDPA}
-          onDecline={handleDeclinePDPA}
-        />
-      )}
       <div className="flex-center-start gap-16 mb-gap-16">
         {customerTabs.map((tab) => (
           <TabButton key={tab.id} tab={tab} />

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import Image from "next/image"
 import RegisterHeader from "../../../components/register/register-header"
 import ButtonSubmit from "../../../components/register/button-submit"
+import ConfirmSkeleton from "../../../components/register/register-skeleton/confirm-skeleton"
 
 type FormData = {
   firstName: string
@@ -43,11 +44,7 @@ export default function ConfirmPage() {
 
   if (!formData) {
     return (
-      <div className="min-h-screen bg-[#f0f8f0] flex justify-center items-center">
-        <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
-          <p className="text-center">กำลังโหลดข้อมูล...</p>
-        </div>
-      </div>
+      <ConfirmSkeleton />
     )
   }
 
