@@ -23,6 +23,7 @@
 .font-gotham {
   font-family: var(--font-gotham);
 }
+
 .text-color-blue {
   color: var(--color-blue);
 }
@@ -49,4 +50,7 @@
 }
 .bg-color-red-soft {
   background-color: var(--color-red-soft);
+}
+.color-midnight-black {
+  color: var(--color-midnight-black);
 }

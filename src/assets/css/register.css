@@ -229,7 +229,6 @@ button {
 
 .pdpa-content {
   background-color: var(--color-light-surface);
-  max-height: 1410px;
   box-shadow: 0 1px 12px 0px rgba(69, 114, 167, 0.5);
 }
 
@@ -241,47 +240,11 @@ button {
   text-decoration-thickness: 2px;
 }
 .box-text-pdpa{
-  height: calc(100% - 190px);
-  width: 100%; 
   background-image: url('../../../public/register/shadow_pdpa.png');
   background-size: 100% auto;
   background-position: bottom center; 
   background-repeat: no-repeat; 
 }
-.text-pdpa{
-  color: var(--color-midnight-black);
-  height: 100%;
-}
-.pdpa-confirm-box {
-  height: 144px;
-  gap: 40px
-}
-.pdpa-btn-decline {
-  background-color: #bababa;
-}
-.pdpa-btn-accept {
-  background-color: var(--color-blue);
-}
-.pdpa-btn-decline , .pdpa-btn-accept  {
-  font-family: var(--font-family);
-  font-weight: 300;
-  font-size: 30px;
-  color: #fdfdfd;
-  width: 283px;
-  height: 81px;
-  border-radius: 17px;
-}
-
-.pdpa-btn-accept :focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
-}
-.pdpa-btn-decline:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.5);
-}
-
-
 /*Success Page*/
 .success-container {
   background-color: #ffffff;
@@ -346,51 +309,6 @@ button {
 }
 .edit-btn {
   border: 3px solid var(--color-blue);
-}
-
-/* Example Data Table */
-.example-data {
-  background-color: #eff6ff;
-  padding: 0.75rem;
-  border-radius: 0.375rem;
-  margin-bottom: 1rem;
-}
-
-.example-data-title {
-  font-weight: 500;
-  color: #1e40af;
-  margin-bottom: 0.5rem;
-}
-
-.example-data-table {
-  width: 100%;
-  font-size: 0.875rem;
-}
-
-.example-data-table th {
-  text-align: left;
-  padding: 0.25rem 0.5rem;
-  border-bottom: 1px solid #bfdbfe;
-}
-
-.example-data-table td {
-  padding: 0.25rem 0.5rem;
-  border-bottom: 1px solid #dbeafe;
-}
-
-.example-data-button {
-  font-size: 0.75rem;
-  color: #2563eb;
-}
-
-.example-data-button:hover {
-  color: #1e40af;
-}
-
-.example-data-note {
-  font-size: 0.75rem;
-  color: #6b7280;
-  margin-top: 0.5rem;
 }
 
 /* Loading */
