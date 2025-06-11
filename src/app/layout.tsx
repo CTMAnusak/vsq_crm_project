@@ -1,23 +1,30 @@
 import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
+import "../assets/scss/_settings.scss"
+import "../assets/css/pxtovw.css"
+import "../assets/scss/main.scss"
+
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
+
 
 export const metadata: Metadata = {
-  title: "V Square Clinic - ลงทะเบียนสมาชิก",
-  description: "ลงทะเบียนเป็นสมาชิก V Square Clinic เพื่อรับสิทธิพิเศษ",
+  title: "",
+  description: "",
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({children}) {
   return (
     <html lang="th">
-      <body>
-        <div className="relative w-full max-w-768 mb-max-w-768 mx-auto overflow-x-hidden">
+      <body cz-shortcut-listen="true">
+        <div className="relative w-full max-w-768 mx-auto mb-max-w-full overflow-hidden">
+          <Header />
           {children}
-          </div>
+          <Footer />
+        </div>
+        
       </body>
     </html>
   )
