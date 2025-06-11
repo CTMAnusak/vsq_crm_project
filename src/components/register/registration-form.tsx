@@ -5,6 +5,8 @@ import type React from "react"
 import { useState, useEffect, useCallback, useMemo, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { CheckIcon, InfoIcon } from "lucide-react"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import PDPAModal from "./pdpa-modal"
 import ButtonSubmit from "./button-submit"
 
@@ -37,7 +39,11 @@ const mockExistingUsers = [
 const customerTabs = [
   {
     id: "existing",
-    title: "ลูกค้า V Square",
+    title: (
+      <>
+        ลูกค้า <span className="font-gotham font-medium font-size-28 mb-font-size-28">V Square</span>
+      </>
+    ),
     subtitle: "เคยรับบริการแล้ว"
   },
   {
@@ -150,7 +156,7 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
     const errorMessages: string[] = []
 
     if (activeTab === "new") {
-      // ตรวจสอบความถูกต้องของอีเมล
+      // ตรวจสอบความถูกต้องของ Email
       if (!formData.firstName) {
         newErrors.firstName = "กรุณากรอกชื่อ"
         errorMessages.push("ชื่อ")
@@ -160,11 +166,11 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
         errorMessages.push("นามสกุล")
       }
       if (!formData.email) {
-        newErrors.email = "กรุณากรอกอีเมล"
-        errorMessages.push("อีเมล")
+        newErrors.email = "กรุณากรอก Email"
+        errorMessages.push("Email")
       } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-        newErrors.email = "รูปแบบอีเมลไม่ถูกต้อง"
-        errorMessages.push("อีเมล")
+        newErrors.email = "รูปแบบ Email ไม่ถูกต้อง"
+        errorMessages.push("Email")
       }
 
       // ตรวจสอบความถูกต้องของเบอร์โทรศัพท์
@@ -191,7 +197,7 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
 
         // *** เงื่อนไขการตรวจสอบข้อมูลซ้ำเมื่อ activeTab === "new" ตามที่ผู้ใช้กำหนด ***
 
-        // กรณีที่ 2: เบอร์โทรศัพท์ซ้ำเพียงอย่างเดียว (ชื่อ-นามสกุล และอีเมลไม่ซ้ำ)
+        // กรณีที่ 2: เบอร์โทรศัพท์ซ้ำเพียงอย่างเดียว (ชื่อ-นามสกุล และ Email ไม่ซ้ำ)
         if (existingPhone && !existingName && !existingEmail) {
             newErrors.phone = "เบอร์โทรศัพท์นี้ถูกใช้ไปแล้ว กรุณาติดต่อสาขาที่ท่านใช้บริการ";
             // เพิ่มเฉพาะข้อความรวมสำหรับกรณีนี้ หากยังไม่มีข้อความนี้อยู่ใน list
@@ -235,11 +241,11 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
         errorMessages.push("นามสกุล")
       }
       if (!formData.email) {
-        newErrors.email = "กรุณากรอกอีเมล"
-        errorMessages.push("อีเมล")
+        newErrors.email = "กรุณากรอก Email"
+        errorMessages.push("Email")
       } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-        newErrors.email = "รูปแบบอีเมลไม่ถูกต้อง"
-        errorMessages.push("อีเมล")
+        newErrors.email = "รูปแบบ Email ไม่ถูกต้อง"
+        errorMessages.push("Email")
       }
       if (!formData.phone) {
         newErrors.phone = "กรุณากรอกเบอร์โทรศัพท์"
@@ -285,7 +291,7 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
 
       if (!hasFirstName) notFound.push("ชื่อ");
       if (!hasLastName) notFound.push("นามสกุล");
-      if (!hasEmail) notFound.push("อีเมล");
+      if (!hasEmail) notFound.push("Email");
       if (!hasPhone) notFound.push("เบอร์โทรศัพท์");
 
       if (notFound.length > 0) {
@@ -362,32 +368,28 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
       {
         id: "firstName",
         name: "firstName",
-        label: "ชื่อ*",
-        placeholder: "ชื่อ",
+        placeholder: "ชื่อ*",
         type: "text",
         value: formData.firstName,
       },
       {
         id: "lastName",
         name: "lastName",
-        label: "นามสกุล*",
-        placeholder: "นามสกุล",
+        placeholder: "นามสกุล*",
         type: "text",
         value: formData.lastName,
       },
       {
         id: "email",
         name: "email",
-        label: "อีเมล*",
-        placeholder: "อีเมล",
+        placeholder: "Email*",
         type: "email",
         value: formData.email,
       },
       {
         id: "phone",
         name: "phone",
-        label: "เบอร์โทรศัพท์*",
-        placeholder: "เบอร์โทรศัพท์",
+        placeholder: "เบอร์โทรศัพท์*",
         type: "tel",
         value: formData.phone,
       }
@@ -402,23 +404,20 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
             hasError = true; // Field has a specific validation error
           } else if (activeTab === "existing") {
             // Check existing user specific errors
-            if (notFoundFields.includes(field.label.replace("*", ""))) {
+            if (notFoundFields.includes(field.placeholder.replace("*", ""))) {
               hasError = true; // Data not found for this field
             } else if (notFound && notFoundFields[0]?.includes("ถูกใช้ไปแล้ว") && field.name === "phone") {
               hasError = true; // Phone used error specific to phone field
             }
           } else if (activeTab === "new") {
             // Check new user specific errors (primarily duplicate checks handled in validateForm)
-            if (notFound && notFoundFields.includes(field.label.replace("*", ""))) {
+            if (notFound && notFoundFields.includes(field.placeholder.replace("*", ""))) {
               hasError = true; // Error indicated for this field in notFoundFields
             }
           }
 
           return (
-            <div key={field.id} className="mb-4">
-              <label htmlFor={field.id} className="font-size-35 mb-font-size-35 font-normal">
-                {field.label}
-              </label>
+            <div key={field.id} className="mb-28 mb-mb-28">
               <input
                 type={field.type}
                 id={field.id}
@@ -426,8 +425,12 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
                 value={field.value}
                 onChange={handleInputChange}
                 placeholder={field.placeholder}
-                className={`register-form-input text-color-blue font-normal text-center w-557 h-88 rounded-17 font-size-35 mb-w-557 mb-h-88 mb-rounded-17 mb-font-size-35 ${
+                className={`register-form-input text-left w-555 h-86 rounded-17 mb-w-555 mb-h-86 mb-rounded-17 pl-40 mb-pl-40 pr-40 mb-pr-40 ${
                   hasError ? "input-error" : ""
+                } ${
+                  field.value 
+                    ? (field.name === "email" ? "font-normal text-color-blue font-size-35 mb-font-size-35" : "font-normal text-color-blue font-size-35 mb-font-size-35") 
+                    : (field.name === "email" ? "font-gotham text-color-gray-mid font-normal font-size-30 mb-font-size-30" : "font-light text-color-gray-mid font-size-30 mb-font-size-30")
                 }`}
               />
             </div>
@@ -442,8 +445,8 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
       <button
         key={tab.id}
         className={`${
-          activeTab === tab.id ? "customer-tab-active" : "customer-tab"
-        } relative bg-white overflow-hidden w-319 h-121 rounded-10 mb-w-319 mb-h-121 mb-rounded-10`}
+          activeTab === tab.id ? "customer-tab-active w-321 h-123 mb-w-321 mb-h-123" : "customer-tab w-319 h-121 mb-w-319 mb-h-121"
+        } relative bg-white overflow-hidden rounded-10 mb-rounded-10`}
         onClick={(e) => {
           e.preventDefault()
           e.stopPropagation()
@@ -455,10 +458,10 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
             activeTab === tab.id ? "checkbox-checked" : "checkbox-unchecked"
           }`}
         >
-          {activeTab === tab.id && <CheckIcon className="text-white" />}
+          {activeTab === tab.id && <FontAwesomeIcon icon={faCheck} className="font-size-30 mb-font-size-30" />}
         </div>
-        <p className={`customer-tab-text absolute contents line-12 font-light top-1-2 left-1-2 font-size-30 mb-top-1-2 mb-left-1-2  mb-font-size-30  ${
-          activeTab === tab.id ? "customer-tab-text-active" : ""
+        <p className={`customer-tab-text absolute contents line-12  top-1-2 left-1-2 font-size-30 mb-top-1-2 mb-left-1-2 mb-font-size-30  ${
+          activeTab === tab.id ? "customer-tab-active text-color-blue font-normal" : "text-color-gray-medium font-light"
         }`}>
           {tab.title}
           <br />
@@ -470,17 +473,17 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
 
   return (
     <div>
-      <div className="flex-center-start gap-16 mb-gap-16">
+      <div className="flex-center gap-16 mb-gap-16">
         {customerTabs.map((tab) => (
           <TabButton key={tab.id} tab={tab} />
         ))}
       </div>
 
       <form ref={formRef} className="register-form flex-start-center flex-col" onSubmit={handleSubmit}>
-        <div className="bg-white flex-start-center text-center flex-col mt-21 pt-32 pl-48 pr-48 pb-46 rounded-10 mb-mt-21 mb-pt-32 mb-pl-48 mb-pr-48 mb-pb-46 mb-rounded-10">
+        <div className="bg-white flex-start-center text-center flex-col mt-22 pt-77 pl-47 pr-47 pb-54 rounded-10 mb-mt-22 mb-pt-77 mb-pl-47 mb-pr-47 mb-pb-54 mb-rounded-10">
           {renderFormFields()}
         </div>
-        <div className="text-center h-64 mb-h-64 flex-center flex-col">
+        <div className="text-center h-82 mb-h-82 flex-center flex-col">
           {activeTab === "existing" && notFound && (
             <p className="text-error">
               {notFoundFields[0]?.includes("ถูกใช้ไปแล้ว") 
@@ -502,7 +505,7 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
         <ButtonSubmit
           type="submit"
           variant={isFormValid ? "blue_bg" : "gray_bg"}
-          className={`w-553 h-84 mb-w-553 mb-h-84 ${activeTab === "new" ? "mb-84 mb-mb-84" : ""}`}
+          className={`w-553 h-81 mb-w-553 mb-h-81 ${activeTab === "new" ? "mb-84 mb-mb-84" : ""}`}
           isDisabled={!isFormValid}
         >
           {activeTab === "existing" ? "ยืนยันข้อมูล" : "ถัดไป"}
@@ -510,8 +513,8 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
       </form>
 
       {activeTab === "existing" && (
-        <p className="text-exceeds-w-box relative text-center text-color-blue-deep font-light top-0 left-1-2 font-size-26 mt-24 mb-26 mb-top-0 mb-left-1-2  mb-font-size-26 mb-mt-24 mb-mb-26">
-          *ชื่อ – นามสกุล ผิด ลูกค้าแจ้งแก้ไขได้ ที่หน้าสาขา V Square Clinic
+        <p className="text-exceeds-w-box relative text-center text-color-blue-deep font-light top-0 left-1-2 font-size-26 mt-35 mb-60 mb-top-0 mb-left-1-2  mb-font-size-26 mb-mt-35 mb-mb-60">
+          *ชื่อ – นามสกุล ผิด ลูกค้าแจ้งแก้ไขได้ ที่หน้าสาขา <span className="font-gotham font-size-24 mb-font-size-24 font-normal">V Square Clinic</span>
         </p>
       )}
 

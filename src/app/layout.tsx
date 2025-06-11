@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="th">
       <body>
-        <div className="relative w-full max-w-768 mb-max-w-768 mx-auto overflow-x-hidden">
+        <div className="relative w-full max-w-768 mb-max-w-768 mx-auto overflow-x-hidden scrollbar-none">
           {children}
           </div>
       </body>

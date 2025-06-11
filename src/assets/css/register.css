@@ -5,7 +5,11 @@
 .overflow-x-hidden {
   overflow-x: hidden;
 }
-
+.scrollbar-none {
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;    /* IE 10+ */
+  -webkit-overflow-scrolling: touch;
+}
 input,
 select,
 textarea {
@@ -122,17 +126,13 @@ button {
   color: #6b7280;
 }
 .customer-tab{
-  border: 3px solid var(--color-gray-soft);
+  border: 2px solid var(--color-gray-regular);
 }
 .customer-tab-active {
   border: 3px solid var(--color-blue);
 }
 .customer-tab-text {
-  color: var(--color-gray-medium);
   transform: translate(-50%, -50%);
-}
-.customer-tab-text-active {
-  color: var(--color-blue);
 }
 
 
@@ -140,7 +140,6 @@ button {
 .checkbox-container {
   border-style: solid;
   border-width: 0;
-  border-color: var(--color-gray-soft);
   border-radius: 0 0 10px 0;
 }
 
@@ -151,14 +150,9 @@ button {
 }
 
 .checkbox-unchecked {
-  background-color: var(--color-gray-soft);
-  border-color: var(--color-gray-soft);
-  color: var(--color-blue);
-}
-.checkbox-checked svg{
-  stroke-width: 3px;
-  width: 24px;
-  height: 30px;
+  background-color: var(--color-gray-regular);
+  border-color: var(--color-gray-regular);
+  color: var(--color-gray-regular);
 }
 
 /* Register Form */
@@ -169,11 +163,8 @@ button {
   perspective: 1000;
   -webkit-font-smoothing: antialiased;
 }
-.register-form label {
-  color: var(--color-blue-deep);
-}
 .register-form-input {
-  border: 3px solid var(--color-gray-soft);
+  border: 2px solid var(--color-gray-regular);
   transition: border-color 0.1s ease, color 0.1s ease;
 }
 /* Placeholder: สีเทา */
@@ -183,7 +174,6 @@ button {
 .register-form-input::-moz-placeholder,
 .register-form-input:-ms-input-placeholder,
 .register-form-input::-ms-input-placeholder {
-  color: var(--color-gray-medium);
   transition: color 0.1s ease;
 }
 /* เมื่อ focus → ทุกอย่างเป็นสีฟ้า */
@@ -193,7 +183,6 @@ button {
 /* ถ้าไม่ได้แสดง placeholder = มี value แล้ว */
 .register-form-input:not(:placeholder-shown) {
   border-color: var(--color-blue);
-  color: var(--color-blue) !important;
   outline: none;
 }
 
@@ -217,6 +206,7 @@ button {
 .pdpa-modal {
   inset: 0;
   z-index: 50;
+  height: max-content;
 }
 .pdpa-modal:before {
   content: "";
@@ -229,7 +219,7 @@ button {
 
 .pdpa-content {
   background-color: var(--color-light-surface);
-  box-shadow: 0 1px 12px 0px rgba(69, 114, 167, 0.5);
+  box-shadow: 0px 1px 13px #4572a7;
 }
 
 .headText-pdpa{
