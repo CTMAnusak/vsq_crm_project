@@ -10,6 +10,9 @@
   -ms-overflow-style: none;    /* IE 10+ */
   -webkit-overflow-scrolling: touch;
 }
+.translateX-minus-1-2 {
+  transform: translateX(-50%);
+}
 input,
 select,
 textarea {
@@ -40,14 +43,14 @@ label {
 .input-error,
 .register-form-input.input-error:not(:placeholder-shown),
 .otp-input.input-error {
-  border-color: #ef4444 !important;
+  border-color: var(--color-red) !important;
 }
 .text-error {
-  color: #ef4444;
+  color: var(--color-error-text);
 }
 
 .input-error:focus , .otp-input.input-error:focus {
-  border-color: #ef4444;
+  border-color: var(--color-red);
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5);
 }
 
@@ -112,7 +115,6 @@ button {
 
 .text-exceeds-w-box {
   width: calc(100% + 80px);
-  transform: translateX(-50%);
 }
 
 /* Tabs */
@@ -322,7 +324,7 @@ button {
 /* Error Message */
 .error-message {
   background-color: #fee2e2;
-  color: #dc2626;
+  color: var(--color-red);
   padding: 0.75rem;
   border-radius: 0.375rem;
   text-align: center;
@@ -334,22 +336,20 @@ input.register-form-input:-webkit-autofill,
 input.register-form-input:-webkit-autofill:focus,
 input.register-form-input:-webkit-autofill:hover,
 input.register-form-input:-webkit-autofill:active {
-  -webkit-text-fill-color: var(--color-blue) !important;
+  -webkit-text-fill-color: var(--color-blue);
   transition: background-color 1s ease-in-out 0s;
+  /* เพิ่มตรงนี้เพื่อเปลี่ยนพื้นหลัง autofill เป็นสีขาว */
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  box-shadow: 0 0 0px 1000px white inset !important;
 }
-
-/* สำหรับกรณี browser suggestion */
-input.register-form-input {
-  color: var(--color-blue) !important;
+input.register-form-input.text-input-error:-webkit-autofill,
+input.register-form-input.text-input-error:-webkit-autofill:focus,
+input.register-form-input.text-input-error:-webkit-autofill:hover,
+input.register-form-input.text-input-error:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--color-red);
 }
-
-.register-form-input::selection {
-  background: #b3d4fc;
-  color: var(--color-blue);
-}
-.register-form-input::-webkit-selection {
-  background: #b3d4fc;
-  color: var(--color-blue);
+.text-input-error {
+  color: var(--color-red);
 }
 
 .customer-tab {

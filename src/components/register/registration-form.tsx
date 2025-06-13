@@ -39,11 +39,7 @@ const mockExistingUsers = [
 const customerTabs = [
   {
     id: "existing",
-    title: (
-      <>
-        ลูกค้า <span className="font-gotham font-medium font-size-28 mb-font-size-28">V Square</span>
-      </>
-    ),
+    title: "ลูกค้า V Square",
     subtitle: "เคยรับบริการแล้ว"
   },
   {
@@ -128,8 +124,8 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
     const { name, value } = e.target
 
     if (name === "phone") {
-      // จำกัดให้กรอกได้แค่ตัวเลข
-      const numericValue = value.replace(/[^0-9]/g, "")
+      // จำกัดให้กรอกได้แค่ตัวเลข และจำกัดความยาวไม่เกิน 10 หลัก
+      const numericValue = value.replace(/[^0-9]/g, "").slice(0, 10)
       setFormData((prev) => ({ ...prev, [name]: numericValue }))
     } else if (name === "firstName" || name === "lastName") {
       // จำกัดให้กรอกได้แค่ตัวอักษร (ไทยและอังกฤษ) เท่านั้น ไม่รวมเว้นวรรคและอักษรพิเศษ
@@ -426,11 +422,11 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
                 onChange={handleInputChange}
                 placeholder={field.placeholder}
                 className={`register-form-input text-left w-555 h-86 rounded-17 mb-w-555 mb-h-86 mb-rounded-17 pl-40 mb-pl-40 pr-40 mb-pr-40 ${
-                  hasError ? "input-error" : ""
-                } ${
-                  field.value 
-                    ? (field.name === "email" ? "font-normal text-color-blue font-size-35 mb-font-size-35" : "font-normal text-color-blue font-size-35 mb-font-size-35") 
-                    : (field.name === "email" ? "font-gotham text-color-gray-mid font-normal font-size-30 mb-font-size-30" : "font-light text-color-gray-mid font-size-30 mb-font-size-30")
+                  hasError
+                    ? "input-error text-input-error font-normal font-size-35 mb-font-size-35"
+                    : field.value
+                      ? (field.name === "email" ? "font-normal text-color-blue font-size-35 mb-font-size-35" : "font-normal text-color-blue font-size-35 mb-font-size-35") 
+                      : (field.name === "email" ? "font-gotham text-color-gray-mid font-normal font-size-30 mb-font-size-30" : "font-light text-color-gray-mid font-size-30 mb-font-size-30")
                 }`}
               />
             </div>
@@ -446,7 +442,7 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
         key={tab.id}
         className={`${
           activeTab === tab.id ? "customer-tab-active w-321 h-123 mb-w-321 mb-h-123" : "customer-tab w-319 h-121 mb-w-319 mb-h-121"
-        } relative bg-white overflow-hidden rounded-10 mb-rounded-10`}
+        } relative bg-white overflow-hidden rounded-10 mb-rounded-10 line-13`}
         onClick={(e) => {
           e.preventDefault()
           e.stopPropagation()
@@ -461,9 +457,15 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
           {activeTab === tab.id && <FontAwesomeIcon icon={faCheck} className="font-size-30 mb-font-size-30" />}
         </div>
         <p className={`customer-tab-text absolute contents line-12  top-1-2 left-1-2 font-size-30 mb-top-1-2 mb-left-1-2 mb-font-size-30  ${
-          activeTab === tab.id ? "customer-tab-active text-color-blue font-normal" : "text-color-gray-medium font-light"
+          activeTab === tab.id ? "customer-tab-active text-color-blue font-normal" : "text-color-gray-mid font-light"
         }`}>
-          {tab.title}
+          {tab.id === "existing" ? (
+            <>
+              ลูกค้า <span className={`${activeTab === "existing" ? "font-gotham font-medium font-size-28 mb-font-size-28" : "font-kanit font-light font-size-30 mb-font-size-30"}`}>V Square</span>
+            </>
+          ) : (
+            tab.title
+          )}
           <br />
           {tab.subtitle}
         </p>
@@ -480,24 +482,24 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
       </div>
 
       <form ref={formRef} className="register-form flex-start-center flex-col" onSubmit={handleSubmit}>
-        <div className="bg-white flex-start-center text-center flex-col mt-22 pt-77 pl-47 pr-47 pb-54 rounded-10 mb-mt-22 mb-pt-77 mb-pl-47 mb-pr-47 mb-pb-54 mb-rounded-10">
+        <div className="bg-white flex-start-center text-center flex-col w-651 mb-w-651 mt-22 pt-77 pb-54 rounded-10 mb-mt-22 mb-pt-77 mb-pb-54 mb-rounded-10">
           {renderFormFields()}
         </div>
-        <div className="text-center h-82 mb-h-82 flex-center flex-col">
+        <div className="h-82 mb-h-82 flex-center flex-col text-exceeds-w-box">
           {activeTab === "existing" && notFound && (
-            <p className="text-error">
+            <p className="text-error font-normal font-size-28 mb-font-size-28">
               {notFoundFields[0]?.includes("ถูกใช้ไปแล้ว") 
                 ? `*${notFoundFields[0]}`
                 : `*ไม่พบข้อมูลนี้ กรุณากรอกข้อมูลใหม่อีกครั้ง`}
             </p>
           )}
           {activeTab === "existing" && isDataMismatch && (
-            <p className="text-error">
+            <p className="text-error font-normal font-size-28 mb-font-size-28">
               *ข้อมูลไม่ตรงกัน กรุณากรอกข้อมูลใหม่
             </p>
           )}
           {activeTab === "new" && notFound && notFoundFields.length > 0 && (
-            <p className="text-error">
+            <p className="text-error font-normal font-size-28 mb-font-size-28">
               *{notFoundFields[0]}
             </p>
           )}
@@ -508,12 +510,12 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
           className={`w-553 h-81 mb-w-553 mb-h-81 ${activeTab === "new" ? "mb-84 mb-mb-84" : ""}`}
           isDisabled={!isFormValid}
         >
-          {activeTab === "existing" ? "ยืนยันข้อมูล" : "ถัดไป"}
+          ถัดไป
         </ButtonSubmit>
       </form>
 
       {activeTab === "existing" && (
-        <p className="text-exceeds-w-box relative text-center text-color-blue-deep font-light top-0 left-1-2 font-size-26 mt-35 mb-60 mb-top-0 mb-left-1-2  mb-font-size-26 mb-mt-35 mb-mb-60">
+        <p className="text-exceeds-w-box translateX-minus-1-2 relative text-center text-color-blue-deep font-light top-0 left-1-2 font-size-26 mt-35 mb-60 mb-top-0 mb-left-1-2  mb-font-size-26 mb-mt-35 mb-mb-60">
           *ชื่อ – นามสกุล ผิด ลูกค้าแจ้งแก้ไขได้ ที่หน้าสาขา <span className="font-gotham font-size-24 mb-font-size-24 font-normal">V Square Clinic</span>
         </p>
       )}

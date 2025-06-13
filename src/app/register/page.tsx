@@ -41,7 +41,8 @@ export default function RegisterPage() {
             <div className="flex-start-center flex-col text-center mb-24 mb-flex-start-center mb-flex-col mb-text-center mb-mb-24">
               <p className="font-kanit text-color-blue-deep font-normal font-size-47 mb-font-size-47">
                 เข้าร่วม <span className="font-gotham font-medium">
-                  {activeTab === "existing" ? "V Club" : "V Prestige Club"}
+                  {/* {activeTab === "existing" ? "V Club" : "V Prestige Club"} */}
+                  V Club
                 </span>
               </p>
               <p className="text-color-blue font-normal line-12 font-size-35 mb-font-size-35 ">

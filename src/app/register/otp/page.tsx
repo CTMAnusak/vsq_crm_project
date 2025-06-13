@@ -153,7 +153,7 @@ export default function OTPPage() {
             </div>
 
             {/* Request OTP */}
-            <div className="text-exceeds-w-box relative top-0 left-1-2  mb-top-0 mb-left-1-2">
+            <div className="text-exceeds-w-box translateX-minus-1-2 relative top-0 left-1-2  mb-top-0 mb-left-1-2">
               <p className="pt-42 font-size-30  mb-pt-55 mb-font-size-30 text-color-blue-deep font-light text-center">
                 กรณีไม่ได้รับรหัส SMS OTP ให้กด{" "}
                 <button

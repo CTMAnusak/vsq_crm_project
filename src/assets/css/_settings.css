@@ -16,7 +16,8 @@
   --color-gray-medium: #949494;
   --color-light-surface: #f5f8fa;
   --color-white-light: #fdfdfd;
-  --color-red: #dc3545;
+  --color-red: #d40000;
+  --color-error-text: #b93c3c;
   --color-red-soft: #FADADD;
 
 }
