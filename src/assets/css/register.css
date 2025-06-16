@@ -54,6 +54,16 @@ label {
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5);
 }
 
+.otp-input-error,
+.register-form-input.otp-input-error:not(:placeholder-shown),
+.otp-input.otp-input-error {
+  border-color: var(--color-red-base) !important;
+}
+.otp-input-error:focus , .otp-input.otp-input-error:focus {
+  border-color: var(--color-red-base);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5);
+}
+
 /* ===== Buttons ===== */
 button {
   transition: all 0.1s;
@@ -115,6 +125,9 @@ button {
 
 .text-exceeds-w-box {
   width: calc(100% + 80px);
+}
+button.underline {
+  text-underline-offset: 7px;
 }
 
 /* Tabs */
@@ -192,6 +205,10 @@ button {
 .otp-input {
   border: 3px solid var(--color-blue); 
   transition: border-color 0.1s ease, color 0.1s ease;
+  letter-spacing: 20px;
+}
+.otp-input:placeholder-shown {
+  letter-spacing: 12px;
 }
 .otp-input:focus {
   outline: none;
@@ -294,7 +311,7 @@ button {
 }
 /* Confirmation Page */
 .confirm-data {
-  margin-left: -28px;
+  margin-left: -22px;
 }
 .confirm-data-box {
   gap: 40px 0;

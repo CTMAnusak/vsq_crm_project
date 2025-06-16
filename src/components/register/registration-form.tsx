@@ -507,7 +507,7 @@ export default function RegistrationForm({ onTabChange }: RegistrationFormProps)
         <ButtonSubmit
           type="submit"
           variant={isFormValid ? "blue_bg" : "gray_bg"}
-          className={`w-553 h-81 mb-w-553 mb-h-81 ${activeTab === "new" ? "mb-84 mb-mb-84" : ""}`}
+          className={`w-553 h-81 mb-w-553 mb-h-81 ${activeTab === "new" ? "mb-131 mb-mb-131" : ""}`}
           isDisabled={!isFormValid}
         >
           ถัดไป

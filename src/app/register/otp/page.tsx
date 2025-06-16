@@ -4,13 +4,13 @@ import type React from "react"
 
 import { useState, useEffect, useRef, useMemo } from "react"
 import { useRouter } from "next/navigation"
-import Image from "next/image"
 import RegisterHeader from "../../../components/register/register-header"
 import OTPSkeleton from "../../../components/register/register-skeleton/otp-skeleton"
 
 type FormData = {
   firstName: string
   lastName: string
+  email: string
   phone: string
 }
 
@@ -82,7 +82,7 @@ export default function OTPPage() {
     } else if (otp.length === 6) {
       // ตรวจสอบ OTP (สำหรับ demo purposes) เมื่อ blur และกรอกครบ 6 หลัก
       if (otp !== "856900") {
-         setError("รหัส OTP ไม่ถูกต้อง กรุณากรอกใหม่อีกครั้ง"); // ข้อความ error สำหรับรหัสไม่ถูกต้อง
+         setError("กรุณากรอกรหัส OTP ใหม่อีกครั้ง"); // ข้อความ error สำหรับรหัสไม่ถูกต้อง
       } else {
          // ถ้าถูกต้อง ลบ error (การไปหน้าถัดไปทำใน handleOtpChange แล้ว)
          setError("");
@@ -124,20 +124,20 @@ export default function OTPPage() {
     <div className="register-container h-auto flex-start-center flex-col">
       <div className="register-card">
         <RegisterHeader />
-        <div className="register-content flex-start-center flex-col mx-auto w-656 mt-15 mb-w-656 mb-mt-15">
-          <div className="flex-start-center flex-col text-center mb-24  mb-mb-24">
+        <div className="register-content relative flex-start-center flex-col mx-auto w-651 mt-100 mb-w-651 mb-mt-100 mb-445 mb-mb-445">
+          <div className="flex-start-center flex-col text-center mb-40  mb-mb-40">
             <h2 className="register-title font-normal font-size-60 mb-font-size-60 text-color-blue-deep">ยืนยันรหัส <span className="text-color-blue">OTP</span></h2>
           </div>
 
-          <div className="bg-white mb-32 pt-32 pl-48 pr-48 pb-46 rounded-10  mb-mb-32 mb-pt-32 mb-pl-48 mb-pr-48 mb-pb-46 mb-rounded-10">
+          <div className="bg-white w-full  pt-56 pl-10 pr-10 pb-60 rounded-10  mb-pt-56 mb-pl-10 mb-pr-10 mb-pb-60 mb-rounded-10">
             {formData && (
-                <p className="pb-42 font-size-30  mb-pb-42 mb-font-size-30 text-color-blue-deep font-light text-center">
-                  กรุณาใส่รหัส OTP 6 หลัก
+                <p className="pb-56 font-size-30  mb-pb-56 mb-font-size-30 text-color-blue-deep font-light text-center">
+                  กรุญายืนยัน OTP 6 หลัก
                   <br />
                   ที่ส่งไปที่หมายเลข {formData.phone}
                 </p>
               )}
-            <div>
+            <div className="flex-center">
               <input
                 ref={inputRef}
                 type="text"
@@ -145,8 +145,8 @@ export default function OTPPage() {
                 onChange={handleOtpChange}
                 onBlur={handleOtpBlur} // เพิ่ม onBlur handler
                 // ใช้ class otp-input เป็นพื้นฐาน และเพิ่ม input-error เมื่อมี error หรือ correctBorderClass เมื่อถูกต้อง
-                className={`otp-input text-color-blue font-normal text-center w-557 h-88 rounded-17 font-size-35  mb-w-557 mb-h-88 mb-rounded-17 mb-font-size-35 
-                  ${error ? "input-error" : correctBorderClass}`}
+                className={`otp-input px-0 mb-px-0 text-color-blue font-normal text-center w-539 h-113 rounded-17 font-size-60  mb-w-539 mb-h-113 mb-rounded-17 mb-font-size-60 
+                  ${error ? "otp-input-error" : correctBorderClass}`}
                 placeholder="• • • • • •"
                 maxLength={6} // เพิ่ม maxLength เพื่อจำกัดจำนวนตัวอักษรใน input
               />
@@ -154,7 +154,7 @@ export default function OTPPage() {
 
             {/* Request OTP */}
             <div className="text-exceeds-w-box translateX-minus-1-2 relative top-0 left-1-2  mb-top-0 mb-left-1-2">
-              <p className="pt-42 font-size-30  mb-pt-55 mb-font-size-30 text-color-blue-deep font-light text-center">
+              <p className="pt-56 font-size-30  mb-pt-56 mb-font-size-30 text-color-blue-deep font-light text-center">
                 กรณีไม่ได้รับรหัส SMS OTP ให้กด{" "}
                 <button
                   type="button"
@@ -169,7 +169,7 @@ export default function OTPPage() {
                   ? "เพื่อขอรับรหัสใหม่อีกครั้ง"
                   : countdown > 0 // ตรวจสอบเงื่อนไข countdown
                     ? <>{"เพื่อขอรับรหัสใหม่อีกครั้ง "} {/* ข้อความส่วนแรก */}
-                       <span className="text-error">{`กรุณารอ (${countdown}s)`}</span>{/* ข้อความส่วนที่ต้องการเป็นสีแดง */}
+                       <span className="text-color-red">{`กรุณารอ (${countdown}s)`}</span>{/* ข้อความส่วนที่ต้องการเป็นสีแดง */}
                       </>
                     : "เพื่อขอรับรหัสใหม่อีกครั้ง" // ข้อความเมื่อ countdown เป็น 0
                 }
@@ -178,11 +178,14 @@ export default function OTPPage() {
 
           </div>
             {/* Error Message */}
-            {error && ( // แสดง error ถ้ามี
-              <div className="flex-center bg-color-red-soft text-error font-normal text-center mb-55 w-557 h-88 rounded-17 font-size-24  mb-mb-55 mb-w-557 mb-h-88 mb-rounded-17 mb-font-size-24">
-                {error}
-              </div>
-            )}
+            <div className="relative w-full">
+              {error && ( // แสดง error ถ้ามี
+                <div className="absolute flex-center top-40 mb-top-40 left-1-2 mb-translate-x--1-2  bg-color-red-soft text-error font-light text-center w-537 h-82 rounded-17 font-size-30   mb-w-537 mb-h-82 mb-rounded-17 mb-font-size-30">
+                  {error}
+                </div>
+              )}
+            </div>
+            
         </div>
       </div>
     </div>

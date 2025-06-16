@@ -12,6 +12,7 @@ type FormData = {
   firstName: string
   lastName: string
   phone: string
+  email: string
   isExistingCustomer?: boolean // เพิ่มฟิลด์เพื่อระบุว่าเป็นลูกค้าเดิมหรือลูกค้าใหม่
 }
 
@@ -51,6 +52,7 @@ export default function ConfirmPage() {
   const confirmFields = [
     { label: "ชื่อ :", value: formData.firstName },
     { label: "นามสกุล :", value: formData.lastName },
+    { label: "Email :", value: formData.email },
     { label: "เบอร์โทรศัพท์ :", value: formData.phone },
   ];
 
@@ -68,11 +70,11 @@ export default function ConfirmPage() {
             </p>
           </div>
           {/* กล่องแสดงข้อมูลยืนยัน */}
-          <div className="bg-white w-651 mb-59 pt-115 pl-71 pr-71 pb-135 rounded-10  mb-w-651 mb-mb-59 mb-pt-115 mb-pl-71 mb-pr-71 mb-pb-135 mb-rounded-10">
+          <div className="bg-white w-651 mb-59 pt-80 pl-10 pr-10 pb-80 rounded-10  mb-w-651 mb-mb-59 mb-pt-80 mb-pl-10 mb-pr-10 mb-pb-80 mb-rounded-10">
             <div className="confirm-data-box grid grid-cols-2">
               {confirmFields.map((item, idx) => (
                 <React.Fragment key={idx}>
-                  <div className="confirm-text font-size-35 mb-font-size-35 font-normal text-color-blue-deep text-left">{item.label}</div>
+                  <div className="confirm-text font-size-35 mb-font-size-35 font-normal text-color-blue-deep text-right pr-77 mb-pr-77">{item.label}</div>
                   <div className="confirm-data font-size-35 mb-font-size-35 font-normal text-color-blue text-left">{item.value}</div>
                 </React.Fragment>
               ))}
@@ -83,14 +85,14 @@ export default function ConfirmPage() {
             <ButtonSubmit 
               onClick={handleConfirm} 
               variant="blue_bg"
-              className="w-553 h-84 mb-w-553 mb-h-84"
+              className="w-553 h-81 mb-w-553 mb-h-81"
             >
               ยืนยันข้อมูล
             </ButtonSubmit>
             <ButtonSubmit 
               onClick={handleEdit} 
               variant="blue_border"
-              className="w-553 h-84 mb-w-553 mb-h-84"
+              className="w-557 h-85 mb-w-557 mb-h-85"
             >
               แก้ไขข้อมูล
             </ButtonSubmit>
