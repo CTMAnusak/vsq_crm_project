@@ -19,7 +19,7 @@ export default function RootLayout({children}) {
   return (
     <html lang="th">
       <body cz-shortcut-listen="true">
-        <div className="relative w-full max-w-768 mx-auto mb-max-w-full overflow-hidden">
+        <div className="relative w-full max-w-768 mx-auto mb-max-w-full overflow-x-hidden scrollbar-none">
           <Header />
           {children}
           <Footer />

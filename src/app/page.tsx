@@ -1,5 +1,6 @@
 "use client";
 
+
 import Image from "next/image";
 import "../assets/css/pxtovw.css";
 import "../assets/css/home.css";
@@ -7,6 +8,8 @@ import "../assets/css/main.css";
 import { Progress } from "../components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select"
 import { useState } from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 // Import card images
 import basicCard from "../assets/images/home/basic-card.png";
