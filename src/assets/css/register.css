@@ -208,7 +208,8 @@ button.underline {
   letter-spacing: 20px;
 }
 .otp-input:placeholder-shown {
-  letter-spacing: 12px;
+  letter-spacing: 5px;
+  font-size: 70px;
 }
 .otp-input:focus {
   outline: none;
@@ -267,6 +268,9 @@ button.underline {
   border-bottom: 1px solid #b5b5b5;
   width: 490px;
 }
+.check-icon-complete {
+  margin-top: -86px;
+}
 
 /* Container ที่ใช้ขยายทั้งก้อนพร้อม ripple */
 .circle-container {
@@ -312,6 +316,8 @@ button.underline {
 /* Confirmation Page */
 .confirm-data {
   margin-left: -22px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 .confirm-data-box {
   gap: 40px 0;
