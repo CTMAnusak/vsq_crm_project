@@ -1,0 +1,95 @@
+body, h2, h3 {
+    margin : 0;
+}
+.bg-alert {
+    background-color: #a50000;
+}
+.text-footer-active {
+    color: #3896f3;
+}
+.bg-footer-active {
+    background-color: #d7e6fb;
+}
+
+.bg-platinum {
+    background: linear-gradient(180deg,rgba(153, 153, 153, 1) 0%, rgba(109, 109, 109, 1) 100%);
+}
+.bg-platinum-sub {
+    background: linear-gradient(270deg,rgba(153, 153, 153, 1) 0%, rgba(109, 109, 109, 1) 100%);
+}
+
+.bg-gold {
+    background: linear-gradient(180deg, rgba(137, 107, 76, 1) 50%, rgb(219 195 168) 100%);
+}
+.bg-gold-sub {
+    background: linear-gradient(270deg, rgba(204, 160, 91, 1) 0%, rgba(94, 72, 59, 1) 70%);
+}
+
+.bg-silver {
+    background: linear-gradient(180deg, rgb(255 255 255) 30%, rgba(136, 136, 136, 1) 100%);
+}
+.bg-silver-sub {
+    background: linear-gradient(270deg, rgba(144, 144, 144, 1) 0%, rgba(82, 82, 82, 1) 100%);
+}
+
+.bg-basic {
+    background: linear-gradient(180deg, rgb(234 240 243) 30%, rgba(117, 155, 199, 1) 100%);
+}
+.bg-basic-sub {
+    background: linear-gradient(270deg, rgb(143 182 227) 0%, rgba(80, 129, 185, 1) 100%);
+}
+
+.bg-header-shadow {
+        filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.13));
+}
+
+.card-shadow {
+    filter: drop-shadow(10px 10px 8px rgba(0, 0, 0, 0.13));
+}
+
+.progressIndicatorColor-platinum {
+    background-color: #3d3d3e;
+}
+
+.progressIndicatorColor-gold {
+    background-color: #5e483b;
+}
+
+.progressIndicatorColor-silver {
+    background-color: #515252;
+}
+
+.progressIndicatorColor-basic {
+    background-color: #435b9a;
+}
+
+.brightness-140 {
+    filter: brightness(140%);
+}
+/* .brightness-300 {
+    filter: brightness(300%);
+} */
+
+
+
+/* Font Classes for Home Page */
+/* .gotham {
+    font-family: 'Gotham', sans-serif;
+    font-weight: 400;
+}
+
+.gotham-light {
+    font-family: 'Gotham', sans-serif;
+    font-weight: 300;
+}
+
+.gotham-medium {
+    font-family: 'Gotham', sans-serif;
+    font-weight: 500;
+}
+
+.gotham-extra-light {
+    font-family: 'Gotham', sans-serif;
+    font-weight: 200;
+} */
+
