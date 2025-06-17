@@ -29,7 +29,14 @@ export default function RegisterPage() {
   }
 
   const handleDeclinePDPA = () => {
+    localStorage.setItem("vsquare_pdpa_accepted", "false")
+    setPdpaStatus('declined')
     router.push("/")
+  }
+
+  const checkPDPAStatus = () => {
+    const pdpaAccepted = localStorage.getItem("vsquare_pdpa_accepted")
+    return pdpaAccepted === "true"
   }
 
   return (
@@ -41,7 +48,6 @@ export default function RegisterPage() {
             <div className="flex-start-center flex-col text-center mb-24 mb-flex-start-center mb-flex-col mb-text-center mb-mb-24">
               <p className="font-kanit text-color-blue-deep font-normal font-size-47 mb-font-size-47">
                 เข้าร่วม <span className="font-gotham font-medium">
-                  {/* {activeTab === "existing" ? "V Club" : "V Prestige Club"} */}
                   V Club
                 </span>
               </p>
@@ -52,12 +58,19 @@ export default function RegisterPage() {
               </p>
             </div>
 
-            <RegistrationForm onTabChange={setActiveTab} />
+            <RegistrationForm 
+              onTabChange={setActiveTab} 
+              isPDPAAccepted={checkPDPAStatus()}
+            />
           </div>
         </div>
       </div>
-      {pdpaStatus !== 'accepted' && (
-        <PDPAModal onAccept={handleAcceptPDPA} onDecline={handleDeclinePDPA} />
+      {!checkPDPAStatus() && (
+        <PDPAModal 
+          onAccept={handleAcceptPDPA} 
+          onDecline={handleDeclinePDPA} 
+          onClose={() => {}} 
+        />
       )}
     </main>
     

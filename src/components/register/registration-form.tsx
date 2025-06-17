@@ -17,6 +17,7 @@ type FormData = {
   email: string
   phone: string
   isExistingCustomer?: boolean // เพิ่มฟิลด์เพื่อระบุว่าเป็นลูกค้าเดิมหรือลูกค้าใหม่
+  isPDPAAccepted?: boolean // เพิ่มฟิลด์สำหรับสถานะการยอมรับ PDPA
 }
 
 // จำลองข้อมูลผู้ใช้ที่มีอยู่ในระบบ
@@ -51,9 +52,10 @@ const customerTabs = [
 
 interface RegistrationFormProps {
   onTabChange: (tab: TabType) => void
+  isPDPAAccepted: boolean
 }
 
-export default function RegistrationForm({ onTabChange }: RegistrationFormProps) {
+export default function RegistrationForm({ onTabChange, isPDPAAccepted }: RegistrationFormProps) {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<TabType>("existing")
   const [isTabLoading, setIsTabLoading] = useState(false)

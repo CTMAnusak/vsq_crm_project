@@ -6,9 +6,10 @@ import ButtonSubmit from "./button-submit"
 interface PDPAModalProps {
   onAccept: () => void
   onDecline: () => void
+  onClose: () => void
 }
 
-export default function PDPAModal({ onAccept, onDecline }: PDPAModalProps) {
+export default function PDPAModal({ onAccept, onDecline, onClose }: PDPAModalProps) {
   // ป้องกันการเลื่อนหน้าเว็บเมื่อ modal เปิดอยู่
   useEffect(() => {
     document.body.style.overflow = "hidden"
@@ -42,14 +43,20 @@ export default function PDPAModal({ onAccept, onDecline }: PDPAModalProps) {
           <ButtonSubmit 
               variant="gray_bg"
               className="w-283 h-81 mb-w-283 mb-h-81"
-              onClick={onDecline}
+              onClick={() => {
+                onDecline();
+                onClose();
+              }}
             >
               ไม่ยอมรับ
             </ButtonSubmit>
             <ButtonSubmit 
               variant="blue_bg"
               className="w-283 h-81 mb-w-283 mb-h-81"
-              onClick={onAccept}
+              onClick={() => {
+                onAccept();
+                onClose();
+              }}
             >
               ยอมรับ
             </ButtonSubmit>

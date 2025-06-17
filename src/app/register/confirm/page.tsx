@@ -33,9 +33,20 @@ export default function ConfirmPage() {
 
   const handleEdit = () => {
     if (formData) {
-      // เก็บข้อมูลที่ต้องการแก้ไขไว้ใน localStorage ด้วยคีย์พิเศษ
-      localStorage.setItem("editingRegistrationData", JSON.stringify(formData))
-      router.push("/register")
+      // ตรวจสอบสถานะ PDPA ก่อนบันทึกข้อมูล
+      const pdpaAccepted = localStorage.getItem("vsquare_pdpa_accepted")
+      if (pdpaAccepted === "true") {
+        // เก็บข้อมูลที่ต้องการแก้ไขไว้ใน localStorage พร้อมสถานะ PDPA
+        const dataWithPDPA = {
+          ...formData,
+          isPDPAAccepted: true
+        }
+        localStorage.setItem("editingRegistrationData", JSON.stringify(dataWithPDPA))
+        router.push("/register")
+      } else {
+        // ถ้ายังไม่ยอมรับ PDPA ให้กลับไปหน้าแรก
+        router.push("/")
+      }
     }
   }
 
