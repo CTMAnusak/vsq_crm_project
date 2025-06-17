@@ -11,12 +11,6 @@ body, h2, h3 {
     background-color: #d7e6fb;
 }
 
-.bg-diamond {
-    background: linear-gradient(180deg,rgba(153, 153, 153, 1) 0%, rgba(109, 109, 109, 1) 100%);
-}
-.bg-diamond-sub {
-    background: linear-gradient(270deg,rgba(153, 153, 153, 1) 0%, rgba(109, 109, 109, 1) 100%);
-}
 .bg-platinum {
     background: linear-gradient(180deg,rgba(153, 153, 153, 1) 0%, rgba(109, 109, 109, 1) 100%);
 }
@@ -52,9 +46,7 @@ body, h2, h3 {
 .card-shadow {
     filter: drop-shadow(10px 10px 8px rgba(0, 0, 0, 0.13));
 }
-.progressIndicatorColor-diamond {
-    background-color: #3d3d3e;
-}
+
 .progressIndicatorColor-platinum {
     background-color: #3d3d3e;
 }

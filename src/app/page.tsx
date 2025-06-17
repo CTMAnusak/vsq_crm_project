@@ -13,10 +13,9 @@ import basicCard from "../assets/images/home/basic-card.png";
 import silverCard from "../assets/images/home/silver-card.png";
 import goldCard from "../assets/images/home/gold-card.png";
 import platinumCard from "../assets/images/home/platinum-card.png";
-import diamondCard from "../assets/images/home/platinum-card.png";
 import bgHeader from "../assets/images/home/bg-header.png";
 
-type MembershipClass = "member" | "gold" | "platinum" | "diamond"
+type MembershipClass = "member" | "gold" | "platinum" 
 
 // Define membership data for each class
 const membershipData = {
@@ -24,7 +23,7 @@ const membershipData = {
     cardImage: basicCard,
     bgMainClass: "bg-basic",
     bgSubClass: "bg-basic-sub",
-    spendingAmount: "10,500 บาท",
+    spendingAmount: "50,250 บาท",
     progressBgColor: "bg-white",
     progressIndicatorColor: "progressIndicatorColor-basic",
   },
@@ -32,7 +31,7 @@ const membershipData = {
     cardImage: goldCard,
     bgMainClass: "bg-gold",
     bgSubClass: "bg-gold-sub",
-    spendingAmount: "200,500 บาท",
+    spendingAmount: "350,250 บาท",
     progressBgColor: "bg-white",
     progressIndicatorColor: "progressIndicatorColor-gold",
   },
@@ -40,17 +39,9 @@ const membershipData = {
     cardImage: platinumCard,
     bgMainClass: "bg-platinum",
     bgSubClass: "bg-platinum-sub",
-    spendingAmount: "450,000 บาท",
+    spendingAmount: "560,250 บาท",
     progressBgColor: "bg-white",
     progressIndicatorColor: "progressIndicatorColor-platinum",
-  },
-  diamond: {
-    cardImage: diamondCard,
-    bgMainClass: "bg-diamond",
-    bgSubClass: "bg-diamond-sub",
-    spendingAmount: "750,000 บาท",
-    progressBgColor: "bg-white",
-    progressIndicatorColor: "progressIndicatorColor-diamond",
   },
 }
 
@@ -60,23 +51,17 @@ const memberships = [
     key: "member",
     label: "V MEMBER",
     min: 0,
-    max: 100000,
+    max: 300000,
   },
   {
     key: "gold",
     label: "V GOLD",
-    min: 100001,
-    max: 300000,
-  },
-  {
-    key: "platinum",
-    label: "V PLATINUM",
     min: 300001,
     max: 500000,
   },
   {
-    key: "diamond",
-    label: "V DIAMOND",
+    key: "platinum",
+    label: "V PLATINUM",
     min: 500001,
     max: 1000000,
   },
@@ -154,15 +139,13 @@ export default function Home() {
             <SelectTrigger className="w-150 bg-white h-65 font-size-20 bg-blue text-white rounded-15 flex-center mb-w-150 mb-h-65 mb-font-size-20 mb-rounded-15">
               <SelectValue placeholder="Select class" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-gray mb-w-150 mb-h-80">
               <SelectItem 
-              className="font-size-20" value="member">Member</SelectItem>
+              className="font-size-20 mb-font-size-20 h-30 mb-h-30 line-20 mb-line-20" value="member">Member</SelectItem>
               <SelectItem 
-              className="font-size-20" value="gold">Gold</SelectItem>
+              className="font-size-20 mb-font-size-20 h-30 mb-h-30 line-20 mb-line-20" value="gold">Gold</SelectItem>
               <SelectItem 
-              className="font-size-20" value="platinum">Platinum</SelectItem>
-              <SelectItem 
-              className="font-size-20" value="diamond">Diamond</SelectItem>
+              className="font-size-20 mb-font-size-20 h-30 mb-h-30 line-20 mb-line-20" value="platinum">Platinum</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -194,27 +177,27 @@ export default function Home() {
           </div> 
 
           {/* Membership Level */}
-          <div className="w-full text-center mt-58 mb-110 mb-mt-58 mb-mb-110">
+          <div className="w-full text-center mt-20 mb-60 mb-mt-20 mb-mb-60">
             <h3 className="text-white mb-2 font-size-75 line-15 mb-font-size-75 mb-line-15 gotham-light">
-              <span className="px-4 py-2 rounded-lg">V {memberClass.toUpperCase()}</span>
+              <span className="">V {memberClass.toUpperCase()}</span>
             </h3>
-            <div className={`inline-block text-white px-4 py-1 mt-2 rounded-35 pl-33 pr-33 font-size-34 mb-rounded-35 mb-pl-33 mb-pr-33 mb-font-size-34 gotham-light card-shadow ${currentMembership.bgSubClass}`}>CLASS</div>
+            <div className={`inline-block text-white gotham-light rounded-35 pl-33 pr-33 font-size-34 mb-rounded-35 mb-pl-33 mb-pr-33 mb-font-size-34 card-shadow ${currentMembership.bgSubClass}`}>CLASS</div>
           </div>
 
         {/* Progress Bar */}
         <div className="w-full mb-30 mb-mb-30">
             <div className="flex flex-col items-center">
-              <p className="relative left-25 mb-left-25 w-440 mb-w-440 text-center text-white font-light font-size-text-center text-white font-light font-size-24 mb-font-size-24 mt-2 mb-font-size-25 mt-2">
+              <p className="text-center text-white font-light font-size-24 mb-font-size-24 mb-20 mb-mb-20">
                 ยอดใช้จ่ายสะสม
               </p>
               {/* Class range label */}
-              <div className="flex items-center justify-center mb-8 gap-9 mb-mb-8 mb-gap-9">
+              <div className="flex-center mb-8 gap-9 mb-mb-8 mb-gap-9">
                 {/* Start class */}
-                <span className="text-white font-size-21 mb-font-size-21 gotham-light" style={{ minWidth: 90, textAlign: 'left' }}>
+                <span className="text-white gotham-light font-size-21 mb-font-size-21 min-w-90 mb-min-w-90">
                   {getClassRange(memberClass).current.label}
                 </span>
                 {/* Progress bar */}
-                <div className="flex-1 relative flex items-center w-440 mb-w-440" style={{ minWidth: 0 }}>
+                <div className="flex-1 relative flex items-center w-440 mb-w-440">
                   {/* Bar background */}
                   <div className="w-full bg-white relative overflow-hidden h-10 rounded-100 mb-h-10 mb-rounded-100 ">
                     {/* Progress indicator */}
@@ -226,23 +209,30 @@ export default function Home() {
                     />
                   </div>
                   {/* Start dot */}
-                  <span className={`absolute left-0 w-24 h-24 mb-w-24 mb-h-24 rounded-100 ${currentMembership.progressIndicatorColor}`}></span>
+                  <span className={`absolute left-0 w-24 h-24 mb-w-24 mb-h-24 rounded-100 mb-rounded-100 ${currentMembership.progressIndicatorColor}`}></span>
                   {/* End dot */}
-                  <span className={`absolute right-0 w-24 h-24 mb-w-24 mb-h-24 rounded-100 ${getClassRange(memberClass).isLast ? currentMembership.progressIndicatorColor : 'bg-white'}`}></span>
+                  <span className={`absolute right-0 w-24 h-24 mb-w-24 mb-h-24 rounded-100 mb-rounded-100 ${getClassRange(memberClass).isLast ? currentMembership.progressIndicatorColor : 'bg-white'}`}></span>
                   {/* SpendingAmount/Max label */}
                   {getClassRange(memberClass).isLast ? (
-                    <span className="absolute left-1-2 translate-x--1-2 top-25 mt-8 text-center w-180 text-balance text-white font-size-24 mb-font-size-24 font-light">
-                      {currentMembership.spendingAmount}
+                    <span className="absolute left-1-2 translate-x--1-2 text-center text-white font-light w-180 mb-w-180 top-25 mt-8 mb-top-25 mb-mt-8 font-size-24 mb-font-size-24">
+                      <span className="gotham-light">{currentMembership.spendingAmount.split(' ')[0]}</span>
+                      <span className="font-light"> บาท</span>
                     </span>
                   ) : (
                     <>
-                      <span className="absolute left-0 top-25 mt-8 mb-top-25 mb-mt-8 text-center w-180 mb-w-180 text-balance text-white font-size-24 mb-font-size-24 font-light translate-x--75 mb-translate-x--75">
-                        {currentMembership.spendingAmount}
+                      <span className="absolute text-center text-white font-light left-0 top-25 mt-8 mb-top-25 mb-mt-8 w-180 mb-w-180 font-size-24 mb-font-size-24 translate-x--75 mb-translate-x--75">
+                        <span className="gotham-light">{currentMembership.spendingAmount.split(' ')[0]}</span>
+                        <span className="kanit-light"> บาท</span>
                       </span>
-                      <span className="absolute right-0 top-25 mt-8 mb-top-25 mb-mt-8 text-center w-150 mb-w-150 text-balance text-white font-size-24 mb-font-size-24 font-light translate-x-75 mb-translate-x-75">
+                      <span className="absolute text-center text-white font-light right-0 top-25 mt-8 mb-top-25 mb-mt-8 w-150 mb-w-150 font-size-24 mb-font-size-24 translate-x-75 mb-translate-x-75">
                         {(() => {
-                          const { current, next } = getClassRange(memberClass);
-                          return (next.min - 1).toLocaleString() + ' บาท';
+                          const { next } = getClassRange(memberClass);
+                          return (
+                            <>
+                              <span className="gotham-light">{(next.min - 1).toLocaleString()}</span>
+                              <span className="kanit-light"> บาท</span>
+                            </>
+                          );
                         })()}
                       </span>
                     </>
@@ -250,10 +240,10 @@ export default function Home() {
                 </div>
                 {/* End class */}
                 {getClassRange(memberClass).isLast ? (
-                  <span className="inline-block min-w-85 mb-min-w-85 text-right">&nbsp;</span>
+                  <span className="inline-block min-w-129 mb-min-w-129 text-right">&nbsp;</span>
                 ) : (
                   getClassRange(memberClass).next && (
-                    <span className="text-white font-size-21 mb-font-size-21 gotham-light text-right">
+                    <span className="text-white gotham-light font-size-21 mb-font-size-21">
                       {getClassRange(memberClass).next.label}
                     </span>
                   )
