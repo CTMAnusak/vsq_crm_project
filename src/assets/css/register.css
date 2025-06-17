@@ -5,7 +5,14 @@
 .overflow-x-hidden {
   overflow-x: hidden;
 }
-
+.scrollbar-none {
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;    /* IE 10+ */
+  -webkit-overflow-scrolling: touch;
+}
+.translateX-minus-1-2 {
+  transform: translateX(-50%);
+}
 input,
 select,
 textarea {
@@ -36,14 +43,24 @@ label {
 .input-error,
 .register-form-input.input-error:not(:placeholder-shown),
 .otp-input.input-error {
-  border-color: #ef4444 !important;
+  border-color: var(--color-red) !important;
 }
 .text-error {
-  color: #ef4444;
+  color: var(--color-error-text);
 }
 
 .input-error:focus , .otp-input.input-error:focus {
-  border-color: #ef4444;
+  border-color: var(--color-red);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5);
+}
+
+.otp-input-error,
+.register-form-input.otp-input-error:not(:placeholder-shown),
+.otp-input.otp-input-error {
+  border-color: var(--color-red-base) !important;
+}
+.otp-input-error:focus , .otp-input.otp-input-error:focus {
+  border-color: var(--color-red-base);
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5);
 }
 
@@ -108,7 +125,9 @@ button {
 
 .text-exceeds-w-box {
   width: calc(100% + 80px);
-  transform: translateX(-50%);
+}
+button.underline {
+  text-underline-offset: 7px;
 }
 
 /* Tabs */
@@ -122,17 +141,13 @@ button {
   color: #6b7280;
 }
 .customer-tab{
-  border: 3px solid var(--color-gray-soft);
+  border: 2px solid var(--color-gray-regular);
 }
 .customer-tab-active {
   border: 3px solid var(--color-blue);
 }
 .customer-tab-text {
-  color: var(--color-gray-medium);
   transform: translate(-50%, -50%);
-}
-.customer-tab-text-active {
-  color: var(--color-blue);
 }
 
 
@@ -140,7 +155,6 @@ button {
 .checkbox-container {
   border-style: solid;
   border-width: 0;
-  border-color: var(--color-gray-soft);
   border-radius: 0 0 10px 0;
 }
 
@@ -151,14 +165,9 @@ button {
 }
 
 .checkbox-unchecked {
-  background-color: var(--color-gray-soft);
-  border-color: var(--color-gray-soft);
-  color: var(--color-blue);
-}
-.checkbox-checked svg{
-  stroke-width: 3px;
-  width: 24px;
-  height: 30px;
+  background-color: var(--color-gray-regular);
+  border-color: var(--color-gray-regular);
+  color: var(--color-gray-regular);
 }
 
 /* Register Form */
@@ -169,11 +178,8 @@ button {
   perspective: 1000;
   -webkit-font-smoothing: antialiased;
 }
-.register-form label {
-  color: var(--color-blue-deep);
-}
 .register-form-input {
-  border: 3px solid var(--color-gray-soft);
+  border: 2px solid var(--color-gray-regular);
   transition: border-color 0.1s ease, color 0.1s ease;
 }
 /* Placeholder: สีเทา */
@@ -183,7 +189,6 @@ button {
 .register-form-input::-moz-placeholder,
 .register-form-input:-ms-input-placeholder,
 .register-form-input::-ms-input-placeholder {
-  color: var(--color-gray-medium);
   transition: color 0.1s ease;
 }
 /* เมื่อ focus → ทุกอย่างเป็นสีฟ้า */
@@ -193,7 +198,6 @@ button {
 /* ถ้าไม่ได้แสดง placeholder = มี value แล้ว */
 .register-form-input:not(:placeholder-shown) {
   border-color: var(--color-blue);
-  color: var(--color-blue) !important;
   outline: none;
 }
 
@@ -201,6 +205,11 @@ button {
 .otp-input {
   border: 3px solid var(--color-blue); 
   transition: border-color 0.1s ease, color 0.1s ease;
+  letter-spacing: 20px;
+}
+.otp-input:placeholder-shown {
+  letter-spacing: 5px;
+  font-size: 70px;
 }
 .otp-input:focus {
   outline: none;
@@ -217,6 +226,7 @@ button {
 .pdpa-modal {
   inset: 0;
   z-index: 50;
+  height: max-content;
 }
 .pdpa-modal:before {
   content: "";
@@ -229,7 +239,7 @@ button {
 
 .pdpa-content {
   background-color: var(--color-light-surface);
-  box-shadow: 0 1px 12px 0px rgba(69, 114, 167, 0.5);
+  box-shadow: 0px 1px 13px #4572a7;
 }
 
 .headText-pdpa{
@@ -257,6 +267,9 @@ button {
 .character-divider {
   border-bottom: 1px solid #b5b5b5;
   width: 490px;
+}
+.check-icon-complete {
+  margin-top: -86px;
 }
 
 /* Container ที่ใช้ขยายทั้งก้อนพร้อม ripple */
@@ -302,7 +315,9 @@ button {
 }
 /* Confirmation Page */
 .confirm-data {
-  margin-left: -28px;
+  margin-left: -22px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 .confirm-data-box {
   gap: 40px 0;
@@ -332,7 +347,7 @@ button {
 /* Error Message */
 .error-message {
   background-color: #fee2e2;
-  color: #dc2626;
+  color: var(--color-red);
   padding: 0.75rem;
   border-radius: 0.375rem;
   text-align: center;
@@ -344,22 +359,20 @@ input.register-form-input:-webkit-autofill,
 input.register-form-input:-webkit-autofill:focus,
 input.register-form-input:-webkit-autofill:hover,
 input.register-form-input:-webkit-autofill:active {
-  -webkit-text-fill-color: var(--color-blue) !important;
+  -webkit-text-fill-color: var(--color-blue);
   transition: background-color 1s ease-in-out 0s;
+  /* เพิ่มตรงนี้เพื่อเปลี่ยนพื้นหลัง autofill เป็นสีขาว */
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  box-shadow: 0 0 0px 1000px white inset !important;
 }
-
-/* สำหรับกรณี browser suggestion */
-input.register-form-input {
-  color: var(--color-blue) !important;
+input.register-form-input.text-input-error:-webkit-autofill,
+input.register-form-input.text-input-error:-webkit-autofill:focus,
+input.register-form-input.text-input-error:-webkit-autofill:hover,
+input.register-form-input.text-input-error:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--color-red);
 }
-
-.register-form-input::selection {
-  background: #b3d4fc;
-  color: var(--color-blue);
-}
-.register-form-input::-webkit-selection {
-  background: #b3d4fc;
-  color: var(--color-blue);
+.text-input-error {
+  color: var(--color-red);
 }
 
 .customer-tab {
