@@ -178,10 +178,10 @@ export default function Home() {
 
           {/* Membership Level */}
           <div className="w-full text-center mt-20 mb-60 mb-mt-20 mb-mb-60">
-            <h3 className="text-white mb-2 font-size-75 line-15 mb-font-size-75 mb-line-15 gotham-light">
+            <h3 className="text-white mb-2 font-size-75 line-15 mb-font-size-75 mb-line-15 font-gotham font-light">
               <span className="">V {memberClass.toUpperCase()}</span>
             </h3>
-            <div className={`inline-block text-white gotham-light rounded-35 pl-33 pr-33 font-size-34 mb-rounded-35 mb-pl-33 mb-pr-33 mb-font-size-34 card-shadow ${currentMembership.bgSubClass}`}>CLASS</div>
+            <div className={`inline-block text-white font-gotham font-light rounded-35 pl-33 pr-33 font-size-34 mb-rounded-35 mb-pl-33 mb-pr-33 mb-font-size-34 card-shadow ${currentMembership.bgSubClass}`}>CLASS</div>
           </div>
 
         {/* Progress Bar */}
@@ -193,7 +193,7 @@ export default function Home() {
               {/* Class range label */}
               <div className="flex-center mb-8 gap-9 mb-mb-8 mb-gap-9">
                 {/* Start class */}
-                <span className="text-white gotham-light font-size-21 mb-font-size-21 min-w-90 mb-min-w-90">
+                <span className="text-white font-gotham font-light font-size-21 mb-font-size-21 min-w-90 mb-min-w-90">
                   {getClassRange(memberClass).current.label}
                 </span>
                 {/* Progress bar */}
@@ -215,21 +215,21 @@ export default function Home() {
                   {/* SpendingAmount/Max label */}
                   {getClassRange(memberClass).isLast ? (
                     <span className="absolute left-1-2 translate-x--1-2 text-center text-white font-light w-180 mb-w-180 top-25 mt-8 mb-top-25 mb-mt-8 font-size-24 mb-font-size-24">
-                      <span className="gotham-light">{currentMembership.spendingAmount.split(' ')[0]}</span>
+                      <span className="font-gotham font-normal">{currentMembership.spendingAmount.split(' ')[0]}</span>
                       <span className="font-light"> บาท</span>
                     </span>
                   ) : (
                     <>
                       <span className="absolute text-center text-white font-light left-0 top-25 mt-8 mb-top-25 mb-mt-8 w-180 mb-w-180 font-size-24 mb-font-size-24 translate-x--75 mb-translate-x--75">
-                        <span className="gotham-light">{currentMembership.spendingAmount.split(' ')[0]}</span>
+                        <span className="font-gotham font-normal">{currentMembership.spendingAmount.split(' ')[0]}</span>
                         <span className="kanit-light"> บาท</span>
                       </span>
-                      <span className="absolute text-center text-white font-light right-0 top-25 mt-8 mb-top-25 mb-mt-8 w-150 mb-w-150 font-size-24 mb-font-size-24 translate-x-75 mb-translate-x-75">
+                      <span className="absolute text-center text-white font-light right-0 top-25 mt-8 mb-top-25 mb-mt-8 w-180 mb-w-180 font-size-24 mb-font-size-24 translate-x-75 mb-translate-x-75">
                         {(() => {
                           const { next } = getClassRange(memberClass);
                           return (
                             <>
-                              <span className="gotham-light">{(next.min - 1).toLocaleString()}</span>
+                              <span className="font-gotham font-normal">{(next.min - 1).toLocaleString()}</span>
                               <span className="kanit-light"> บาท</span>
                             </>
                           );
@@ -243,7 +243,7 @@ export default function Home() {
                   <span className="inline-block min-w-129 mb-min-w-129 text-right">&nbsp;</span>
                 ) : (
                   getClassRange(memberClass).next && (
-                    <span className="text-white gotham-light font-size-21 mb-font-size-21">
+                    <span className="text-white font-gotham font-light font-size-21 mb-font-size-21">
                       {getClassRange(memberClass).next.label}
                     </span>
                   )

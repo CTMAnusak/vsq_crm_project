@@ -73,8 +73,9 @@ body, h2, h3 {
 
 
 /* Font Classes for Home Page */
-.gotham {
+/* .gotham {
     font-family: 'Gotham', sans-serif;
+    font-weight: 400;
 }
 
 .gotham-light {
@@ -90,5 +91,5 @@ body, h2, h3 {
 .gotham-extra-light {
     font-family: 'Gotham', sans-serif;
     font-weight: 200;
-}
+} */
 
