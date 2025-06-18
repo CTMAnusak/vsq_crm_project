@@ -4,10 +4,19 @@
 
 .section-course {
   position: relative;
+  background-image: url('../images/course/BG-section-2.png');
+  background-size: 100% auto;
+  background-repeat: repeat;
+  min-height: 100dvh;
+  padding-bottom: 120px;
+}
+
+.section-course-bg{
   background-image: url('../images/course/BG-section.jpg');
-  background-size: 100% 100%;
+  background-size: 100% auto;
   background-repeat: no-repeat;
-  height: 1900px;
+  display: flex;
+  flex-direction: column;
 }
 
 .dropdown-menu-vip-hed.sticky {
