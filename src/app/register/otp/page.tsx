@@ -124,7 +124,7 @@ export default function OTPPage() {
     <div className="register-container h-auto flex-start-center flex-col">
       <div className="register-card">
         <RegisterHeader />
-        <div className="register-content relative flex-start-center flex-col mx-auto w-651 mt-100 mb-w-651 mb-mt-100 mb-445 mb-mb-445">
+        <div className="register-content relative flex-start-center flex-col mx-auto w-651 mt-97 mb-w-651 mb-mt-97 mb-445 mb-mb-445">
           <div className="flex-start-center flex-col text-center mb-40  mb-mb-40">
             <h2 className="register-title font-normal font-size-60 mb-font-size-60 text-color-blue-deep">ยืนยันรหัส <span className="text-color-blue">OTP</span></h2>
           </div>
