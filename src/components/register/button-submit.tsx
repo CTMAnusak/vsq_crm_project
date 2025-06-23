@@ -21,9 +21,9 @@ export default function ButtonSubmit({
   const baseClasses = "flex-center font-light font-kanit font-size-30 mb-font-size-30 rounded-17 mb-rounded-17"
   
   const variantClasses = {
-    blue_bg: "text-white bg-color-blue",
+    blue_bg: "text-color-white-light bg-color-blue",
     blue_border: "text-color-blue bg-white border-color-blue",
-    gray_bg: "text-white bg-color-gray-soft"
+    gray_bg: "text-color-white-light bg-color-gray-soft"
   }
 
   const buttonClasses = `${baseClasses} ${variantClasses[variant]} ${className}`

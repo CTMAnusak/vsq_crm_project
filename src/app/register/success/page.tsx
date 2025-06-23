@@ -20,7 +20,7 @@ export default function SuccessPage() {
         </div>
         <div className="register-content h-auto flex-start-center flex-col mx-auto w-700 mb-244  mb-w-700 mb-mb-244">
           <div className="flex flex-col items-center">
-            <div className="check-icon relative flex-center w-768 h-431 mt-29 mb-w-768 mb-h-431 mb-mt-29">
+            <div className="check-icon-complete relative flex-center w-768 h-431 mt-29 mb-w-768 mb-h-431 mb-mt-29">
               <Image
               src="/register/check-icon-complete-page.png"
               alt="VSquare Clinic Logo"
@@ -31,13 +31,13 @@ export default function SuccessPage() {
           </div>
 
 
-            <p className="character-divider text-color-blue-deep font-normal text-center pb-60 font-size-54  mb-pb-60 mb-font-size-54">
+            <p className="character-divider text-color-blue-deep line-14 font-normal text-center mt-19 mb-mt-19 pb-63 font-size-54  mb-pb-63 mb-font-size-54">
               การลงทะเบียนสมาชิก
               <br />
               เสร็จสมบูรณ์
             </p>
 
-            <p className="text-center text-color-blue font-normal line-14 mb-70 mt-60 font-size-39  mb-mb-70 mb-mt-60 mb-font-size-39">
+            <p className="text-center text-color-blue font-normal line-14 mb-70 mt-56 font-size-39  mb-mb-70 mb-mt-56 mb-font-size-39">
               V Square Clinic ขอขอบคุณ
               <br />
               ติดตามสิทธิสุดพิเศษได้เลย !
@@ -48,7 +48,7 @@ export default function SuccessPage() {
             <ButtonSubmit 
               href="#"
               variant="blue_bg"
-              className="w-553 h-84 mb-w-553 mb-h-84"
+              className="w-490 h-81 mb-w-490 mb-h-81"
             >
               เข้าสู่ LINE@ V Square Clinic
             </ButtonSubmit>

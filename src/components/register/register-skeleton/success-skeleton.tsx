@@ -13,7 +13,7 @@ export default function SuccessSkeleton() {
         <div className="register-content h-auto flex-start-center flex-col mx-auto w-700 mb-244 mb-w-700 mb-mb-244">
           {/* Check Icon Skeleton */}
           <div className="flex flex-col items-center">
-            <div className="check-icon relative flex-center w-768 h-431 mt-29 mb-w-768 mb-h-431 mb-mt-29">
+            <div className="check-icon-complete relative flex-center w-768 h-431 mt-29 mb-w-768 mb-h-431 mb-mt-29">
               <Skeleton variant="rectangular" width={768} height={431} />
             </div>
           </div>
