@@ -1,0 +1,17 @@
+body, h2, h3 {
+    margin : 0;
+}
+.bg-alert {
+    background-color: #a50000;
+}
+.text-footer-active {
+    color: #3896f3;
+}
+.bg-footer-active {
+    background-color: #d7e6fb;
+}
+
+.bg-header-shadow {
+        filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.13));
+}
+

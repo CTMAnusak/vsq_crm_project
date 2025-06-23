@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import "./globals.css"
 import "../assets/scss/_settings.scss"
 import "../assets/css/pxtovw.css"
+import "../assets/css/footer.css"
 import "../assets/scss/main.scss"
 
 import Header from "../components/Header";

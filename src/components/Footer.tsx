@@ -64,7 +64,7 @@ export default function Footer() {
             id: "course", 
             icon: iconCourse, 
             activeIcon: iconCourseActive,
-            href: '#', 
+            href: '/course', 
             label: 'บริการของคุณ' 
         },
         { 
