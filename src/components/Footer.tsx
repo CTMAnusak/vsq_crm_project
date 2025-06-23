@@ -42,7 +42,7 @@ const FooterButton = ({ icon, activeIcon, id, isActive, onClick, notificationCou
             {label}
         </span>
         {notificationCount !== undefined && notificationCount > 0 && (
-            <span className="absolute flex-center bg-alert text-white rounded-circle gotham z-2 top-18 right-32 mb-top-20 mb-right-32 w-22 h-22 mb-w-28 mb-h-28 font-size-16 mb-font-size-16">
+            <span className="absolute flex-center bg-alert text-white rounded-circle gotham z-2 top-18 right-32 mb-top-18 mb-right-32 w-22 h-22 mb-w-22 mb-h-22 font-size-16 mb-font-size-16">
                 {notificationCount}
             </span>
         )}
