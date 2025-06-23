@@ -42,7 +42,7 @@ const FooterButton = ({ icon, activeIcon, id, isActive, onClick, notificationCou
             {label}
         </span>
         {notificationCount !== undefined && notificationCount > 0 && (
-            <span className="absolute flex-center bg-alert text-white rounded-circle gotham z-2 top-32 right-26 w-28 h-28 font-size-22 mb-top-32 mb-right-26 mb-w-28 mb-h-28 mb-font-size-22">
+            <span className="absolute flex-center bg-alert text-white rounded-circle gotham z-2 top-18 right-32 mb-top-20 mb-right-32 w-22 h-22 mb-w-28 mb-h-28 font-size-16 mb-font-size-16">
                 {notificationCount}
             </span>
         )}
@@ -64,6 +64,7 @@ export default function Footer() {
             id: "course", 
             icon: iconCourse, 
             activeIcon: iconCourseActive,
+            notificationCount: 4, 
             href: '/course', 
             label: 'บริการของคุณ' 
         },
@@ -71,7 +72,7 @@ export default function Footer() {
             id: "gift", 
             icon: iconGift, 
             activeIcon: iconGiftActive,
-            notificationCount: 5, 
+            notificationCount: 3, 
             href: '#gifts', 
             label: 'สิทธิพิเศษ' 
         },
@@ -79,14 +80,15 @@ export default function Footer() {
             id: "appointment", 
             icon: iconAppointment, 
             activeIcon: iconAppointmentActive,
-            href: '/appointments', 
+            notificationCount: 2, 
+            href: '#gifts', 
             label: 'นัดหมาย' 
         }
     ];
 
     return (
-        <footer className="absolute bottom-45 z-9 left-1-2 translate-x--1-2 bg-header-shadow">
-            <div className="bg-white flex-center w-728 h-129 rounded-80 gap-35 mb-w-728 mb-h-129 mb-rounded-80 mb-gap-35">
+        <footer className="relative bottom-0 shadow-footer-container z-9 h-180 mb-h-180">
+            <div className="shadow-footer-item bg-white flex-center mx-auto w-728 h-129 rounded-80 gap-35 mb-w-728 mb-h-129 mb-rounded-80 mb-gap-35">
                 {buttons.map(({ id, icon, activeIcon, notificationCount, href, label }) => (
                     <FooterButton
                         key={id}

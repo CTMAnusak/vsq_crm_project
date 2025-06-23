@@ -13,7 +13,6 @@ import { useRouter } from "next/navigation";
 
 // Import card images
 import basicCard from "../assets/images/home/basic-card.png";
-import silverCard from "../assets/images/home/silver-card.png";
 import goldCard from "../assets/images/home/gold-card.png";
 import platinumCard from "../assets/images/home/platinum-card.png";
 import bgHeader from "../assets/images/home/bg-header.png";
@@ -66,7 +65,7 @@ const memberships = [
     key: "platinum",
     label: "V PLATINUM",
     min: 500001,
-    max: 1000000,
+    max: 500000,
   },
 ];
 
@@ -123,8 +122,10 @@ export default function Home() {
   // หมายเหตุ: ต้องสร้าง state สำหรับ name, spendingAmount และ map ข้อมูลที่ได้กับ membershipData/memberships
   // ----------------------
 
+  const { current, next, isLast } = getClassRange(memberClass);
+
   return (
-    <div className={`w-full relative pb-243 mb-pb-213 ${currentMembership.bgMainClass}`}>
+    <div className={`w-full relative pb-70 mb-pb-70 ${currentMembership.bgMainClass}`}>
       {/* Header background image */}
       <div className="absolute top-0 left-0 right-0 z-0 overflow-visible">
         <Image
@@ -176,7 +177,6 @@ export default function Home() {
                 />
               </div>
             </div>
-            <p className="text-right font-light text-white mt-22 mb-mt-22 font-size-21 mb-font-size-21">วันที่หมดอายุ 30/06/69</p>
           </div> 
 
           {/* Membership Level */}
@@ -255,6 +255,14 @@ export default function Home() {
              
             </div>
           </div>
+          <p className="text-center text-white font-light mt-50 mb-mt-50 font-size-20 mb-font-size-20">
+            สะสมยอดใช้จ่ายให้ครบ <span className="font-gotham font-normal font-size-18 mb-font-size-18">{current.max.toLocaleString()}</span> บาท<br/>
+            {isLast ? (
+              <>เพื่อคงสิทธิพิเศษ <span className="font-gotham font-normal font-size-18 mb-font-size-18">{current.label}</span> ภายใน 31/12/2025</>
+            ) : (
+              <>เพื่อรับสิทธิพิเศษ <span className="font-gotham font-normal font-size-18 mb-font-size-18">{next.label}</span> ภายใน 31/12/2025</>
+            )}
+          </p>
         </main>
     </div>
   );
