@@ -20,6 +20,7 @@
   --color-red-base: #d30000;
   --color-error-text: #b93c3c;
   --color-red-soft: #FADADD;
+  --color-line-green: #06C755;
 
 }
 
@@ -75,4 +76,7 @@
 }
 .bg-color-red-soft {
   background-color: var(--color-red-soft);
+}
+.bg-line-green {
+  background-color: var(--color-line-green);
 }

@@ -26,6 +26,7 @@ export default function RegisterPage() {
   const handleAcceptPDPA = () => {
     localStorage.setItem("vsquare_pdpa_accepted", "true")
     setPdpaStatus('accepted')
+    router.push("/register/login-line")
   }
 
   const handleDeclinePDPA = () => {

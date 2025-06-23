@@ -4,7 +4,7 @@ import { ButtonHTMLAttributes } from "react"
 import Link from "next/link"
 
 interface ButtonSubmitProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "blue_bg" | "blue_border" | "gray_bg"
+  variant?: "blue_bg" | "blue_border" | "gray_bg" | "green_bg"
   className?: string
   isDisabled?: boolean
   href?: string
@@ -23,7 +23,8 @@ export default function ButtonSubmit({
   const variantClasses = {
     blue_bg: "text-color-white-light bg-color-blue",
     blue_border: "text-color-blue bg-white border-color-blue",
-    gray_bg: "text-color-white-light bg-color-gray-soft"
+    gray_bg: "text-color-white-light bg-color-gray-soft",
+    green_bg: "text-color-white-light bg-line-green"
   }
 
   const buttonClasses = `${baseClasses} ${variantClasses[variant]} ${className}`
