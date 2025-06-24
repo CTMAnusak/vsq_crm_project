@@ -6,18 +6,19 @@ import "../assets/css/pxtovw.css";
 import "../assets/css/home.css";
 import "../assets/css/main.css";
 // import { Progress } from "../components/ui/progress";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select"
+// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select"
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 // Import card images
 import basicCard from "../assets/images/home/basic-card.png";
+import silverCard from "../assets/images/home/silver-card.png";
 import goldCard from "../assets/images/home/gold-card.png";
 import platinumCard from "../assets/images/home/platinum-card.png";
 import bgHeader from "../assets/images/home/bg-header.png";
 
-type MembershipClass = "member" | "gold" | "platinum" 
+type MembershipClass = "member" | "silver" | "gold" | "platinum" 
 
 // Define membership data for each class
 const membershipData = {
@@ -28,6 +29,14 @@ const membershipData = {
     spendingAmount: "50,250 บาท",
     progressBgColor: "bg-white",
     progressIndicatorColor: "progressIndicatorColor-basic",
+  },
+  silver: {
+    cardImage: silverCard, // You can replace with a silver card image if available
+    bgMainClass: "bg-silver",
+    bgSubClass: "bg-silver-sub",
+    spendingAmount: "150,250 บาท",
+    progressBgColor: "bg-white",
+    progressIndicatorColor: "progressIndicatorColor-silver",
   },
   gold: {
     cardImage: goldCard,
@@ -53,6 +62,12 @@ const memberships = [
     key: "member",
     label: "V MEMBER",
     min: 0,
+    max: 100000,
+  },
+  {
+    key: "silver",
+    label: "V SILVER",
+    min: 100001,
     max: 300000,
   },
   {
@@ -99,6 +114,8 @@ const calculateRangeProgress = (spendingAmount: string, memberClass: MembershipC
 export default function Home() {
   // State to track current membership class (default to platinum)
   const [memberClass, setMemberClass] = useState<MembershipClass>("platinum")
+  // State for custom dropdown
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   // Get current membership data based on class
   const currentMembership = membershipData[memberClass]
@@ -124,6 +141,32 @@ export default function Home() {
 
   const { current, next, isLast } = getClassRange(memberClass);
 
+  // Handle dropdown toggle
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  // Handle option selection
+  const handleOptionSelect = (value: MembershipClass) => {
+    setMemberClass(value);
+    setIsDropdownOpen(false);
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.custom-dropdown')) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className={`w-full relative pb-70 mb-pb-70 ${currentMembership.bgMainClass}`}>
       {/* Header background image */}
@@ -137,21 +180,49 @@ export default function Home() {
         />
       </div>
 
-        {/* Class selector (for demo purposes) */}
-        <div className="absolute absolute top-16 left-29 w-80 h-65 mb-top-16 mb-left-29 mb-w-80 mb-h-65 ">
-          <Select value={memberClass} onValueChange={(value) => setMemberClass(value as MembershipClass)}>
-            <SelectTrigger className="w-150 bg-white h-65 font-size-20 bg-blue text-white rounded-15 flex-center mb-w-150 mb-h-65 mb-font-size-20 mb-rounded-15">
-              <SelectValue placeholder="Select class" />
-            </SelectTrigger>
-            <SelectContent className="bg-gray mb-w-150 mb-h-80">
-              <SelectItem 
-              className="font-size-20 mb-font-size-20 h-30 mb-h-30 line-20 mb-line-20" value="member">Member</SelectItem>
-              <SelectItem 
-              className="font-size-20 mb-font-size-20 h-30 mb-h-30 line-20 mb-line-20" value="gold">Gold</SelectItem>
-              <SelectItem 
-              className="font-size-20 mb-font-size-20 h-30 mb-h-30 line-20 mb-line-20" value="platinum">Platinum</SelectItem>
-            </SelectContent>
-          </Select>
+        {/* Custom Class selector */}
+        <div className="absolute absolute top-16 left-29 w-80 h-65 mb-top-16 mb-left-29 mb-w-80 mb-h-65 custom-dropdown">
+          <div className="relative">
+            {/* Dropdown trigger button */}
+            <button
+              onClick={toggleDropdown}
+              className="w-150 bg-white h-65 font-size-20 bg-blue text-white rounded-15 flex-center mb-w-150 mb-h-65 mb-font-size-20 mb-rounded-15 flex items-center justify-between"
+            >
+              <span>{memberClass.charAt(0).toUpperCase() + memberClass.slice(1)}</span>
+            </button>
+
+            {/* Dropdown menu */}
+            {isDropdownOpen && (
+              <div className="absolute top-full left-0 w-full mt-1 bg-white rounded-15 z-50">
+                <div className="py-2">
+                  <button
+                    onClick={() => handleOptionSelect("member")}
+                    className="w-full text-left font-size-20 mb-font-size-20 h-30 mb-h-30 line-20 mb-line-20"
+                  >
+                    Member
+                  </button>
+                  <button
+                    onClick={() => handleOptionSelect("silver")}
+                    className="w-full text-left font-size-20 mb-font-size-20 h-30 mb-h-30 line-20 mb-line-20"
+                  >
+                    Silver
+                  </button>
+                  <button
+                    onClick={() => handleOptionSelect("gold")}
+                    className="w-full text-left font-size-20 mb-font-size-20 h-30 mb-h-30 line-20 mb-line-20"
+                  >
+                    Gold
+                  </button>
+                  <button
+                    onClick={() => handleOptionSelect("platinum")}
+                    className="w-full text-left font-size-20 mb-font-size-20 h-30 mb-h-30 line-20 mb-line-20"
+                  >
+                    Platinum
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       
 
@@ -255,12 +326,12 @@ export default function Home() {
              
             </div>
           </div>
-          <p className="text-center text-white font-light mt-50 mb-mt-50 font-size-20 mb-font-size-20">
-            สะสมยอดใช้จ่ายให้ครบ <span className="font-gotham font-normal font-size-18 mb-font-size-18">{current.max.toLocaleString()}</span> บาท<br/>
+          <p className="text-center text-white font-light mt-50 mb-mt-50 font-size-21 mb-font-size-21">
+            สะสมยอดใช้จ่ายให้ครบ <span className="font-gotham-book font-size-18 mb-font-size-18">{current.max.toLocaleString()}</span> บาท<br/>
             {isLast ? (
-              <>เพื่อคงสิทธิพิเศษ <span className="font-gotham font-normal font-size-18 mb-font-size-18">{current.label}</span> ภายใน 31/12/2025</>
+              <>เพื่อคงสิทธิพิเศษ <span className="font-gotham-book font-size-18 mb-font-size-18">{current.label}</span> ภายใน <span className="font-gotham-book font-size-18 mb-font-size-18">31/12/2025</span></>
             ) : (
-              <>เพื่อรับสิทธิพิเศษ <span className="font-gotham font-normal font-size-18 mb-font-size-18">{next.label}</span> ภายใน 31/12/2025</>
+              <>เพื่อรับสิทธิพิเศษ <span className="font-gotham-book font-size-18 mb-font-size-18">{next.label}</span> ภายใน <span className="font-gotham-book font-size-18 mb-font-size-18">31/12/2025</span></>
             )}
           </p>
         </main>
