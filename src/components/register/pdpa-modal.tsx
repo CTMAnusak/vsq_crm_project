@@ -44,8 +44,10 @@ export default function PDPAModal({ onAccept, onDecline, onClose }: PDPAModalPro
               variant="gray_bg"
               className="w-283 h-81 mb-w-283 mb-h-81"
               onClick={() => {
-                onDecline();
-                onClose();
+                localStorage.clear();
+                sessionStorage.clear();
+                window.location.href = 'about:blank'
+                
               }}
             >
               ไม่ยอมรับ
