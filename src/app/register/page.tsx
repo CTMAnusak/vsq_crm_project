@@ -1,10 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Image from "next/image"
 import RegistrationForm from "../../components/register/registration-form"
 import RegisterHeader from "../../components/register/register-header"
-import RegisterSkeleton from "../../components/register/register-skeleton/register-skeleton"
 import PDPAModal from "../../components/register/pdpa-modal"
 import { useRouter } from "next/navigation"
 
@@ -48,7 +46,7 @@ export default function RegisterPage() {
           <div className="register-content  w-656 mx-auto mt-15 mb-w-656 mb-mx-auto mb-mt-15">
             <div className="flex-start-center flex-col text-center mb-24 mb-flex-start-center mb-flex-col mb-text-center mb-mb-24">
               <p className="font-kanit text-color-blue-deep font-normal font-size-47 mb-font-size-47">
-                เข้าร่วม <span className="font-gotham font-medium">
+                เข้าร่วม <span className="font-gotham-medium font-medium">
                   V Club
                 </span>
               </p>

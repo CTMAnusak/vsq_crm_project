@@ -428,7 +428,7 @@ export default function RegistrationForm({ onTabChange, isPDPAAccepted }: Regist
                     ? "input-error text-input-error font-normal font-size-35 mb-font-size-35"
                     : field.value
                       ? (field.name === "email" ? "font-normal text-color-blue font-size-35 mb-font-size-35" : "font-normal text-color-blue font-size-35 mb-font-size-35") 
-                      : (field.name === "email" ? "font-gotham text-color-gray-mid font-normal font-size-30 mb-font-size-30" : "font-light text-color-gray-mid font-size-30 mb-font-size-30")
+                      : (field.name === "email" ? "font-gotham-book font-normal text-color-gray-mid font-size-30 mb-font-size-30" : "font-light text-color-gray-mid font-size-30 mb-font-size-30")
                 }`}
               />
             </div>
@@ -463,7 +463,7 @@ export default function RegistrationForm({ onTabChange, isPDPAAccepted }: Regist
         }`}>
           {tab.id === "existing" ? (
             <>
-              ลูกค้า <span className={`${activeTab === "existing" ? "font-gotham font-medium font-size-28 mb-font-size-28" : "font-kanit font-light font-size-30 mb-font-size-30"}`}>V Square</span>
+              ลูกค้า <span className={`${activeTab === "existing" ? "font-gotham-medium font-medium font-size-28 mb-font-size-28" : "font-kanit font-light font-size-30 mb-font-size-30"}`}>V Square</span>
             </>
           ) : (
             tab.title
@@ -518,7 +518,7 @@ export default function RegistrationForm({ onTabChange, isPDPAAccepted }: Regist
 
       {activeTab === "existing" && (
         <p className="text-exceeds-w-box translateX-minus-1-2 relative text-center text-color-blue-deep font-light top-0 left-1-2 font-size-26 mt-35 mb-60 mb-top-0 mb-left-1-2  mb-font-size-26 mb-mt-35 mb-mb-60">
-          *ชื่อ – นามสกุล ผิด ลูกค้าแจ้งแก้ไขได้ ที่หน้าสาขา <span className="font-gotham font-size-24 mb-font-size-24 font-normal">V Square Clinic</span>
+          *ชื่อ – นามสกุล ผิด ลูกค้าแจ้งแก้ไขได้ ที่หน้าสาขา <span className="font-gotham-book font-normal font-size-24 mb-font-size-24">V Square Clinic</span>
         </p>
       )}
 

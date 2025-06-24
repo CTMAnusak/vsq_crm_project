@@ -1,6 +1,9 @@
 :root {
   --font-family: "Kanit", sans-serif;
   --font-gotham: "Gotham", sans-serif;
+  --font-gotham-bold: "gothambold", sans-serif;
+  --font-gotham-book: "gotham-book", sans-serif;
+  --font-gotham-medium: "gothammedium", sans-serif;
 
   --bg-green: #28a745;
   --bg-yellow: #ffc107;
@@ -30,6 +33,15 @@
 }
 .font-gotham {
   font-family: var(--font-gotham);
+}
+.font-gotham-bold {
+  font-family: var(--font-gotham-bold);
+}
+.font-gotham-book {
+  font-family: var(--font-gotham-book);
+}
+.font-gotham-medium {
+  font-family: var(--font-gotham-medium);
 }
 
 /* text color */
