@@ -7,6 +7,7 @@ import Image from "next/image"
 import RegisterHeader from "../../../components/register/register-header"
 import ButtonSubmit from "../../../components/register/button-submit"
 import ConfirmSkeleton from "../../../components/register/register-skeleton/confirm-skeleton"
+import liff from "@line/liff"
 
 type FormData = {
   firstName: string
@@ -19,6 +20,7 @@ type FormData = {
 export default function ConfirmPage() {
   const router = useRouter()
   const [formData, setFormData] = useState<FormData | null>(null)
+  const [profileImage, setProfileImage] = useState<string | null>(null)
 
   useEffect(() => {
     // ดึงข้อมูลจาก localStorage
@@ -29,6 +31,19 @@ export default function ConfirmPage() {
       // ถ้าไม่มีข้อมูล ให้กลับไปหน้าลงทะเบียน
       router.push("/register")
     }
+
+    const initializeLiff = async () => {
+      try {
+        await liff.init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID! })
+        if (liff.isLoggedIn()) {
+          const profile = await liff.getProfile()
+          setProfileImage(profile.pictureUrl || null)
+        }
+      } catch (err) {
+        console.error("LIFF initialization failed on confirm page:", err)
+      }
+    }
+    initializeLiff()
   }, [router])
 
   const handleEdit = () => {
@@ -71,7 +86,7 @@ export default function ConfirmPage() {
     <div className="register-container h-auto flex-start-center flex-col">
       <div className="register-card">
         {/* Header เหมือนหน้า register */}
-        <RegisterHeader />
+        <RegisterHeader profileImage={profileImage} />
         <div className="register-content w-656 mx-auto mt-23 mb-273  mb-w-656 mb-mx-auto mb-mt-23 mb-mb-273">
           <div className="flex-start-center flex-col text-center mb-24 mb-mb-24">
             <p className="font-kanit text-color-blue-deep font-normal font-size-47 mb-font-size-47">เข้าร่วม <span className="font-gotham-medium font-medium">V Club</span></p>

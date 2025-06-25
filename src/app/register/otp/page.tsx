@@ -6,6 +6,7 @@ import { useState, useEffect, useRef, useMemo } from "react"
 import { useRouter } from "next/navigation"
 import RegisterHeader from "../../../components/register/register-header"
 import OTPSkeleton from "../../../components/register/register-skeleton/otp-skeleton"
+import liff from "@line/liff"
 
 type FormData = {
   firstName: string
@@ -17,6 +18,7 @@ type FormData = {
 export default function OTPPage() {
   const router = useRouter()
   const [formData, setFormData] = useState<FormData | null>(null)
+  const [profileImage, setProfileImage] = useState<string | null>(null)
   const [otp, setOtp] = useState("")
   const [countdown, setCountdown] = useState(0)
   const [error, setError] = useState("")
@@ -32,6 +34,19 @@ export default function OTPPage() {
       // ถ้าไม่มีข้อมูล ให้กลับไปหน้าลงทะเบียน
       router.push("/register")
     }
+
+    const initializeLiff = async () => {
+      try {
+        await liff.init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID! })
+        if (liff.isLoggedIn()) {
+          const profile = await liff.getProfile()
+          setProfileImage(profile.pictureUrl || null)
+        }
+      } catch (err) {
+        console.error("LIFF initialization failed on OTP page:", err)
+      }
+    }
+    initializeLiff()
   }, [router])
 
   useEffect(() => {
@@ -123,7 +138,7 @@ export default function OTPPage() {
   return (
     <div className="register-container h-auto flex-start-center flex-col">
       <div className="register-card">
-        <RegisterHeader />
+        <RegisterHeader profileImage={profileImage} />
         <div className="register-content relative flex-start-center flex-col mx-auto w-651 mt-97 mb-w-651 mb-mt-97 mb-445 mb-mb-445">
           <div className="flex-start-center flex-col text-center mb-40  mb-mb-40">
             <h2 className="register-title font-normal font-size-60 mb-font-size-60 text-color-blue-deep">ยืนยันรหัส <span className="text-color-blue">OTP</span></h2>
@@ -180,7 +195,7 @@ export default function OTPPage() {
             {/* Error Message */}
             <div className="relative w-full">
               {error && ( // แสดง error ถ้ามี
-                <div className="absolute flex-center top-40 mb-top-40 left-1-2 mb-translate-x--1-2  bg-color-red-soft text-error font-light text-center w-537 h-82 rounded-17 font-size-30   mb-w-537 mb-h-82 mb-rounded-17 mb-font-size-30">
+                <div className="absolute flex-center top-40 mb-top-40 left-1-2 translate-x--1-2 mb-translate-x--1-2  bg-color-red-soft text-error font-light text-center w-537 h-82 rounded-17 font-size-30   mb-w-537 mb-h-82 mb-rounded-17 mb-font-size-30">
                   {error}
                 </div>
               )}
