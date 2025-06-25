@@ -17,6 +17,7 @@ import silverCard from "../assets/images/home/silver-card.png";
 import goldCard from "../assets/images/home/gold-card.png";
 import platinumCard from "../assets/images/home/platinum-card.png";
 import bgHeader from "../assets/images/home/bg-header.png";
+import light from "../assets/images/home/light.png"
 
 type MembershipClass = "member" | "silver" | "gold" | "platinum" 
 
@@ -228,7 +229,7 @@ export default function Home() {
 
      
       {/* Main content */}
-      <main className="w-full flex-1 flex flex-col items-center px-6 pt-4 z-2">
+      <main className="w-full flex flex-col items-center">
           {/* Greeting */}
           <div className="w-full pl-50 pr-50 mt-70 mb-80 mb-pl-50 mb-pr-50 mb-mt-70 mb-mb-80 z-3">
             <h1 className="font-light font-size-71 mx-0 mb-font-size-71 line-13 text-darkblue">สวัสดีค่ะ</h1>
@@ -237,16 +238,19 @@ export default function Home() {
 
           {/* Membership Card */}
           <div className="relative"> 
-            <div className="w-669 mb-w-669">
-              <div className="overflow-hidden card-shadow">
+            <div className="overflow-hidden card-shadow w-669 mb-w-669">
                 <Image
                   src={currentMembership.cardImage || "/placeholder.svg"}
                   alt={`${memberClass.charAt(0).toUpperCase() + memberClass.slice(1)} Membership Card`}
-                  width={400}
-                  height={225}
                   className="w-full h-auto"
                 />
-              </div>
+            </div>
+            <div className="absolute top-345 left--110 w-640 h-183 mb-top-345 mb-left--110 mb-w-640 mb-h-183">
+            <Image
+                  src={light}
+                  alt="Light effect"
+                  className="w-full h-auto"
+                />
             </div>
           </div> 
 
