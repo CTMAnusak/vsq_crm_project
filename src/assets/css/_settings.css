@@ -86,6 +86,10 @@
 .bg-color-gray-soft {
   background-color: var(--color-gray-soft);
 }
+.bg-color-gray-regular {
+  background-color: var(--color-gray-regular);
+}
+
 .bg-color-red-soft {
   background-color: var(--color-red-soft);
 }

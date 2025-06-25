@@ -1,6 +1,10 @@
 import Image from "next/image"
 
-export default function RegisterHeader() {
+interface RegisterHeaderProps {
+  profileImage?: string | null;
+}
+
+export default function RegisterHeader({ profileImage }: RegisterHeaderProps) {
   return (
     <div className="register-header-bar relative">
       <div className="register-header w-768 h-353 mb-w-768 mb-h-353">
@@ -9,8 +13,10 @@ export default function RegisterHeader() {
           <span className="font-gotham font-light font-size-30 mb-font-size-30 text-white">REGISTER</span>
         </div>
       </div>
-      <div className="register-profile-img absolute rounded-circle overflow-hidden top-0 left-1-2 mx-auto w-226 h-226 mb-top-0 mb-left-1-2 mb-w-226 mb-h-226">
-        <Image src="/register/anime_fairy.jpg" alt="Profile"  width={96} height={96} className="object-cover" />
+      <div className="register-profile-img absolute rounded-circle overflow-hidden top-0 left-1-2 mx-auto w-226 h-226 mb-top-0 mb-left-1-2 mb-w-226 mb-h-226 flex-center-center bg-color-gray-regular ">
+        {profileImage ? (
+          <Image src={profileImage} alt="Profile"  width={226} height={226} className="object-cover w-full h-full" />
+        ) : null}
       </div>
     </div>
   )
