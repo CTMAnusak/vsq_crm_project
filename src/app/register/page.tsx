@@ -15,10 +15,17 @@ export default function RegisterPage() {
   const router = useRouter()
 
   useEffect(() => {
+    // ลบค่าเมื่อรีเฟรชหน้าเว็บใหม่หรือเข้าเว็บใหม่
+    localStorage.removeItem("vsquare_pdpa_accepted");
+    localStorage.removeItem("vsquare_line_user_id");
+    
     // This single effect handles all client-side logic after hydration
     const checkCompletionStatus = async () => {
       // The "master" flag. If this is true, the user has done everything.
-      if (localStorage.getItem("vsquare_registration_complete") === "true") {
+      const registrationComplete = localStorage.getItem("vsquare_registration_complete") === "true";
+      const storedUserId = localStorage.getItem("vsquare_line_user_id");
+      
+      if (registrationComplete && storedUserId) {
         setIsFlowComplete(true);
         try {
           // If flow is complete, we should be logged in. Init LIFF to get profile.
@@ -40,10 +47,14 @@ export default function RegisterPage() {
 
         // Check if the user has just returned from a successful LIFF login.
         if (liff.isLoggedIn()) {
+          const profile = await liff.getProfile();
+          
+          // เก็บค่า profile.userId ไว้ใน localStorage
+          localStorage.setItem("vsquare_line_user_id", profile.userId);
+          
           // This is the final step! The user is now fully registered.
           localStorage.setItem("vsquare_registration_complete", "true");
           setIsFlowComplete(true); // This will hide the popup
-          const profile = await liff.getProfile();
           setProfileImage(profile.pictureUrl || null);
         } else {
           // User is NOT logged in. The flow is definitely not complete.
