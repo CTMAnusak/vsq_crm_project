@@ -15,10 +15,6 @@ export default function RegisterPage() {
   const router = useRouter()
 
   useEffect(() => {
-    // ลบค่าเมื่อรีเฟรชหน้าเว็บใหม่หรือเข้าเว็บใหม่
-    localStorage.removeItem("vsquare_pdpa_accepted");
-    localStorage.removeItem("vsquare_line_user_id");
-    
     // This single effect handles all client-side logic after hydration
     const checkCompletionStatus = async () => {
       // The "master" flag. If this is true, the user has done everything.
@@ -87,20 +83,7 @@ export default function RegisterPage() {
       <div className="register-container h-auto flex-start-center flex-col">
         <div className="register-card">
           <RegisterHeader profileImage={profileImage} />
-          <div className="register-content  w-656 mx-auto mt-15 mb-w-656 mb-mx-auto mb-mt-15">
-            <div className="flex-start-center flex-col text-center mb-24 mb-flex-start-center mb-flex-col mb-text-center mb-mb-24">
-              <p className="font-kanit text-color-blue-deep font-normal font-size-47 mb-font-size-47">
-                เข้าร่วม <span className="font-gotham-medium font-medium">
-                  V Club
-                </span>
-              </p>
-              <p className="text-color-blue font-normal line-12 font-size-35 mb-font-size-35 ">
-                พบกับสิทธิประโยชน์ และรางวัลสุดพิเศษ
-                <br />
-                สำหรับสมาชิกเท่านั้น !
-              </p>
-            </div>
-
+          <div className="register-content  w-656 mx-auto mt-40 mb-w-656 mb-mx-auto mb-mt-40">
             <RegistrationForm 
               onTabChange={setActiveTab} 
               isPDPAAccepted={isFlowComplete}

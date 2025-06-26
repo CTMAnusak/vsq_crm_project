@@ -193,7 +193,7 @@ button.underline {
 }
 /* เมื่อ focus → ทุกอย่างเป็นสีฟ้า */
 .register-form-input:focus {
-  color: var(--color-blue) !important;
+  color: var(--color-blue-deep) !important;
 }
 /* ถ้าไม่ได้แสดง placeholder = มี value แล้ว */
 .register-form-input:not(:placeholder-shown) {
@@ -208,8 +208,8 @@ button.underline {
   letter-spacing: 20px;
 }
 .otp-input:placeholder-shown {
-  letter-spacing: 5px;
-  font-size: 70px;
+  letter-spacing: 22px;
+  font-size: 40px;
 }
 .otp-input:focus {
   outline: none;
@@ -315,7 +315,7 @@ button.underline {
 }
 /* Confirmation Page */
 .confirm-data {
-  margin-left: -22px;
+  margin-left: -35px;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }

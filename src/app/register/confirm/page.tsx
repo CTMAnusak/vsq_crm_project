@@ -87,27 +87,20 @@ export default function ConfirmPage() {
       <div className="register-card">
         {/* Header เหมือนหน้า register */}
         <RegisterHeader profileImage={profileImage} />
-        <div className="register-content w-656 mx-auto mt-23 mb-273  mb-w-656 mb-mx-auto mb-mt-23 mb-mb-273">
-          <div className="flex-start-center flex-col text-center mb-24 mb-mb-24">
-            <p className="font-kanit text-color-blue-deep font-normal font-size-47 mb-font-size-47">เข้าร่วม <span className="font-gotham-medium font-medium">V Club</span></p>
-            <p className="text-color-blue font-size-35 mb-font-size-35 font-normal line-12">
-              พบกับสิทธิประโยชน์ และรางวัลสุดพิเศษ<br />
-              สำหรับสมาชิกเท่านั้น !
-            </p>
-          </div>
+        <div className="register-content w-656 mx-auto mt-60  mb-w-656 mb-mx-auto mb-mt-60">
           {/* กล่องแสดงข้อมูลยืนยัน */}
-          <div className="bg-white w-651 mb-59 pt-80 pl-10 pr-10 pb-80 rounded-10  mb-w-651 mb-mb-59 mb-pt-80 mb-pl-10 mb-pr-10 mb-pb-80 mb-rounded-10">
+          <div className="bg-white w-651 mb-59 pt-80 pl-50 pr-50 pb-80 rounded-10  mb-w-651 mb-mb-59 mb-pt-80 mb-pl-50 mb-pr-50 mb-pb-80 mb-rounded-10">
             <div className="confirm-data-box grid grid-cols-2">
               {confirmFields.map((item, idx) => (
                 <React.Fragment key={idx}>
-                  <div className="confirm-text font-size-35 mb-font-size-35 font-normal text-color-blue-deep text-right pr-77 mb-pr-77">{item.label}</div>
-                  <div className="confirm-data font-size-35 mb-font-size-35 font-normal text-color-blue text-left">{item.value}</div>
+                  <div className="confirm-text font-size-35 mb-font-size-35 font-normal text-color-blue text-left pr-46 mb-pr-46">{item.label}</div>
+                  <div className="confirm-data font-size-35 mb-font-size-35 font-normal text-color-blue-deep text-left">{item.value}</div>
                 </React.Fragment>
               ))}
             </div>
           </div>
           {/* ปุ่ม */}
-          <div className="flex-start-center flex-col gap-18 mb-gap-18">
+          <div className="flex-start-center flex-col gap-25 mb-gap-25">
             <ButtonSubmit 
               onClick={handleConfirm} 
               variant="blue_bg"
@@ -123,6 +116,11 @@ export default function ConfirmPage() {
               แก้ไขข้อมูล
             </ButtonSubmit>
           </div>
+
+          <p className="text-exceeds-w-box translateX-minus-1-2 relative text-center text-color-blue-deep font-light top-0 left-1-2 font-size-26 mt-80 mb-60 mb-top-0 mb-left-1-2  mb-font-size-26 mb-mt-80 mb-mb-60">
+          *ชื่อ–นามสกุล ไม่ถูกต้องโปรดแจ้งได้ที่หน้าสาขา <span className="font-gotham-book font-normal font-size-24 mb-font-size-24">V Square Clinic</span>
+        </p>
+        
         </div>
       </div>
     </div>
