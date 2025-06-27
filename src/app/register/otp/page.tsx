@@ -6,6 +6,7 @@ import { useState, useEffect, useRef, useMemo } from "react"
 import { useRouter } from "next/navigation"
 import RegisterHeader from "../../../components/register/register-header"
 import OTPSkeleton from "../../../components/register/register-skeleton/otp-skeleton"
+import liff from "@line/liff"
 
 type FormData = {
   firstName: string
@@ -17,6 +18,7 @@ type FormData = {
 export default function OTPPage() {
   const router = useRouter()
   const [formData, setFormData] = useState<FormData | null>(null)
+  const [profileImage, setProfileImage] = useState<string | null>(null)
   const [otp, setOtp] = useState("")
   const [countdown, setCountdown] = useState(0)
   const [error, setError] = useState("")
@@ -32,6 +34,19 @@ export default function OTPPage() {
       // ถ้าไม่มีข้อมูล ให้กลับไปหน้าลงทะเบียน
       router.push("/register")
     }
+
+    const initializeLiff = async () => {
+      try {
+        await liff.init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID! })
+        if (liff.isLoggedIn()) {
+          const profile = await liff.getProfile()
+          setProfileImage(profile.pictureUrl || null)
+        }
+      } catch (err) {
+        console.error("LIFF initialization failed on OTP page:", err)
+      }
+    }
+    initializeLiff()
   }, [router])
 
   useEffect(() => {
@@ -123,18 +138,14 @@ export default function OTPPage() {
   return (
     <div className="register-container h-auto flex-start-center flex-col">
       <div className="register-card">
-        <RegisterHeader />
-        <div className="register-content relative flex-start-center flex-col mx-auto w-651 mt-100 mb-w-651 mb-mt-100 mb-445 mb-mb-445">
-          <div className="flex-start-center flex-col text-center mb-40  mb-mb-40">
-            <h2 className="register-title font-normal font-size-60 mb-font-size-60 text-color-blue-deep">ยืนยันรหัส <span className="text-color-blue">OTP</span></h2>
-          </div>
-
+        <RegisterHeader profileImage={profileImage} />
+        <div className="register-content relative flex-start-center flex-col mx-auto w-651 mt-50 mb-w-651 mb-mt-50 mb-445 mb-mb-445">
           <div className="bg-white w-full  pt-56 pl-10 pr-10 pb-60 rounded-10  mb-pt-56 mb-pl-10 mb-pr-10 mb-pb-60 mb-rounded-10">
             {formData && (
                 <p className="pb-56 font-size-30  mb-pb-56 mb-font-size-30 text-color-blue-deep font-light text-center">
                   กรุญายืนยัน OTP 6 หลัก
                   <br />
-                  ที่ส่งไปที่หมายเลข {formData.phone}
+                  ที่ส่งไปที่หมายเลขโทรศัพท์ {formData.phone}
                 </p>
               )}
             <div className="flex-center">
@@ -145,7 +156,7 @@ export default function OTPPage() {
                 onChange={handleOtpChange}
                 onBlur={handleOtpBlur} // เพิ่ม onBlur handler
                 // ใช้ class otp-input เป็นพื้นฐาน และเพิ่ม input-error เมื่อมี error หรือ correctBorderClass เมื่อถูกต้อง
-                className={`otp-input px-0 mb-px-0 text-color-blue font-normal text-center w-539 h-113 rounded-17 font-size-60  mb-w-539 mb-h-113 mb-rounded-17 mb-font-size-60 
+                className={`otp-input px-0 mb-px-0 text-color-blue font-normal text-center w-580 h-95 rounded-17 font-size-55  mb-w-580 mb-h-95 mb-rounded-17 mb-font-size-55 
                   ${error ? "otp-input-error" : correctBorderClass}`}
                 placeholder="• • • • • •"
                 maxLength={6} // เพิ่ม maxLength เพื่อจำกัดจำนวนตัวอักษรใน input
@@ -155,7 +166,7 @@ export default function OTPPage() {
             {/* Request OTP */}
             <div className="text-exceeds-w-box translateX-minus-1-2 relative top-0 left-1-2  mb-top-0 mb-left-1-2">
               <p className="pt-56 font-size-30  mb-pt-56 mb-font-size-30 text-color-blue-deep font-light text-center">
-                กรณีไม่ได้รับรหัส SMS OTP ให้กด{" "}
+                กรณียังไม่ได้รับรหัส SMS OTP ให้กด{" "}
                 <button
                   type="button"
                   onClick={handleRequestOTP}
@@ -180,7 +191,7 @@ export default function OTPPage() {
             {/* Error Message */}
             <div className="relative w-full">
               {error && ( // แสดง error ถ้ามี
-                <div className="absolute flex-center top-40 mb-top-40 left-1-2 mb-translate-x--1-2  bg-color-red-soft text-error font-light text-center w-537 h-82 rounded-17 font-size-30   mb-w-537 mb-h-82 mb-rounded-17 mb-font-size-30">
+                <div className="absolute flex-center top-40 mb-top-40 left-1-2 translate-x--1-2 mb-translate-x--1-2  bg-color-red-soft text-error font-light text-center w-537 h-82 rounded-17 font-size-30   mb-w-537 mb-h-82 mb-rounded-17 mb-font-size-30">
                   {error}
                 </div>
               )}

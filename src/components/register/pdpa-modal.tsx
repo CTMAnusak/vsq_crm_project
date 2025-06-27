@@ -19,7 +19,7 @@ export default function PDPAModal({ onAccept, onDecline, onClose }: PDPAModalPro
   }, [])
 
   return (
-    <div className="pdpa-modal absolute mb-absolute top-0 mb-top-0 flex-center-start max-w-768 mb-max-w-768 mx-auto mb-flex-center-start">
+    <div className="pdpa-modal h-full absolute mb-absolute top-0 mb-top-0 flex-center-start max-w-768 mb-max-w-768 mx-auto mb-flex-center-start">
       <div className="pdpa-content relative w-725 mb-w-725 h-1393 mb-h-1393 rounded-49 pt-45 pl-40 pr-40  mb-rounded-49 mb-pt-45 mb-pl-40 mb-pr-40 mt-88 mb-mt-88 mb-92 mb-mb-92">
         <p className="headText-pdpa inline font-size-29 mb-font-size-29 font-normal ">ข้อตกลงการใช้บริการ</p>
         <div className="box-text-pdpa pt-32 mb-pt-32">
@@ -44,8 +44,10 @@ export default function PDPAModal({ onAccept, onDecline, onClose }: PDPAModalPro
               variant="gray_bg"
               className="w-283 h-81 mb-w-283 mb-h-81"
               onClick={() => {
-                onDecline();
-                onClose();
+                localStorage.clear();
+                sessionStorage.clear();
+                window.location.href = 'about:blank'
+                
               }}
             >
               ไม่ยอมรับ
