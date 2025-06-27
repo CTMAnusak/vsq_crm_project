@@ -1,55 +1,52 @@
+@charset "UTF-8";
 /* ===== Forms ===== */
 .h-full-dvh {
   height: 100dvh;
 }
+
 .overflow-x-hidden {
   overflow-x: hidden;
 }
+
 .scrollbar-none {
-  scrollbar-width: none;       /* Firefox */
-  -ms-overflow-style: none;    /* IE 10+ */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
   -webkit-overflow-scrolling: touch;
 }
+
 .translateX-minus-1-2 {
   transform: translateX(-50%);
 }
+
 input,
 select,
 textarea {
   font-family: var(--font-family);
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 12px 16px;
   border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
+  border-radius: 17px;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: var(--color-blue);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
 }
-
-label {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #374151;
-  margin-bottom: 0.25rem;
-}
-
 
 .input-error,
 .register-form-input.input-error:not(:placeholder-shown),
 .otp-input.input-error {
   border-color: var(--color-red) !important;
 }
+
 .text-error {
   color: var(--color-error-text);
 }
 
-.input-error:focus , .otp-input.input-error:focus {
+.input-error:focus, .otp-input.input-error:focus {
   border-color: var(--color-red);
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5);
 }
@@ -59,27 +56,21 @@ label {
 .otp-input.otp-input-error {
   border-color: var(--color-red-base) !important;
 }
-.otp-input-error:focus , .otp-input.otp-input-error:focus {
+
+.otp-input-error:focus, .otp-input.otp-input-error:focus {
   border-color: var(--color-red-base);
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5);
+}
+
+/* border */
+.border-color-blue {
+  border: 3.5px solid var(--color-blue);
 }
 
 /* ===== Buttons ===== */
 button {
   transition: all 0.1s;
   font-family: var(--font-family);
-}
-
-.btn-link {
-  background: none;
-  color: #3b82f6;
-  padding: 0;
-  font-weight: 500;
-  text-decoration: underline;
-}
-
-.btn-link:hover {
-  color: #2563eb;
 }
 
 /* ===== Images ===== */
@@ -98,17 +89,10 @@ button {
 }
 
 .register-header {
-  background-image: url('../../../public/register/swan_head.png');
+  background-image: url("../../../public/register/swan_head.png");
   background-size: 100% auto;
-  background-position: bottom center; 
-  background-repeat: no-repeat; 
-}
-
-.register-profile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 1.5rem;
+  background-position: bottom center;
+  background-repeat: no-repeat;
 }
 
 .register-profile-img {
@@ -126,13 +110,14 @@ button {
 .text-exceeds-w-box {
   width: calc(100% + 80px);
 }
+
 button.underline {
   text-underline-offset: 7px;
 }
 
 /* Tabs */
 .tab-active {
-  border-color: #3b82f6;
+  border-color: var(--color-blue);
   color: #2563eb;
 }
 
@@ -140,16 +125,18 @@ button.underline {
   border-color: #e5e7eb;
   color: #6b7280;
 }
-.customer-tab{
+
+.customer-tab {
   border: 2px solid var(--color-gray-regular);
 }
+
 .customer-tab-active {
   border: 3px solid var(--color-blue);
 }
+
 .customer-tab-text {
   transform: translate(-50%, -50%);
 }
-
 
 /* Checkbox */
 .checkbox-container {
@@ -178,10 +165,12 @@ button.underline {
   perspective: 1000;
   -webkit-font-smoothing: antialiased;
 }
+
 .register-form-input {
   border: 2px solid var(--color-gray-regular);
   transition: border-color 0.1s ease, color 0.1s ease;
 }
+
 /* Placeholder: สีเทา */
 .register-form-input::placeholder,
 .register-form-input::-webkit-input-placeholder,
@@ -191,10 +180,12 @@ button.underline {
 .register-form-input::-ms-input-placeholder {
   transition: color 0.1s ease;
 }
+
 /* เมื่อ focus → ทุกอย่างเป็นสีฟ้า */
 .register-form-input:focus {
   color: var(--color-blue-deep) !important;
 }
+
 /* ถ้าไม่ได้แสดง placeholder = มี value แล้ว */
 .register-form-input:not(:placeholder-shown) {
   border-color: var(--color-blue);
@@ -203,22 +194,24 @@ button.underline {
 
 /* OTP Input */
 .otp-input {
-  border: 3px solid var(--color-blue); 
+  border: 3px solid var(--color-blue);
   transition: border-color 0.1s ease, color 0.1s ease;
   letter-spacing: 20px;
 }
+
 .otp-input:placeholder-shown {
   letter-spacing: 22px;
   font-size: 40px;
 }
+
 .otp-input:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: var(--color-blue);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
 }
 
 .otp-input::placeholder {
-  color: #3b82f6; /* สี placeholder ฟ้า */
+  color: var(--color-blue); /* สี placeholder ฟ้า */
   opacity: 1; /* เพื่อให้แสดงสีชัดเจนในบาง Browser */
 }
 
@@ -226,8 +219,8 @@ button.underline {
 .pdpa-modal {
   inset: 0;
   z-index: 50;
-  height: max-content;
 }
+
 .pdpa-modal:before {
   content: "";
   background: black;
@@ -242,19 +235,21 @@ button.underline {
   box-shadow: 0px 1px 13px #4572a7;
 }
 
-.headText-pdpa{
+.headText-pdpa {
   color: var(--color-blue);
   display: inline;
   text-decoration: underline;
   text-underline-offset: 5px;
   text-decoration-thickness: 2px;
 }
-.box-text-pdpa{
-  background-image: url('../../../public/register/shadow_pdpa.png');
+
+.box-text-pdpa {
+  background-image: url("../../../public/register/shadow_pdpa.png");
   background-size: 100% auto;
-  background-position: bottom center; 
-  background-repeat: no-repeat; 
+  background-position: bottom center;
+  background-repeat: no-repeat;
 }
+
 /*Success Page*/
 .success-container {
   background-color: #ffffff;
@@ -264,10 +259,12 @@ button.underline {
   perspective: 1000px;
   -webkit-font-smoothing: antialiased;
 }
+
 .character-divider {
   border-bottom: 1px solid #b5b5b5;
   width: 490px;
 }
+
 .check-icon-complete {
   margin-top: -86px;
 }
@@ -276,45 +273,18 @@ button.underline {
   margin-top: -15px;
 }
 
-/* Container ที่ใช้ขยายทั้งก้อนพร้อม ripple */
-.circle-container {
-  animation: scale-pulse1 2.5s ease-out infinite;
-  transform-origin: center center;
-}
-
 @keyframes scale-pulse {
   0% {
     transform: scale(1);
     filter: brightness(1);
   }
   50% {
-    transform: scale(1.32);       /* ขยายชัดเจนขึ้น */
-    filter: brightness(1.1);      /* เพิ่มความสว่าง */
+    transform: scale(1.32); /* ขยายชัดเจนขึ้น */
+    filter: brightness(1.1); /* เพิ่มความสว่าง */
   }
   100% {
     transform: scale(1);
     filter: brightness(1);
-  }
-}
-
-/* Confetti */
-.confetti {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: #3b82f6;
-  border-radius: 50%;
-  animation: confetti-fall 3s ease-in-out infinite;
-}
-
-@keyframes confetti-fall {
-  0% {
-    transform: translateY(-100px) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100px) rotate(360deg);
-    opacity: 0;
   }
 }
 /* Confirmation Page */
@@ -323,39 +293,9 @@ button.underline {
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
+
 .confirm-data-box {
   gap: 40px 0;
-}
-.edit-btn {
-  border: 3px solid var(--color-blue);
-}
-
-/* Loading */
-.loading-container {
-  min-height: 100vh;
-  background-color: rgb(240, 248, 240);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.loading-card {
-  width: 100%;
-  max-width: 28rem;
-  padding: 2rem;
-  background-color: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-/* Error Message */
-.error-message {
-  background-color: #fee2e2;
-  color: var(--color-red);
-  padding: 0.75rem;
-  border-radius: 0.375rem;
-  text-align: center;
-  font-size: 0.875rem;
 }
 
 /* สำหรับ Chrome/Safari autofill */
@@ -369,12 +309,14 @@ input.register-form-input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0px 1000px white inset !important;
   box-shadow: 0 0 0px 1000px white inset !important;
 }
+
 input.register-form-input.text-input-error:-webkit-autofill,
 input.register-form-input.text-input-error:-webkit-autofill:focus,
 input.register-form-input.text-input-error:-webkit-autofill:hover,
 input.register-form-input.text-input-error:-webkit-autofill:active {
   -webkit-text-fill-color: var(--color-red);
 }
+
 .text-input-error {
   color: var(--color-red);
 }
@@ -420,7 +362,226 @@ input.register-form-input.text-input-error:-webkit-autofill:active {
   will-change: color;
 }
 
-
-
 /* class input-error จะใช้กำหนด border สีแดงเมื่อมี error */
+/**************** ขนาดหน้าจอ ไม่เกิน 1919  ****************/
+@media (max-width: 1919px) {
+  input,
+  select,
+  textarea {
+    padding: 0.6253256905vw 0.8337675873vw;
+    border: 0.0521104742vw solid #d1d5db;
+    border-radius: 0.8858780615vw;
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    box-shadow: 0 0 0 0.1563314226vw rgba(59, 130, 246, 0.5);
+  }
+  .input-error:focus, .otp-input.input-error:focus {
+    border-color: var(--color-red);
+    box-shadow: 0 0 0 0.1563314226vw rgba(239, 68, 68, 0.5);
+  }
+  .otp-input-error:focus, .otp-input.otp-input-error:focus {
+    border-color: var(--color-red-base);
+    box-shadow: 0 0 0 0.1563314226vw rgba(239, 68, 68, 0.5);
+  }
+  /* border */
+  .border-color-blue {
+    border: 0.1823866597vw solid var(--color-blue);
+  }
+  /* ===== Specific Components ===== */
+  .register-container {
+    perspective: 52.1104742053vw;
+  }
+  .register-profile-img {
+    border: 0.5211047421vw solid #f6f9fc;
+    box-shadow: 0 0.1563314226vw 0.2084418968vw rgba(69, 114, 167, 0.35);
+    transform: translate(-50%, 6.5659197499vw);
+  }
+  .text-exceeds-w-box {
+    width: calc(100% + 4.1688379364vw);
+  }
+  button.underline {
+    text-underline-offset: 0.3647733194vw;
+  }
+  .customer-tab {
+    border: 0.1042209484vw solid var(--color-gray-regular);
+  }
+  .customer-tab-active {
+    border: 0.1563314226vw solid var(--color-blue);
+  }
+  .customer-tab-text {
+    transform: translate(-50%, -50%);
+  }
+  /* Checkbox */
+  .checkbox-container {
+    border-radius: 0 0 0.5211047421vw 0;
+  }
+  .register-form-input {
+    border: 0.1042209484vw solid var(--color-gray-regular);
+  }
+  /* OTP Input */
+  .otp-input {
+    border: 0.1563314226vw solid var(--color-blue);
+    letter-spacing: 1.0422094841vw;
+  }
+  .otp-input:placeholder-shown {
+    letter-spacing: 1.1464304325vw;
+    font-size: 2.0844189682vw;
+  }
+  .otp-input:focus {
+    box-shadow: 0 0 0 0.1563314226vw rgba(59, 130, 246, 0.5);
+  }
+  .pdpa-content {
+    box-shadow: 0 0.0521104742vw 0.6774361647vw #4572a7;
+  }
+  .headText-pdpa {
+    text-underline-offset: 0.260552371vw;
+    text-decoration-thickness: 0.1042209484vw;
+  }
+  /*Success Page*/
+  .success-container {
+    perspective: 52.1104742053vw;
+  }
+  .character-divider {
+    border-bottom: 0.0521104742vw solid #b5b5b5;
+    width: 25.5341323606vw;
+  }
+  .check-icon-complete {
+    margin-top: -4.4815007817vw;
+  }
+  .successSkeleton-title {
+    margin-top: -0.7816571131vw;
+  }
+  /* Confirmation Page */
+  .confirm-data {
+    margin-left: -1.8238665972vw;
+  }
+  .confirm-data-box {
+    gap: 2.0844189682vw 0;
+  }
+  /* สำหรับ Chrome/Safari autofill */
+  input.register-form-input:-webkit-autofill,
+  input.register-form-input:-webkit-autofill:focus,
+  input.register-form-input:-webkit-autofill:hover,
+  input.register-form-input:-webkit-autofill:active {
+    /* เพิ่มตรงนี้เพื่อเปลี่ยนพื้นหลัง autofill เป็นสีขาว */
+    -webkit-box-shadow: 0 0 0 52.1104742053vw white inset !important;
+    box-shadow: 0 0 0 52.1104742053vw white inset !important;
+  }
+  .customer-tab-active {
+    border: 0.1563314226vw solid var(--color-blue);
+  }
+}
+/**************** ขนาดหน้าจอ ไม่เกิน 768  ****************/
+@media (max-width: 768px) {
+  input,
+  select,
+  textarea {
+    padding: 1.5625vw 2.0833333333vw;
+    border: 0.1302083333vw solid #d1d5db;
+    border-radius: 2.2135416667vw;
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    box-shadow: 0 0 0 0.390625vw rgba(59, 130, 246, 0.5);
+  }
+  .input-error:focus, .otp-input.input-error:focus {
+    border-color: var(--color-red);
+    box-shadow: 0 0 0 0.390625vw rgba(239, 68, 68, 0.5);
+  }
+  .otp-input-error:focus, .otp-input.otp-input-error:focus {
+    border-color: var(--color-red-base);
+    box-shadow: 0 0 0 0.390625vw rgba(239, 68, 68, 0.5);
+  }
+  /* border */
+  .border-color-blue {
+    border: 0.4557291667vw solid var(--color-blue);
+  }
+  /* ===== Specific Components ===== */
+  .register-container {
+    perspective: 130.2083333333vw;
+  }
+  .register-profile-img {
+    border: 1.3020833333vw solid #f6f9fc;
+    box-shadow: 0 0.390625vw 0.5208333333vw rgba(69, 114, 167, 0.35);
+    transform: translate(-50%, 16.40625vw);
+  }
+  .text-exceeds-w-box {
+    width: calc(100% + 10.4166666667vw);
+  }
+  button.underline {
+    text-underline-offset: 0.9114583333vw;
+  }
+  .customer-tab {
+    border: 0.2604166667vw solid var(--color-gray-regular);
+  }
+  .customer-tab-active {
+    border: 0.390625vw solid var(--color-blue);
+  }
+  .customer-tab-text {
+    transform: translate(-50%, -50%);
+  }
+  /* Checkbox */
+  .checkbox-container {
+    border-radius: 0 0 1.3020833333vw 0;
+  }
+  .register-form-input {
+    border: 0.2604166667vw solid var(--color-gray-regular);
+  }
+  /* OTP Input */
+  .otp-input {
+    border: 0.390625vw solid var(--color-blue);
+    letter-spacing: 2.6041666667vw;
+  }
+  .otp-input:placeholder-shown {
+    letter-spacing: 2.8645833333vw;
+    font-size: 5.2083333333vw;
+  }
+  .otp-input:focus {
+    box-shadow: 0 0 0 0.390625vw rgba(59, 130, 246, 0.5);
+  }
+  .pdpa-content {
+    box-shadow: 0 0.1302083333vw 1.6927083333vw #4572a7;
+  }
+  .headText-pdpa {
+    text-underline-offset: 0.6510416667vw;
+    text-decoration-thickness: 0.2604166667vw;
+  }
+  /*Success Page*/
+  .success-container {
+    perspective: 130.2083333333vw;
+  }
+  .character-divider {
+    border-bottom: 0.1302083333vw solid #b5b5b5;
+    width: 63.8020833333vw;
+  }
+  .check-icon-complete {
+    margin-top: -11.1979166667vw;
+  }
+  .successSkeleton-title {
+    margin-top: -1.953125vw;
+  }
+  /* Confirmation Page */
+  .confirm-data {
+    margin-left: -4.5572916667vw;
+  }
+  .confirm-data-box {
+    gap: 5.2083333333vw 0;
+  }
+  /* สำหรับ Chrome/Safari autofill */
+  input.register-form-input:-webkit-autofill,
+  input.register-form-input:-webkit-autofill:focus,
+  input.register-form-input:-webkit-autofill:hover,
+  input.register-form-input:-webkit-autofill:active {
+    /* เพิ่มตรงนี้เพื่อเปลี่ยนพื้นหลัง autofill เป็นสีขาว */
+    -webkit-box-shadow: 0 0 0 130.2083333333vw white inset !important;
+    box-shadow: 0 0 0 130.2083333333vw white inset !important;
+  }
+  .customer-tab-active {
+    border: 0.390625vw solid var(--color-blue);
+  }
+}
 
+/*# sourceMappingURL=register.css.map */
