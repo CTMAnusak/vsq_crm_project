@@ -198,25 +198,25 @@ export default function Home() {
                 <div className="py-2">
                   <button
                     onClick={() => handleOptionSelect("member")}
-                    className="w-full text-left font-size-20 mb-font-size-20 h-30 mb-h-30 line-20 mb-line-20"
+                    className="w-full text-left font-size-20 mb-font-size-20 h-30 mb-h-30 line-20 mb-line-20 hover-bg-blue transition"
                   >
                     Member
                   </button>
                   <button
                     onClick={() => handleOptionSelect("silver")}
-                    className="w-full text-left font-size-20 mb-font-size-20 h-30 mb-h-30 line-20 mb-line-20"
+                    className="w-full text-left font-size-20 mb-font-size-20 h-30 mb-h-30 line-20 mb-line-20 hover-bg-blue transition"
                   >
                     Silver
                   </button>
                   <button
                     onClick={() => handleOptionSelect("gold")}
-                    className="w-full text-left font-size-20 mb-font-size-20 h-30 mb-h-30 line-20 mb-line-20"
+                    className="w-full text-left font-size-20 mb-font-size-20 h-30 mb-h-30 line-20 mb-line-20 hover-bg-blue transition"
                   >
                     Gold
                   </button>
                   <button
                     onClick={() => handleOptionSelect("platinum")}
-                    className="w-full text-left font-size-20 mb-font-size-20 h-30 mb-h-30 line-20 mb-line-20"
+                    className="w-full text-left font-size-20 mb-font-size-20 h-30 mb-h-30 line-20 mb-line-20 hover-bg-blue transition"
                   >
                     Platinum
                   </button>
@@ -229,7 +229,7 @@ export default function Home() {
 
      
       {/* Main content */}
-      <main className="w-full flex flex-col items-center">
+      <main className="w-full flex flex-col items-center min-height-100dvh">
           {/* Greeting */}
           <div className="w-full pl-50 pr-50 mt-70 mb-80 mb-pl-50 mb-pr-50 mb-mt-70 mb-mb-80 z-3">
             <h1 className="font-light font-size-71 mx-0 mb-font-size-71 line-13 text-darkblue">สวัสดีค่ะ</h1>
@@ -245,7 +245,7 @@ export default function Home() {
                   className="w-full h-auto"
                 />
             </div>
-            <div className="absolute top-345 left--110 w-640 h-183 mb-top-345 mb-left--110 mb-w-640 mb-h-183">
+            <div className="absolute top-342 left--110 w-640 h-183 mb-top-342 mb-left--110 mb-w-640 mb-h-183">
             <Image
                   src={light}
                   alt="Light effect"
