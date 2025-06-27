@@ -11,14 +11,9 @@ export default function OTPSkeleton() {
         <RegisterHeaderSkeleton />
 
         {/* Content Skeleton */}
-        <div className="register-content flex-start-center flex-col mx-auto w-651 mt-95 mb-w-651 mb-mt-95 mb-445 mb-mb-445">
-          {/* Title Skeleton */}
-          <div className="flex-start-center flex-col text-center mb-52 mb-mb-52 w-370 mb-w-370 h-87 mb-h-87">
-            <Skeleton variant="text" width="100%" height="100%" />
-          </div>
-
+        <div className="register-content flex-start-center flex-col mx-auto w-651 mt-30 mb-w-651 mb-mt-30 mb-445 mb-mb-445">
           {/* OTP Form Box Skeleton */}
-          <div className="bg-white mb-32 pt-52 pl-48 pr-48 pb-46 rounded-10  mb-mb-32 mb-pt-52 mb-pl-48 mb-pr-48 mb-pb-46 mb-rounded-10 w-full">
+          <div className="bg-white mb-32 pt-52 pb-46 rounded-10  mb-mb-32 mb-pt-52 mb-pb-46 mb-rounded-10 w-full">
             {/* Description Skeleton */}
             <div className="mx-auto mb-2 w-286 mb-w-286 h-56 mb-h-56">
               <Skeleton variant="text" width="100%" height="100%" />
@@ -28,7 +23,7 @@ export default function OTPSkeleton() {
             </div>
 
             {/* OTP Input Skeleton */}
-            <div className="mt-42 mb-mt-42 mx-auto w-539 mb-w-539 h-113 mb-h-113 rounded-17 mb-rounded-17">
+            <div className="mt-42 mb-mt-42 mx-auto w-580 mb-w-580 h-95 mb-h-95 rounded-17 mb-rounded-17">
               <Skeleton variant="rounded" width="100%" height="100%" />
             </div>
 

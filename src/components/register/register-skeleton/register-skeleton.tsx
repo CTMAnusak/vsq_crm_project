@@ -12,7 +12,7 @@ export default function RegisterSkeleton() {
           <RegisterHeaderSkeleton />
 
           {/* Content Skeleton */}
-          <div className="register-content w-656 mx-auto mt-40 mb-w-656 mb-mx-auto mb-mt-40 mb-137 mb-mb-137">
+          <div className="register-content w-656 mx-auto mt-40 mb-w-656 mb-mx-auto mb-mt-40">
             
 
             {/* Tabs Skeleton */}
@@ -52,7 +52,7 @@ export default function RegisterSkeleton() {
               />
             </div>
 
-            <div className="mt-35 mb-mt-35 mx-auto w-668 h-50 mb-w-668 mb-h-50">
+            <div className="mt-35 mb-60 mb-mt-35 mb-mb-60 mx-auto w-668 h-50 mb-w-668 mb-h-50">
               <Skeleton variant="text" width="100%" height="100%" />
             </div>
 

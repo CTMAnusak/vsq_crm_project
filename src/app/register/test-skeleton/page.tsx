@@ -9,9 +9,9 @@ export default function TestRegisterHeaderSkeletonPage() {
     <>
       {/* <RegisterHeaderSkeleton /> */}
       {/* <RegisterSkeleton /> */}
-      <ConfirmSkeleton />
+      {/* <ConfirmSkeleton /> */}
       {/* <OTPSkeleton /> */}
-      {/* <SuccessSkeleton /> */}
+      <SuccessSkeleton />
     </>
   );
 }

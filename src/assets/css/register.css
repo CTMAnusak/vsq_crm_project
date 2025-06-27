@@ -272,6 +272,10 @@ button.underline {
   margin-top: -86px;
 }
 
+.successSkeleton-title {
+  margin-top: -15px;
+}
+
 /* Container ที่ใช้ขยายทั้งก้อนพร้อม ripple */
 .circle-container {
   animation: scale-pulse1 2.5s ease-out infinite;
