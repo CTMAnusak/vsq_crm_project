@@ -1,6 +1,9 @@
 body, h2, h3 {
     margin : 0;
 }
+.min-height-100dvh {
+    min-height: 100dvh
+}
 .bg-alert {
     background-color: #a50000;
 }
@@ -69,27 +72,3 @@ body, h2, h3 {
 /* .brightness-300 {
     filter: brightness(300%);
 } */
-
-
-
-/* Font Classes for Home Page */
-/* .gotham {
-    font-family: 'Gotham', sans-serif;
-    font-weight: 400;
-}
-
-.gotham-light {
-    font-family: 'Gotham', sans-serif;
-    font-weight: 300;
-}
-
-.gotham-medium {
-    font-family: 'Gotham', sans-serif;
-    font-weight: 500;
-}
-
-.gotham-extra-light {
-    font-family: 'Gotham', sans-serif;
-    font-weight: 200;
-} */
-

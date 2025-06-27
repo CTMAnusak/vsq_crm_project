@@ -4,6 +4,7 @@
   --font-gotham-bold: "gothambold", sans-serif;
   --font-gotham-book: "gotham-book", sans-serif;
   --font-gotham-medium: "gothammedium", sans-serif;
+
   --bg-green: #28a745;
   --bg-yellow: #ffc107;
   --bg-purple: #6f42c1;
@@ -31,6 +32,15 @@
 
 .font-gotham {
   font-family: var(--font-gotham);
+}
+.font-gotham-bold {
+  font-family: var(--font-gotham-bold);
+}
+.font-gotham-book {
+  font-family: var(--font-gotham-book);
+}
+.font-gotham-medium {
+  font-family: var(--font-gotham-medium);
 }
 
 .font-gotham-bold {
@@ -106,9 +116,7 @@
 .bg-color-red-soft {
   background-color: var(--color-red-soft);
 }
-
 .bg-line-green {
   background-color: var(--color-line-green);
 }
 
-/*# sourceMappingURL=_settings.css.map */
