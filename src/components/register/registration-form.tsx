@@ -73,21 +73,18 @@ export default function RegistrationForm({ onTabChange, isPDPAAccepted }: Regist
   const formRef = useRef<HTMLFormElement>(null)
 
   useEffect(() => {
-    // ตรวจสอบว่ามีข้อมูลที่กำลังแก้ไขหรือไม่
-    const editingData = localStorage.getItem("editingRegistrationData")
-    if (editingData) {
-      const parsedData = JSON.parse(editingData) as FormData
+    // โหลดข้อมูลฟอร์มที่บันทึกไว้จาก localStorage
+    const savedFormData = localStorage.getItem("registrationFormData")
+    if (savedFormData) {
+      const parsedData = JSON.parse(savedFormData) as FormData
       setFormData(parsedData)
 
-      // เลือก tab ตามประเภทลูกค้า
+      // (Optional) หากต้องการให้ tab สอดคล้องกับข้อมูลที่เคยกรอก
       if (parsedData.isExistingCustomer) {
         setActiveTab("existing")
       } else {
         setActiveTab("new")
       }
-
-      // ลบข้อมูลที่กำลังแก้ไขออกจาก localStorage เพื่อไม่ให้โหลดซ้ำ
-      localStorage.removeItem("editingRegistrationData")
     }
   }, [])
 
@@ -124,19 +121,24 @@ export default function RegistrationForm({ onTabChange, isPDPAAccepted }: Regist
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
+    let updatedFormData: FormData;
 
     if (name === "phone") {
       // จำกัดให้กรอกได้แค่ตัวเลข และจำกัดความยาวไม่เกิน 10 หลัก
       const numericValue = value.replace(/[^0-9]/g, "").slice(0, 10)
-      setFormData((prev) => ({ ...prev, [name]: numericValue }))
+      updatedFormData = { ...formData, [name]: numericValue };
     } else if (name === "firstName" || name === "lastName") {
       // จำกัดให้กรอกได้แค่ตัวอักษร (ไทยและอังกฤษ) เท่านั้น ไม่รวมเว้นวรรคและอักษรพิเศษ
       const alphabeticValue = value.replace(/[^a-zA-Z\u0E00-\u0E7F]/g, "")
-      setFormData((prev) => ({ ...prev, [name]: alphabeticValue }))
+      updatedFormData = { ...formData, [name]: alphabeticValue };
     }
     else {
-      setFormData((prev) => ({ ...prev, [name]: value }))
+      updatedFormData = { ...formData, [name]: value };
     }
+    setFormData(updatedFormData);
+
+    // บันทึกข้อมูลที่อัปเดตลงใน localStorage
+    localStorage.setItem("registrationFormData", JSON.stringify(updatedFormData));
 
     // Clear error when user types
     if (errors[name as keyof FormData]) {
@@ -427,8 +429,8 @@ export default function RegistrationForm({ onTabChange, isPDPAAccepted }: Regist
                   hasError
                     ? "input-error text-input-error font-normal font-size-35 mb-font-size-35"
                     : field.value
-                      ? (field.name === "email" ? "font-normal text-color-blue font-size-35 mb-font-size-35" : "font-normal text-color-blue font-size-35 mb-font-size-35") 
-                      : (field.name === "email" ? "font-gotham text-color-gray-mid font-normal font-size-30 mb-font-size-30" : "font-light text-color-gray-mid font-size-30 mb-font-size-30")
+                      ? (field.name === "email" ? "font-normal text-color-blue-deep font-size-35 mb-font-size-35" : "font-normal text-color-blue-deep font-size-35 mb-font-size-35") 
+                      : (field.name === "email" ? "font-gotham-book font-normal text-color-gray-mid font-size-30 mb-font-size-30" : "font-light text-color-gray-mid font-size-30 mb-font-size-30")
                 }`}
               />
             </div>
@@ -463,7 +465,7 @@ export default function RegistrationForm({ onTabChange, isPDPAAccepted }: Regist
         }`}>
           {tab.id === "existing" ? (
             <>
-              ลูกค้า <span className={`${activeTab === "existing" ? "font-gotham font-medium font-size-28 mb-font-size-28" : "font-kanit font-light font-size-30 mb-font-size-30"}`}>V Square</span>
+              ลูกค้า <span className={`${activeTab === "existing" ? "font-gotham-medium font-medium font-size-28 mb-font-size-28" : "font-kanit font-light font-size-30 mb-font-size-30"}`}>V Square</span>
             </>
           ) : (
             tab.title
@@ -484,7 +486,7 @@ export default function RegistrationForm({ onTabChange, isPDPAAccepted }: Regist
       </div>
 
       <form ref={formRef} className="register-form flex-start-center flex-col" onSubmit={handleSubmit}>
-        <div className="bg-white flex-start-center text-center flex-col w-651 mb-w-651 mt-22 pt-77 pb-54 rounded-10 mb-mt-22 mb-pt-77 mb-pb-54 mb-rounded-10">
+        <div className="bg-white flex-start-center text-center flex-col w-651 mb-w-651 mt-40 pt-77 pb-54 rounded-10 mb-mt-40 mb-pt-77 mb-pb-54 mb-rounded-10">
           {renderFormFields()}
         </div>
         <div className="h-82 mb-h-82 flex-center flex-col text-exceeds-w-box">
@@ -509,18 +511,18 @@ export default function RegistrationForm({ onTabChange, isPDPAAccepted }: Regist
         <ButtonSubmit
           type="submit"
           variant={isFormValid ? "blue_bg" : "gray_bg"}
-          className={`w-553 h-81 mb-w-553 mb-h-81 ${activeTab === "new" ? "mb-131 mb-mb-131" : ""}`}
+          className={`w-553 h-81 mb-w-553 mb-h-81`}
           isDisabled={!isFormValid}
         >
           ถัดไป
         </ButtonSubmit>
       </form>
 
-      {activeTab === "existing" && (
+     
         <p className="text-exceeds-w-box translateX-minus-1-2 relative text-center text-color-blue-deep font-light top-0 left-1-2 font-size-26 mt-35 mb-60 mb-top-0 mb-left-1-2  mb-font-size-26 mb-mt-35 mb-mb-60">
-          *ชื่อ – นามสกุล ผิด ลูกค้าแจ้งแก้ไขได้ ที่หน้าสาขา <span className="font-gotham font-size-24 mb-font-size-24 font-normal">V Square Clinic</span>
+          *ชื่อ–นามสกุล ไม่ถูกต้องโปรดแจ้งได้ที่หน้าสาขา <span className="font-gotham-book font-normal font-size-24 mb-font-size-24">V Square Clinic</span>
         </p>
-      )}
+     
 
     </div>
   )
