@@ -3,7 +3,6 @@
 import React from "react"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import Image from "next/image"
 import RegisterHeader from "../../../components/register/register-header"
 import ButtonSubmit from "../../../components/register/button-submit"
 import ConfirmSkeleton from "../../../components/register/register-skeleton/confirm-skeleton"

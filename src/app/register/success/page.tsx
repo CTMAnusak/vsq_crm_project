@@ -1,7 +1,5 @@
 "use client"
 
-import Link from "next/link"
-import { CheckIcon } from "lucide-react"
 import Image from "next/image"
 import ButtonSubmit from "../../../components/register/button-submit"
 
