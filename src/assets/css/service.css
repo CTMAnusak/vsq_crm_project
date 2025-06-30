@@ -1,0 +1,153 @@
+.text-drakble {
+  color: #2d4c9d;
+}
+
+.section-service {
+  position: relative;
+  background-image: url("../images/course/BG-section-2.png");
+  background-size: 100% auto;
+  background-repeat: repeat;
+  min-height: 100dvh;
+  padding-bottom: 120px;
+}
+
+.section-service-bg {
+  background-image: url("../images/course/BG-section.jpg");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-list-info {
+  background-color: #fff;
+  box-shadow: 1px 0px 12px 5px rgba(0, 0, 0, 0.11);
+}
+
+.text-activity {
+  position: relative;
+  overflow: hidden;
+  padding-top: 14px;
+}
+
+.img-icon {
+  position: unset;
+  display: inherit;
+}
+
+.span-text-content {
+  font-family: "gotham-book";
+}
+
+.date-text {
+  position: absolute;
+  bottom: -1px;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 175px;
+  height: 37px;
+  border-radius: 12px 0 0;
+  background-color: #f0f6ff;
+  transform: skewX(-14deg);
+  transition: background-color 0.25s ease;
+}
+
+.text-date-1 {
+  transform: skewX(14deg);
+}
+
+.text-drakblue {
+  color: #435b9a;
+}
+
+.text-lingblue {
+  color: #2172eb;
+}
+
+.detail-text-activity-eng {
+  font-family: "gothammedium";
+}
+
+@media (max-width: 1919px) {
+  .section-service {
+    padding-bottom: 6.2532569046vw;
+  }
+  .course-list-info {
+    box-shadow: 0.0521104742vw 0vw 0.6253256905vw 0.260552371vw rgba(0, 0, 0, 0.11);
+  }
+  .text-activity {
+    padding-top: 0.7295466389vw;
+  }
+  .date-text {
+    bottom: -0.0521104742vw;
+    width: 9.1193329859vw;
+    height: 1.9280875456vw;
+    border-radius: 0.6253256905vw 0 0;
+  }
+}
+@media (max-width: 768px) {
+  .text-drakble {
+    color: #2d4c9d;
+  }
+  .section-service {
+    position: relative;
+    background-image: url("../images/course/BG-section-2.png");
+    background-size: 100% auto;
+    background-repeat: repeat;
+    min-height: 100dvh;
+    padding-bottom: 15.625vw;
+  }
+  .section-service-bg {
+    background-image: url("../images/course/BG-section.jpg");
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+  }
+  .course-list-info {
+    background-color: #fff;
+    box-shadow: 0.1302083333vw 0vw 1.5625vw 0.6510416667vw rgba(0, 0, 0, 0.11);
+  }
+  .text-activity {
+    position: relative;
+    overflow: hidden;
+    padding-top: 1.8229166667vw;
+  }
+  .img-icon {
+    position: unset;
+    display: inherit;
+  }
+  .span-text-content {
+    font-family: "gotham-book";
+  }
+  .date-text {
+    position: absolute;
+    bottom: -0.1302083333vw;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22.7864583333vw;
+    height: 4.8177083333vw;
+    border-radius: 1.5625vw 0 0;
+    background-color: #f0f6ff;
+    transform: skewX(-14deg);
+    transition: background-color 0.25s ease;
+  }
+  .text-date-1 {
+    transform: skewX(14deg);
+  }
+  .text-drakblue {
+    color: #435b9a;
+  }
+  .text-lingblue {
+    color: #2172eb;
+  }
+  .detail-text-activity-eng {
+    font-family: "gothammedium";
+  }
+}
+
+/*# sourceMappingURL=service.css.map */
