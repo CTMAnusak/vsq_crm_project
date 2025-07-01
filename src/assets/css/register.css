@@ -18,6 +18,10 @@
   transform: translateX(-50%);
 }
 
+.hide-header-footer {
+  display: none !important;
+}
+
 input,
 select,
 textarea {
@@ -303,7 +307,7 @@ input.register-form-input:-webkit-autofill,
 input.register-form-input:-webkit-autofill:focus,
 input.register-form-input:-webkit-autofill:hover,
 input.register-form-input:-webkit-autofill:active {
-  -webkit-text-fill-color: var(--color-blue);
+  -webkit-text-fill-color: var(--color-blue-deep);
   transition: background-color 1s ease-in-out 0s;
   /* เพิ่มตรงนี้เพื่อเปลี่ยนพื้นหลัง autofill เป็นสีขาว */
   -webkit-box-shadow: 0 0 0px 1000px white inset !important;
