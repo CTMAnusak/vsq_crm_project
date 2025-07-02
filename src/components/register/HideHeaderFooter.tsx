@@ -2,19 +2,26 @@ import { useEffect } from "react";
 
 export default function HideHeaderFooter() {
   useEffect(() => {
-    // เพิ่ม class ให้ header
     const header = document.querySelector("header");
-    if (header) header.classList.add("hide-header-footer");
-
-    // เพิ่ม class ให้ footer
     const footer = document.querySelector("footer");
-    if (footer) footer.classList.add("hide-header-footer");
 
-    // cleanup (ลบ class เมื่อออกจากเพจนี้)
-    return () => {
-      if (header) header.classList.remove("hide-header-footer");
-      if (footer) footer.classList.remove("hide-header-footer");
-    };
+    // ลบ attribute ทั้งหมดของตัวเอง
+    function cleanAttributes(el: HTMLElement | null) {
+      if (!el) return;
+      Array.from(el.attributes).forEach(attr => el.removeAttribute(attr.name));
+    }
+    cleanAttributes(header as HTMLElement);
+    cleanAttributes(footer as HTMLElement);
+
+    // ลบ element ลูกหลานทั้งหมด (เหลือแต่ tag เปล่า)
+    if (header) header.innerHTML = "";
+    if (footer) footer.innerHTML = "";
+
+    // เพิ่ม className 'hide-header-footer'
+    if (header) header.className = "hide-header-footer";
+    if (footer) footer.className = "hide-header-footer";
+
+    return () => {};
   }, []);
   return null;
 } 
