@@ -129,7 +129,7 @@
 }
 
 .record-detail-text-activity {
-  border: 2px solid #CACACA;
+  border: 2px solid #F3F3F3;
   width: 290px;
   padding-block-end: 20px;
 }
@@ -315,7 +315,7 @@
     padding: 0 1.3020833333vw;
   }
   .record-detail-text-activity {
-    border: 0.2604166667vw solid #CACACA;
+    border: 0.2604166667vw solid #F3F3F3;
     width: 37.7604166667vw;
     padding-block-end: 2.6041666667vw;
   }

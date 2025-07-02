@@ -125,7 +125,7 @@ $max-viewport-mb: 768;
   padding: 0 10px;
 }
 .record-detail-text-activity {
-  border: 2px solid #CACACA;
+  border: 2px solid #F3F3F3;
   width: 290px;
   padding-block-end: 20px;
 }
@@ -321,7 +321,7 @@ $max-viewport-mb: 768;
       padding: 0 get-vw-mb(10px);
     }
     .record-detail-text-activity {
-      border: get-vw-mb(2px) solid #CACACA;
+      border: get-vw-mb(2px) solid #F3F3F3;
       width: get-vw-mb(290px);
       padding-block-end: get-vw-mb(20px);
     }
