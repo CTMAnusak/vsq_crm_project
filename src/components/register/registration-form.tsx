@@ -86,6 +86,15 @@ export default function RegistrationForm({ onTabChange, isPDPAAccepted }: Regist
         setActiveTab("new")
       }
     }
+
+    // เพิ่ม logic ลบข้อมูล registrationFormData เมื่อปิดแท็บหรือรีเฟรช
+    const handleBeforeUnload = () => {
+      localStorage.removeItem("registrationFormData")
+    }
+    window.addEventListener("beforeunload", handleBeforeUnload)
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload)
+    }
   }, [])
 
   const handleTabChange = useCallback((tab: TabType) => {
@@ -518,7 +527,6 @@ export default function RegistrationForm({ onTabChange, isPDPAAccepted }: Regist
         </ButtonSubmit>
       </form>
 
-     
         <p className="text-exceeds-w-box translateX-minus-1-2 relative text-center text-color-blue-deep font-light top-0 left-1-2 font-size-26 mt-35 mb-60 mb-top-0 mb-left-1-2  mb-font-size-26 mb-mt-35 mb-mb-60">
           *ชื่อ–นามสกุล ไม่ถูกต้องโปรดแจ้งได้ที่หน้าสาขา <span className="font-gotham-book font-normal font-size-24 mb-font-size-24">V Square Clinic</span>
         </p>

@@ -7,6 +7,7 @@ import RegisterHeader from "../../../components/register/register-header"
 import ButtonSubmit from "../../../components/register/button-submit"
 import ConfirmSkeleton from "../../../components/register/register-skeleton/confirm-skeleton"
 import liff from "@line/liff"
+import RegisterConsoleLog from "../../../components/register/registerConsoleLog"
 
 type FormData = {
   firstName: string
@@ -97,6 +98,7 @@ export default function ConfirmPage() {
 
   return (
     <div className="register-container h-auto flex-start-center flex-col">
+      <RegisterConsoleLog pageName="Confirm" />
       <div className="register-card">
         {/* Header เหมือนหน้า register */}
         <RegisterHeader profileImage={profileImage} />

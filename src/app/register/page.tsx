@@ -6,6 +6,7 @@ import RegisterHeader from "../../components/register/register-header"
 import PDPAModal from "../../components/register/pdpa-modal"
 import { useRouter } from "next/navigation"
 import liff from "@line/liff"
+import RegisterConsoleLog from "../../components/register/registerConsoleLog"
 
 
 export default function RegisterPage() {
@@ -95,6 +96,7 @@ export default function RegisterPage() {
 
   return (
     <main className="w-full">
+      <RegisterConsoleLog pageName="Register" />
       <div className="register-container h-auto flex-start-center flex-col">
         <div className="register-card">
           <RegisterHeader profileImage={profileImage} />

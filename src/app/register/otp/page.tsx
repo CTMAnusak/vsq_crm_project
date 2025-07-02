@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation"
 import RegisterHeader from "../../../components/register/register-header"
 import OTPSkeleton from "../../../components/register/register-skeleton/otp-skeleton"
 import liff from "@line/liff"
+import RegisterConsoleLog from "../../../components/register/registerConsoleLog"
 
 type FormData = {
   firstName: string
@@ -153,6 +154,7 @@ export default function OTPPage() {
 
   return (
     <div className="register-container h-auto flex-start-center flex-col">
+      <RegisterConsoleLog pageName="OTP" />
       <div className="register-card">
         <RegisterHeader profileImage={profileImage} />
         <div className="register-content relative flex-start-center flex-col mx-auto w-651 mt-50 mb-w-651 mb-mt-50 mb-445 mb-mb-445">
