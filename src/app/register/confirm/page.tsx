@@ -8,6 +8,7 @@ import ButtonSubmit from "../../../components/register/button-submit"
 import ConfirmSkeleton from "../../../components/register/register-skeleton/confirm-skeleton"
 import liff from "@line/liff"
 import RegisterConsoleLog from "../../../components/register/registerConsoleLog"
+import HideHeaderFooter from "../../../components/register/HideHeaderFooter"
 
 type FormData = {
   firstName: string
@@ -44,20 +45,6 @@ export default function ConfirmPage() {
       }
     }
     initializeLiff()
-
-    // เพิ่ม class ให้ header
-    const header = document.querySelector("header");
-    if (header) header.classList.add("hide-header-footer");
-
-    // เพิ่ม class ให้ footer
-    const footer = document.querySelector("footer");
-    if (footer) footer.classList.add("hide-header-footer");
-
-    // cleanup (ลบ class เมื่อออกจากเพจนี้)
-    return () => {
-      if (header) header.classList.remove("hide-header-footer");
-      if (footer) footer.classList.remove("hide-header-footer");
-    };
   }, [router])
 
   const handleEdit = () => {
@@ -98,6 +85,7 @@ export default function ConfirmPage() {
 
   return (
     <div className="register-container h-auto flex-start-center flex-col">
+      <HideHeaderFooter />
       <RegisterConsoleLog pageName="Confirm" />
       <div className="register-card">
         {/* Header เหมือนหน้า register */}

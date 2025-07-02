@@ -8,6 +8,7 @@ import RegisterHeader from "../../../components/register/register-header"
 import OTPSkeleton from "../../../components/register/register-skeleton/otp-skeleton"
 import liff from "@line/liff"
 import RegisterConsoleLog from "../../../components/register/registerConsoleLog"
+import HideHeaderFooter from "../../../components/register/HideHeaderFooter"
 
 type FormData = {
   firstName: string
@@ -66,22 +67,6 @@ export default function OTPPage() {
       return () => clearTimeout(timer)
     }
   }, [countdown])
-
-  useEffect(() => {
-    // เพิ่ม class ให้ header
-    const header = document.querySelector("header");
-    if (header) header.classList.add("hide-header-footer");
-
-    // เพิ่ม class ให้ footer
-    const footer = document.querySelector("footer");
-    if (footer) footer.classList.add("hide-header-footer");
-
-    // cleanup (ลบ class เมื่อออกจากเพจนี้)
-    return () => {
-      if (header) header.classList.remove("hide-header-footer");
-      if (footer) footer.classList.remove("hide-header-footer");
-    };
-  }, []);
 
   const handleOtpChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
@@ -154,6 +139,7 @@ export default function OTPPage() {
 
   return (
     <div className="register-container h-auto flex-start-center flex-col">
+      <HideHeaderFooter />
       <RegisterConsoleLog pageName="OTP" />
       <div className="register-card">
         <RegisterHeader profileImage={profileImage} />
