@@ -32,13 +32,13 @@ export default function Appointment() {
                     <div className="branch-text-icon w-auto gap-5 mb-w-full mb-gap-5">
                       <div className="icon-day-time pd-0 gap-4 mb-pd-0 mb-gap-4">
                         <div className="img-icon">
-                          <Image src={calendar} alt="calendar" width={26} height={23}/>
+                          <Image src={calendar} alt="calendar" width={26} height={23} className="w-26 h-23 mb-w-26 mb-h-23"/>
                         </div>
                         <p className="text-day-time font-light text-lingblue font-size-23 mb-font-size-23">23 มิ.ย. 68</p>
                       </div>
                       <div className="icon-day-time pd-0 gap-4 mb-pd-0 mb-gap-4">
                         <div className="img-icon">
-                          <Image src={clock} alt="calendar" width={23} height={23}/>
+                          <Image src={clock} alt="calendar" width={23} height={23} className="w-23 h-23 mb-w-23 mb-h-23"/>
                         </div>
                         <p className="text-day-time font-light text-lingblue font-size-23 mb-font-size-23">13.00 น.</p>
                       </div> 
@@ -62,13 +62,13 @@ export default function Appointment() {
                     <div className="branch-text-icon w-auto gap-5 mb-gap-5">
                       <div className="icon-day-time pd-0 gap-4 mb-pd-0 mb-gap-4">
                         <div className="img-icon">
-                          <Image src={calendar} alt="calendar" width={26} height={23}/>
+                          <Image src={calendar} alt="calendar" width={26} height={23} className="w-26 h-23 mb-w-26 mb-h-23"/>
                         </div>
                         <p className="text-day-time font-light text-lingblue font-size-23 mb-font-size-23">17 ก.ค. 68</p>
                       </div>
                       <div className="icon-day-time pd-0 gap-4 mb-pd-0 mb-gap-4">
                         <div className="img-icon">
-                          <Image src={clock} alt="calendar" width={23} height={23}/>
+                          <Image src={clock} alt="calendar" width={23} height={23} className="w-23 h-23 mb-w-23 mb-h-23"/>
                         </div>
                         <p className="text-day-time font-light text-lingblue font-size-23 mb-font-size-23">15.30 น.</p>
                       </div> 
@@ -98,13 +98,13 @@ export default function Appointment() {
                     <div className="record-branch-text-icon w-auto gap-5 mb-gap-5">
                       <div className="record-icon-day-time pd-0 gap-4 mb-pd-0 mb-gap-4">
                         <div className="img-icon">
-                          <Image src={calendargray} alt="calendar" width={26} height={23}/>
+                          <Image src={calendargray} alt="calendar" width={26} height={23} className="w-26 h-23 mb-w-26 mb-h-23"/>
                         </div>
                         <p className="text-day-time font-light text-linggray font-size-23 mb-font-size-23">7 มิ.ย. 68</p>
                       </div>
                       <div className="record-icon-day-time pd-0 gap-4 mb-pd-0 mb-gap-4">
                         <div className="img-icon">
-                          <Image src={clockgray} alt="calendar" width={23} height={23}/>
+                          <Image src={clockgray} alt="calendar" width={23} height={23} className="w-23 h-23 mb-w-23 mb-h-23"/>
                         </div>
                         <p className="text-day-time font-light text-linggray font-size-23 mb-font-size-23">13.00 น.</p>
                       </div> 
@@ -128,13 +128,13 @@ export default function Appointment() {
                     <div className="record-branch-text-icon w-auto gap-5 mb-gap-5">
                       <div className="record-icon-day-time pd-0 gap-4 mb-pd-0 mb-gap-4">
                         <div className="img-icon">
-                          <Image src={calendargray} alt="calendar" width={26} height={23}/>
+                          <Image src={calendargray} alt="calendar" width={26} height={23} className="w-26 h-23 mb-w-26 mb-h-23" />
                         </div>
                         <p className="text-day-time font-light text-linggray font-size-23 mb-font-size-23">4 มิ.ย. 68</p>
                       </div>
                       <div className="record-icon-day-time pd-0 gap-4 mb-pd-0 mb-gap-4">
                         <div className="img-icon">
-                          <Image src={clockgray} alt="calendar" width={23} height={23}/>
+                          <Image src={clockgray} alt="calendar" width={23} height={23} className="w-23 h-23 mb-w-23 mb-h-23"/>
                         </div>
                         <p className="text-day-time font-light text-linggray font-size-23 mb-font-size-23">15.20 น.</p>
                       </div> 
