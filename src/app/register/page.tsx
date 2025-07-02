@@ -83,6 +83,16 @@ export default function RegisterPage() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!sessionStorage.getItem("sessionStarted")) {
+      localStorage.removeItem("registrationData");
+      localStorage.removeItem("vsquare_pdpa_accepted");
+      localStorage.removeItem("vsquare_line_user_id");
+      // เพิ่ม key อื่นๆ ที่ต้องการลบได้ที่นี่
+      sessionStorage.setItem("sessionStarted", "true");
+    }
+  }, []);
+
   const handleAcceptPDPA = () => {
     // This flag is temporary, only for the login-line page to check.
     localStorage.setItem("vsquare_pdpa_accepted", "true")
