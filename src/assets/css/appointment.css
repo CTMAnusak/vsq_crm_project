@@ -1,0 +1,344 @@
+.text-drakble {
+  color: #2d4c9d;
+}
+
+.text-gray-1 {
+  color: #CACACA;
+}
+
+.text-linggray {
+  color: #CACACA;
+}
+
+.section-service {
+  position: relative;
+  background-image: url("../images/course/BG-section-2.png");
+  background-size: 100% auto;
+  background-repeat: repeat;
+  min-height: 100dvh;
+  padding-bottom: 190px;
+}
+
+.section-service-bg {
+  background-image: url("../images/course/BG-section.jpg");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-drakblue {
+  color: #435b9a;
+}
+
+.text-lingblue {
+  color: #2172eb;
+}
+
+.course-list-info {
+  background-color: #fff;
+  box-shadow: 1px 0px 12px 5px rgba(0, 0, 0, 0.11);
+}
+
+.text-activity {
+  position: relative;
+  overflow: hidden;
+  padding: 0 10px;
+}
+
+.img-icon {
+  position: unset;
+  display: inherit;
+}
+
+.date-text-button {
+  background-color: #e3f1ff;
+  border-radius: 28px;
+  border: 2px solid #fff;
+}
+
+.number-date {
+  font-family: "gothammedium";
+}
+
+.day-date {
+  background-color: #f4f9ff;
+  width: 100%;
+  text-align: center;
+}
+
+.span-text-content {
+  font-family: "gothammedium";
+}
+
+.detail-text-activity {
+  border: 2px solid #a1c6ff;
+  width: 290px;
+  padding-block-end: 20px;
+}
+
+.detail-text-activity:first-child {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+}
+
+.branch-text-icon {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.icon-day-time {
+  display: flex;
+  align-items: center;
+  background-color: #eff5ff;
+  border-radius: 18px;
+  gap: 10px;
+  padding: 0px 15px;
+}
+
+.course-list-info {
+  column-gap: 20px;
+}
+
+.record-list-info {
+  background-color: #fff;
+  box-shadow: 1px 0px 12px 5px rgba(0, 0, 0, 0.11);
+  column-gap: 20px;
+}
+
+.record-date-text-button {
+  background-color: #F3F3F3;
+  border-radius: 28px;
+  border: 2px solid #fff;
+}
+
+.record-day-date {
+  background-color: #F3F3F3;
+  width: 100%;
+  text-align: center;
+}
+
+.record-text-activity {
+  position: relative;
+  overflow: hidden;
+  padding: 0 10px;
+}
+
+.record-detail-text-activity {
+  border: 2px solid #F3F3F3;
+  width: 290px;
+  padding-block-end: 20px;
+}
+
+.record-detail-text-activity:first-child {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+}
+
+.record-branch-text-icon {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.record-icon-day-time {
+  display: flex;
+  align-items: center;
+  background-color: #f8f8f8;
+  border-radius: 18px;
+  gap: 10px;
+  padding: 0px 15px;
+}
+
+@media (max-width: 1919px) {
+  .section-service {
+    padding-bottom: 9.900990099vw;
+  }
+  .course-list-info {
+    box-shadow: 0.0521104742vw 0 0.6253256905vw 0.260552371vw rgba(0, 0, 0, 0.11);
+  }
+  .text-activity {
+    padding: 0 0.5211047421vw;
+  }
+  .date-text-button {
+    border-radius: 1.4590932777vw;
+    border: 0.1042209484vw solid #fff;
+  }
+  .detail-text-activity {
+    border: 0.1042209484vw solid #a1c6ff;
+    width: 15.1120375195vw;
+    padding-block-end: 1.0422094841vw;
+  }
+  .icon-day-time {
+    border-radius: 0.9379885357vw;
+    gap: 0.5211047421vw;
+    padding: 0 0.7816571131vw;
+  }
+  .course-list-info {
+    column-gap: 1.0422094841vw;
+  }
+  .record-list-info {
+    box-shadow: 0.0521104742vw 0 0.6253256905vw 0.260552371vw rgba(0, 0, 0, 0.11);
+    column-gap: 1.0422094841vw;
+  }
+  .record-date-text-button {
+    border-radius: 1.4590932777vw;
+    border: 0.1042209484vw solid #fff;
+  }
+  .record-text-activity {
+    padding: 0 0.5211047421vw;
+  }
+  .record-detail-text-activity {
+    border: 0.1042209484vw solid #CACACA;
+    width: 15.1120375195vw;
+    padding-block-end: 1.0422094841vw;
+  }
+  .record-icon-day-time {
+    border-radius: 0.9379885357vw;
+    gap: 0.5211047421vw;
+    padding: 0 0.7816571131vw;
+  }
+}
+@media (max-width: 768px) {
+  .text-drakble {
+    color: #2d4c9d;
+  }
+  .text-gray-1 {
+    color: #CACACA;
+  }
+  .text-linggray {
+    color: #CACACA;
+  }
+  .section-service {
+    position: relative;
+    background-image: url("../images/course/BG-section-2.png");
+    background-size: 100% auto;
+    background-repeat: repeat;
+    min-height: 100dvh;
+    padding-bottom: 24.7395833333vw;
+  }
+  .section-service-bg {
+    background-image: url("../images/course/BG-section.jpg");
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+  }
+  .text-drakblue {
+    color: #435b9a;
+  }
+  .text-lingblue {
+    color: #2172eb;
+  }
+  .course-list-info {
+    background-color: #fff;
+    box-shadow: 0.1302083333vw 0 1.5625vw 0.6510416667vw rgba(0, 0, 0, 0.11);
+  }
+  .text-activity {
+    position: relative;
+    overflow: hidden;
+    padding: 0 1.3020833333vw;
+  }
+  .img-icon {
+    position: unset;
+    display: inherit;
+  }
+  .date-text-button {
+    background-color: #e3f1ff;
+    border-radius: 3.6458333333vw;
+    border: 0.2604166667vw solid #fff;
+  }
+  .number-date {
+    font-family: "gothammedium";
+  }
+  .day-date {
+    background-color: #f4f9ff;
+    width: 100%;
+    text-align: center;
+  }
+  .span-text-content {
+    font-family: "gothammedium";
+  }
+  .detail-text-activity {
+    border: 0.2604166667vw solid #a1c6ff;
+    width: 37.7604166667vw;
+    padding-block-end: 2.6041666667vw;
+  }
+  .detail-text-activity:first-child {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+  .branch-text-icon {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .icon-day-time {
+    display: flex;
+    align-items: center;
+    background-color: #eff5ff;
+    border-radius: 2.34375vw;
+    gap: 1.3020833333vw;
+    padding: 0px 1.953125vw;
+  }
+  .course-list-info {
+    column-gap: 2.6041666667vw;
+  }
+  .record-list-info {
+    background-color: #fff;
+    box-shadow: 0.1302083333vw 0 1.5625vw 0.6510416667vw rgba(0, 0, 0, 0.11);
+    column-gap: 2.6041666667vw;
+  }
+  .record-date-text-button {
+    background-color: #F3F3F3;
+    border-radius: 3.6458333333vw;
+    border: 0.2604166667vw solid #fff;
+  }
+  .record-day-date {
+    background-color: #F3F3F3;
+    width: 100%;
+    text-align: center;
+  }
+  .record-text-activity {
+    position: relative;
+    overflow: hidden;
+    padding: 0 1.3020833333vw;
+  }
+  .record-detail-text-activity {
+    border: 0.2604166667vw solid #F3F3F3;
+    width: 37.7604166667vw;
+    padding-block-end: 2.6041666667vw;
+  }
+  .record-detail-text-activity:first-child {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+  .record-branch-text-icon {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .record-icon-day-time {
+    display: flex;
+    align-items: center;
+    background-color: #f8f8f8;
+    border-radius: 2.34375vw;
+    gap: 1.3020833333vw;
+    padding: 0 1.953125vw;
+  }
+}
+
+/*# sourceMappingURL=appointment.css.map */
