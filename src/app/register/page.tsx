@@ -6,6 +6,8 @@ import RegisterHeader from "../../components/register/register-header"
 import PDPAModal from "../../components/register/pdpa-modal"
 import { useRouter } from "next/navigation"
 import liff from "@line/liff"
+import RegisterConsoleLog from "../../components/register/registerConsoleLog"
+import HideHeaderFooter from "../../components/register/HideHeaderFooter"
 
 
 export default function RegisterPage() {
@@ -66,6 +68,15 @@ export default function RegisterPage() {
     checkCompletionStatus();
   }, []);
 
+  useEffect(() => {
+    if (!sessionStorage.getItem("sessionStarted")) {
+      localStorage.removeItem("registrationData");
+      localStorage.removeItem("vsquare_pdpa_accepted");
+      localStorage.removeItem("vsquare_line_user_id");
+      // เพิ่ม key อื่นๆ ที่ต้องการลบได้ที่นี่
+      sessionStorage.setItem("sessionStarted", "true");
+    }
+  }, []);
 
   const handleAcceptPDPA = () => {
     // This flag is temporary, only for the login-line page to check.
@@ -80,6 +91,8 @@ export default function RegisterPage() {
 
   return (
     <main className="w-full">
+      <HideHeaderFooter />
+      <RegisterConsoleLog pageName="Register" />
       <div className="register-container h-auto flex-start-center flex-col">
         <div className="register-card">
           <RegisterHeader profileImage={profileImage} />

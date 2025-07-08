@@ -2,6 +2,7 @@
 
 import { useEffect } from "react"
 import ButtonSubmit from "./button-submit"
+import liff from '@line/liff'
 
 interface PDPAModalProps {
   onAccept: () => void
@@ -46,7 +47,8 @@ export default function PDPAModal({ onAccept, onDecline, onClose }: PDPAModalPro
               onClick={() => {
                 localStorage.clear();
                 sessionStorage.clear();
-                window.location.href = 'about:blank'
+                // ปิด LIFF window ทันที
+                liff.closeWindow()
                 
               }}
             >

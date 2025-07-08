@@ -1,13 +1,16 @@
 "use client"
 
-import Link from "next/link"
-import { CheckIcon } from "lucide-react"
 import Image from "next/image"
 import ButtonSubmit from "../../../components/register/button-submit"
+import { useEffect } from "react"
+import RegisterConsoleLog from "../../../components/register/registerConsoleLog"
+import HideHeaderFooter from "../../../components/register/HideHeaderFooter"
 
 export default function SuccessPage() {
   return (
     <div className="register-container h-auto flex-start-center flex-col">
+      <HideHeaderFooter />
+      <RegisterConsoleLog pageName="Success" />
 
       <div className="register-card flex-center flex-col mt-106 mb-mt-106">
         <div className="relative w-562 h-270 mb-w-562 mb-h-270">
