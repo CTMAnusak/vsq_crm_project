@@ -1,71 +1,110 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Image from "next/image"
 import RegistrationForm from "../../components/register/registration-form"
 import RegisterHeader from "../../components/register/register-header"
-import RegisterSkeleton from "../../components/register/register-skeleton/register-skeleton"
 import PDPAModal from "../../components/register/pdpa-modal"
 import { useRouter } from "next/navigation"
+import liff from "@line/liff"
+import RegisterConsoleLog from "../../components/register/registerConsoleLog"
+import HideHeaderFooter from "../../components/register/HideHeaderFooter"
 
 
 export default function RegisterPage() {
-  const [pdpaStatus, setPdpaStatus] = useState<'checking' | 'accepted' | 'declined'>('checking');
   const [activeTab, setActiveTab] = useState<"existing" | "new">("existing")
+  const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [isFlowComplete, setIsFlowComplete] = useState(true); // Start as true to prevent flash of popup on server
   const router = useRouter()
 
   useEffect(() => {
-    const pdpaAccepted = localStorage.getItem("vsquare_pdpa_accepted")
-    if (pdpaAccepted === "true") {
-      setPdpaStatus('accepted')
-    } else {
-      setPdpaStatus('declined')
+    // This single effect handles all client-side logic after hydration
+    const checkCompletionStatus = async () => {
+      // The "master" flag. If this is true, the user has done everything.
+      const registrationComplete = localStorage.getItem("vsquare_registration_complete") === "true";
+      const storedUserId = localStorage.getItem("vsquare_line_user_id");
+      
+      if (registrationComplete && storedUserId) {
+        setIsFlowComplete(true);
+        try {
+          // If flow is complete, we should be logged in. Init LIFF to get profile.
+          await liff.init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID! });
+          if (liff.isLoggedIn()) {
+            const profile = await liff.getProfile();
+            setProfileImage(profile.pictureUrl || null);
+          }
+        } catch (e) {
+          console.error("LIFF init failed (flow was complete):", e);
+        }
+        return; // Early exit, popup will not be shown
+      }
+
+      // If we are here, the flow is not complete.
+      // We must initialize LIFF to check the user's login status.
+      try {
+        await liff.init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID! });
+
+        // Check if the user has just returned from a successful LIFF login.
+        if (liff.isLoggedIn()) {
+          const profile = await liff.getProfile();
+          
+          // เก็บค่า profile.userId ไว้ใน localStorage
+          localStorage.setItem("vsquare_line_user_id", profile.userId);
+          
+          // This is the final step! The user is now fully registered.
+          localStorage.setItem("vsquare_registration_complete", "true");
+          setIsFlowComplete(true); // This will hide the popup
+          setProfileImage(profile.pictureUrl || null);
+        } else {
+          // User is NOT logged in. The flow is definitely not complete.
+          setIsFlowComplete(false); // This ensures the popup is shown.
+        }
+      } catch (err) {
+        console.error("LIFF initialization failed:", err);
+        // If LIFF fails to initialize, we assume the flow is not complete.
+        setIsFlowComplete(false);
+      }
+    };
+
+    checkCompletionStatus();
+  }, []);
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("sessionStarted")) {
+      localStorage.removeItem("registrationData");
+      localStorage.removeItem("vsquare_pdpa_accepted");
+      localStorage.removeItem("vsquare_line_user_id");
+      // เพิ่ม key อื่นๆ ที่ต้องการลบได้ที่นี่
+      sessionStorage.setItem("sessionStarted", "true");
     }
-  }, [])
+  }, []);
 
   const handleAcceptPDPA = () => {
+    // This flag is temporary, only for the login-line page to check.
     localStorage.setItem("vsquare_pdpa_accepted", "true")
-    setPdpaStatus('accepted')
+    router.push("/register/login-line")
   }
 
   const handleDeclinePDPA = () => {
     localStorage.setItem("vsquare_pdpa_accepted", "false")
-    setPdpaStatus('declined')
     router.push("/")
-  }
-
-  const checkPDPAStatus = () => {
-    const pdpaAccepted = localStorage.getItem("vsquare_pdpa_accepted")
-    return pdpaAccepted === "true"
   }
 
   return (
     <main className="w-full">
+      <HideHeaderFooter />
+      <RegisterConsoleLog pageName="Register" />
       <div className="register-container h-auto flex-start-center flex-col">
         <div className="register-card">
-          <RegisterHeader />
-          <div className="register-content  w-656 mx-auto mt-15 mb-w-656 mb-mx-auto mb-mt-15">
-            <div className="flex-start-center flex-col text-center mb-24 mb-flex-start-center mb-flex-col mb-text-center mb-mb-24">
-              <p className="font-kanit text-color-blue-deep font-normal font-size-47 mb-font-size-47">
-                เข้าร่วม <span className="font-gotham font-medium">
-                  V Club
-                </span>
-              </p>
-              <p className="text-color-blue font-normal line-12 font-size-35 mb-font-size-35 ">
-                พบกับสิทธิประโยชน์ และรางวัลสุดพิเศษ
-                <br />
-                สำหรับสมาชิกเท่านั้น !
-              </p>
-            </div>
-
+          <RegisterHeader profileImage={profileImage} />
+          <div className="register-content  w-656 mx-auto mt-40 mb-w-656 mb-mx-auto mb-mt-40">
             <RegistrationForm 
               onTabChange={setActiveTab} 
-              isPDPAAccepted={checkPDPAStatus()}
+              isPDPAAccepted={isFlowComplete}
             />
           </div>
         </div>
       </div>
-      {!checkPDPAStatus() && (
+      {!isFlowComplete && (
         <PDPAModal 
           onAccept={handleAcceptPDPA} 
           onDecline={handleDeclinePDPA} 
