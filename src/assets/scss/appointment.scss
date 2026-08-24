@@ -1,0 +1,351 @@
+$max-viewport-dt: 1919;
+$max-viewport-mb: 768;
+
+@function get-vw-dt($target) {
+    $vw-context: (
+        $max-viewport-dt * .01) * 1px;
+    @return ($target/$vw-context) * 1vw;
+}
+
+@function get-vw-mb($target) {
+    $vw-context: (
+        $max-viewport-mb * .01) * 1px;
+    @return ($target/$vw-context) * 1vw;
+}
+.text-drakble {
+    color: #2d4c9d;
+}
+.text-gray-1{
+  color: #CACACA;
+}
+.text-linggray{
+  color: #CACACA;
+}
+// .section-service {
+//     position: relative;
+//     background-image: url("../images/course/BG-section-2.png");
+//     background-size: 100% auto;
+//     background-repeat: repeat;
+//     min-height: 100dvh;
+//     padding-bottom: 190px;
+// }
+
+// .section-service-bg {
+//     background-image: url("../images/course/BG-section.jpg");
+//     background-size: 100% auto;
+//     background-repeat: no-repeat;
+//     display: flex;
+//     flex-direction: column;
+// }
+.text-drakblue {
+    color: #435b9a;
+}
+
+.text-lingblue {
+    color: #2172eb;
+}
+.course-list-info {
+    background-color: #fff;
+    box-shadow: 1px 0px 12px 5px rgba(0, 0, 0, 0.11);
+}
+
+.text-activity {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    padding: 10px 10px 15px;
+}
+
+.img-icon {
+    position: unset;
+    display: inherit;
+}
+.date-text-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 14px 0 10px;
+  background-color: #e3f1ff;
+  border-radius: 0 0 28px 28px;
+  border-top: 2px solid #fff;
+}
+.number-date {
+  font-family: 'gothammedium';
+}
+.day-date {
+  background-color: #f4f9ff;
+  width: 100%;
+  text-align: center;
+  border-radius: 28px 28px 0 0;
+}
+.span-text-content {
+  font-family: 'gothammedium';
+}
+.detail-text-activity {
+  display: block;
+  width: 100%;
+  padding-bottom: 14px;
+}
+.branch-button {
+  border-top: 2px solid #a1c6ff;
+}
+.branch-text-icon {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 8px;
+}
+.icon-day-time {
+  display: flex;
+  align-items: center;
+  background-color: #eff5ff;
+  border-radius: 18px;
+  gap: 10px;
+  padding: 0px 15px;
+}
+.course-list-info {
+  column-gap: 20px;
+}
+.record-list-info {
+  background-color: #fff;
+  box-shadow: 1px 0px 12px 5px rgba(0, 0, 0, 0.11);
+  column-gap: 20px;
+}
+.record-date-text-button {
+  background-color: #F3F3F3;
+  border-radius: 28px;
+  border: 2px solid #fff;
+}
+.record-day-date {
+  background-color: #F3F3F3;
+  width: 100%;
+  text-align: center;
+}
+.record-text-activity {
+  position: relative;
+  overflow: hidden;
+  padding: 0 10px;
+}
+.record-detail-text-activity {
+  border: 2px solid #F3F3F3;
+  width: 290px;
+  padding-block-end: 20px;
+}
+
+.record-detail-text-activity:first-child {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+}
+.record-branch-text-icon {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.record-icon-day-time {
+  display: flex;
+  align-items: center;
+  background-color: #f8f8f8;
+  border-radius: 18px;
+  gap: 10px;
+  padding: 0px 15px;
+}
+@media (max-width: 1919px) {
+    // .section-service {
+    //     padding-bottom: get-vw-dt(190px);
+    // }
+
+    .course-list-info {
+        box-shadow: get-vw-dt(1px) 0 get-vw-dt(12px) get-vw-dt(5px) rgba(0, 0, 0, 0.11);
+    }
+    
+    .text-activity {
+        padding: get-vw-dt(10px) get-vw-dt(10px) get-vw-dt(15px);
+    }
+    .date-text-button {
+      padding: get-vw-dt(14px) 0 get-vw-dt(10px);
+      border-radius: 0 0 get-vw-dt(28px) get-vw-dt(28px);
+      border-top: get-vw-dt(2px) solid #fff;
+    }
+    .day-date {
+      border-radius: get-vw-dt(28px) get-vw-dt(28px) 0 0;
+    }
+    .detail-text-activity {
+      padding-bottom: get-vw-dt(14px);
+    }
+    .branch-button {
+      border-width: get-vw-dt(2px);
+    }
+    .branch-text-icon {
+      margin-top: get-vw-dt(8px);
+    }
+    .icon-day-time {
+      border-radius: get-vw-dt(18px);
+      gap: get-vw-dt(10px);
+      padding: 0 get-vw-dt(15px);
+    }
+    .course-list-info {
+      column-gap: get-vw-dt(20px);
+    }
+    .record-list-info {
+      box-shadow: get-vw-dt(1px) 0 get-vw-dt(12px) get-vw-dt(5px) rgba(0, 0, 0, 0.11);
+      column-gap: get-vw-dt(20px);
+    }
+    .record-date-text-button {
+      border-radius: get-vw-dt(28px);
+      border: get-vw-dt(2px) solid #fff;
+    }
+
+    .record-text-activity {
+      padding: 0 get-vw-dt(10px);
+    }
+    .record-detail-text-activity {
+      border: get-vw-dt(2px) solid #CACACA;
+      width: get-vw-dt(290px);
+      padding-block-end: get-vw-dt(20px);
+    }
+    
+    .record-icon-day-time {
+      border-radius: get-vw-dt(18px);
+      gap: get-vw-dt(10px);
+      padding: 0 get-vw-dt(15px);
+    }
+}
+
+@media (max-width: 768px) {
+    .text-drakble {
+        color: #2d4c9d;
+    }
+    .text-gray-1{
+      color: #CACACA;
+    }
+    .text-linggray{
+      color: #CACACA;
+    }
+    // .section-service {
+    //     position: relative;
+    //     background-image: url("../images/course/BG-section-2.png");
+    //     background-size: 100% auto;
+    //     background-repeat: repeat;
+    //     min-height: 100dvh;
+    //     padding-bottom: get-vw-mb(190px);
+    // }
+    
+    // .section-service-bg {
+    //     background-image: url("../images/course/BG-section.jpg");
+    //     background-size: 100% auto;
+    //     background-repeat: no-repeat;
+    //     display: flex;
+    //     flex-direction: column;
+    // }
+    .text-drakblue {
+        color: #435b9a;
+    }
+    
+    .text-lingblue {
+        color: #2172eb;
+    }
+    .course-list-info {
+        background-color: #fff;
+        box-shadow: get-vw-mb(1px) 0 get-vw-mb(12px) get-vw-mb(5px) rgba(0, 0, 0, 0.11);
+    }
+    
+    .text-activity {
+        padding: get-vw-mb(10px) get-vw-mb(10px) get-vw-mb(15px);
+    }
+    
+    .img-icon {
+        position: unset;
+        display: inherit;
+    }
+    .date-text-button {
+      padding: get-vw-mb(14px) 0 get-vw-mb(10px);
+      border-radius: 0 0 get-vw-mb(28px) get-vw-mb(28px);
+      border-top: get-vw-mb(2px) solid #fff;
+    }
+    .day-date {
+      border-radius: get-vw-mb(28px) get-vw-mb(28px) 0 0;
+    }
+    .detail-text-activity {
+      padding-bottom: get-vw-mb(14px);
+    }
+    .branch-button {
+      border-width: get-vw-mb(2px);
+    }
+    .branch-text-icon {
+      margin-top: get-vw-mb(8px);
+    }
+    .branch-text-icon {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    .icon-day-time {
+      display: flex;
+      align-items: center;
+      background-color: #eff5ff;
+      border-radius: get-vw-mb(18px);
+      gap: get-vw-mb(10px);
+      padding: 0px get-vw-mb(15px);
+    }
+    .course-list-info {
+      column-gap: get-vw-mb(20px);
+    }
+    .record-list-info {
+      background-color: #fff;
+      box-shadow: get-vw-mb(1px) 0 get-vw-mb(12px) get-vw-mb(5px) rgba(0, 0, 0, 0.11);
+      column-gap: get-vw-mb(20px);
+    }
+    .record-date-text-button {
+      background-color: #F3F3F3;
+      border-radius: get-vw-mb(28px);
+      border: get-vw-mb(2px) solid #fff;
+    }
+    .record-day-date {
+      background-color: #F3F3F3;
+      width: 100%;
+      text-align: center;
+    }
+    .record-text-activity {
+      position: relative;
+      overflow: hidden;
+      padding: 0 get-vw-mb(10px);
+    }
+    .record-detail-text-activity {
+      border: get-vw-mb(2px) solid #F3F3F3;
+      width: get-vw-mb(290px);
+      padding-block-end: get-vw-mb(20px);
+    }
+    
+    .record-detail-text-activity:first-child {
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+    }
+    .record-branch-text-icon {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    .record-icon-day-time {
+      display: flex;
+      align-items: center;
+      background-color: #f8f8f8;
+      border-radius: get-vw-mb(18px);
+      gap: get-vw-mb(10px);
+      padding: 0 get-vw-mb(15px);
+    }
+}

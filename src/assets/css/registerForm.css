@@ -1,0 +1,214 @@
+@charset "UTF-8";
+input,
+select,
+textarea {
+  font-family: var(--font-family);
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 17px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--color-blue);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+.input-error,
+.register-form-input.input-error:not(:placeholder-shown) {
+  border-color: var(--color-red) !important;
+}
+
+.text-error {
+  color: var(--color-error-text);
+}
+
+.input-error:focus {
+  border-color: var(--color-red);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.5);
+}
+
+/* ===== Buttons ===== */
+button {
+  font-family: var(--font-family);
+}
+
+/* ===== Specific Components ===== */
+.text-exceeds-w-box {
+  width: calc(100% + 80px);
+}
+
+button.underline {
+  text-underline-offset: 7px;
+}
+
+/* Tabs */
+.tab-active {
+  border-color: var(--color-blue);
+  color: #2563eb;
+}
+
+.tab-inactive {
+  border-color: #e5e7eb;
+  color: #6b7280;
+}
+
+.customer-tab {
+  border: 2px solid var(--color-gray-regular);
+}
+
+.customer-tab-active {
+  border: 3px solid var(--color-blue);
+}
+
+/* Checkbox */
+.checkbox-container {
+  border-style: solid;
+  border-width: 0;
+  border-radius: 0 0 10px 0;
+}
+
+.checkbox-checked {
+  background-color: var(--color-blue);
+  border-color: var(--color-blue);
+  color: #ffffff;
+}
+
+.checkbox-unchecked {
+  background-color: var(--color-gray-regular);
+  border-color: var(--color-gray-regular);
+  color: var(--color-gray-regular);
+}
+
+/* Register Form */
+.register-form-input {
+  border: 2px solid var(--color-gray-regular);
+}
+
+/* เมื่อ focus → ทุกอย่างเป็นสีฟ้า */
+.register-form-input:focus {
+  color: var(--color-blue-deep) !important;
+  opacity: 1;
+}
+
+/* ถ้าไม่ได้แสดง placeholder = มี value แล้ว */
+.register-form-input:not(:placeholder-shown) {
+  border-color: var(--color-blue);
+  outline: none;
+}
+
+/* สำหรับ Chrome/Safari autofill */
+input.register-form-input:-webkit-autofill,
+input.register-form-input:-webkit-autofill:focus,
+input.register-form-input:-webkit-autofill:hover,
+input.register-form-input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--color-blue);
+  /* เพิ่มตรงนี้เพื่อเปลี่ยนพื้นหลัง autofill เป็นสีขาว */
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  box-shadow: 0 0 0px 1000px white inset !important;
+}
+
+input.register-form-input.text-input-error:-webkit-autofill,
+input.register-form-input.text-input-error:-webkit-autofill:focus,
+input.register-form-input.text-input-error:-webkit-autofill:hover,
+input.register-form-input.text-input-error:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--color-red);
+}
+
+.text-input-error {
+  color: var(--color-red);
+}
+
+.customer-tab-active {
+  border: 3px solid var(--color-blue);
+}
+
+/**************** ขนาดหน้าจอ ไม่เกิน 1919  ****************/
+@media (max-width: 1919px) {
+  input,
+  select,
+  textarea {
+    padding: 0.6253256905vw 0.8337675873vw;
+    border-radius: 0.8858780615vw;
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    box-shadow: 0 0 0 0.1563314226vw rgba(59, 130, 246, 0.5);
+  }
+  .input-error:focus {
+    box-shadow: 0 0 0 0.1563314226vw rgba(239, 68, 68, 0.5);
+  }
+  /* ===== Specific Components ===== */
+  .text-exceeds-w-box {
+    width: calc(100% + 4.1688379364vw);
+  }
+  button.underline {
+    text-underline-offset: 0.3647733194vw;
+  }
+  /* Tabs */
+  .customer-tab {
+    border: 0.1042209484vw solid var(--color-gray-regular);
+  }
+  .customer-tab-active {
+    border: 0.1563314226vw solid var(--color-blue);
+  }
+  /* Checkbox */
+  .checkbox-container {
+    border-radius: 0 0 0.5211047421vw 0;
+  }
+  /* Register Form */
+  .register-form-input {
+    border: 0.1042209484vw solid var(--color-gray-regular);
+  }
+  .customer-tab-active {
+    border: 0.1563314226vw solid var(--color-blue);
+  }
+}
+/**************** ขนาดหน้าจอ ไม่เกิน 768  ****************/
+@media (max-width: 768px) {
+  input,
+  select,
+  textarea {
+    padding: 1.5625vw 2.0833333333vw;
+    border-radius: 2.2135416667vw;
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    box-shadow: 0 0 0 0.390625vw rgba(59, 130, 246, 0.5);
+  }
+  .input-error:focus {
+    box-shadow: 0 0 0 0.390625vw rgba(239, 68, 68, 0.5);
+  }
+  /* ===== Specific Components ===== */
+  .text-exceeds-w-box {
+    width: calc(100% + 10.4166666667vw);
+  }
+  button.underline {
+    text-underline-offset: 0.9114583333vw;
+  }
+  /* Tabs */
+  .customer-tab {
+    border: 0.2604166667vw solid var(--color-gray-regular);
+  }
+  .customer-tab-active {
+    border: 0.390625vw solid var(--color-blue);
+  }
+  /* Checkbox */
+  .checkbox-container {
+    border-radius: 0 0 1.3020833333vw 0;
+  }
+  /* Register Form */
+  .register-form-input {
+    border: 0.2604166667vw solid var(--color-gray-regular);
+  }
+  .customer-tab-active {
+    border: 0.390625vw solid var(--color-blue);
+  }
+}
+
+/*# sourceMappingURL=registerForm.css.map */

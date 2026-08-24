@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react"
-import { Skeleton } from "@mui/material"
+// import { Skeleton } from "@mui/material"
 import RegisterHeaderSkeleton from "./register-header-skeleton"
 
 export default function ConfirmSkeleton() {
@@ -21,11 +21,11 @@ export default function ConfirmSkeleton() {
                 <React.Fragment key={index}>
                   <div className="w-full flex-start">
                     <div className="w-240 mb-w-240 h-56 mb-h-56 pr-77 mb-pr-77">
-                      <Skeleton variant="text" width="100%" height="100%" />
+                      {/* <Skeleton variant="text" width="100%" height="100%" /> */}
                     </div>
                   </div>
                   <div className="confirm-data w-full mb-w-full h-56 mb-h-56">
-                    <Skeleton variant="text" width="100%" height="100%" />
+                    {/* <Skeleton variant="text" width="100%" height="100%" /> */}
                   </div>
                 </React.Fragment>
               ))}
@@ -35,15 +35,15 @@ export default function ConfirmSkeleton() {
           {/* Buttons Skeleton */}
           <div className="flex-start-center flex-col gap-25 mb-gap-25">
             <div className="flex-center rounded-17 mb-rounded-17 w-553 h-81 mb-w-553 mb-h-81">
-              <Skeleton variant="rounded" width="100%" height="100%" />
+              {/* <Skeleton variant="rounded" width="100%" height="100%" /> */}
             </div>
             <div className="flex-center rounded-17 mb-rounded-17 w-553 h-81 mb-w-553 mb-h-81">
-              <Skeleton variant="rounded" width="100%" height="100%" />
+              {/* <Skeleton variant="rounded" width="100%" height="100%" /> */}
             </div>
           </div>
 
           <div className="mt-80 mb-60 mb-mt-80 mb-mb-60 mx-auto w-668 h-50 mb-w-668 mb-h-50">
-            <Skeleton variant="text" width="100%" height="100%" />
+            {/* <Skeleton variant="text" width="100%" height="100%" /> */}
           </div>
 
         </div>

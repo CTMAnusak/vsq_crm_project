@@ -1,0 +1,95 @@
+@charset "UTF-8";
+/* PDPA Modal */
+.pdpa-modal {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.pdpa-content {
+  height: 87dvh;
+  background-color: var(--color-light-surface);
+  box-shadow: 0px 1px 13px #4572a7;
+}
+
+.headText-pdpa {
+  color: var(--color-blue);
+  display: inline;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 2px;
+}
+
+.box-text-pdpa {
+  height: calc(77dvh - 43px - 110px);
+  background-image: url("../images/register/shadow_pdpa.png");
+  background-size: 100% auto;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+}
+
+.text-indent {
+  text-indent: 50px;
+}
+
+.text-gray {
+  color: #333;
+}
+
+.custom-scrollbar strong {
+  color: #111;
+  font-weight: 500;
+}
+
+.custom-scrollbar ul,
+.custom-scrollbar ul > li {
+  list-style: disc;
+}
+
+.custom-scrollbar ol,
+.custom-scrollbar ol > li {
+  list-style: decimal;
+}
+
+.custom-scrollbar ul,
+.custom-scrollbar ol {
+  padding-left: 30px;
+}
+
+.custom-scrollbar hr {
+  border: 0;
+  height: 1px;
+  background-color: #ccc;
+}
+
+@media (max-width: 1919px) {
+  .pdpa-content {
+    box-shadow: 0 1px 0.6774361647vw #4572a7;
+  }
+  .headText-pdpa {
+    text-underline-offset: 0.260552371vw;
+    text-decoration-thickness: 0.1042209484vw;
+  }
+  .box-text-pdpa {
+    height: calc(77dvh - 2.2407503908vw - 5.7321521626vw);
+  }
+  .text-indent {
+    text-indent: 2.6055237103vw;
+  }
+}
+/**************** ขนาดหน้าจอ ไม่เกิน 768  ****************/
+@media (max-width: 768px) {
+  .pdpa-content {
+    box-shadow: 0 1px 1.6927083333vw #4572a7;
+  }
+  .headText-pdpa {
+    text-underline-offset: 0.6510416667vw;
+    text-decoration-thickness: 0.2604166667vw;
+  }
+  .box-text-pdpa {
+    height: calc(77dvh - 5.5989583333vw - 14.3229166667vw);
+  }
+  .text-indent {
+    text-indent: 6.5104166667vw;
+  }
+}
+
+/*# sourceMappingURL=termsModal.css.map */

@@ -15,22 +15,22 @@ $max-viewport-mb: 768;
 .text-drakble {
     color: #2d4c9d;
 }
-.section-service {
-    position: relative;
-    background-image: url("../images/course/BG-section-2.png");
-    background-size: 100% auto;
-    background-repeat: repeat;
-    min-height: 100dvh;
-    padding-bottom: 120px;
-}
+// .section-service {
+//     position: relative;
+//     background-image: url("../images/course/BG-section-2.png");
+//     background-size: 100% auto;
+//     background-repeat: repeat;
+//     min-height: 100dvh;
+//     padding-bottom: 120px;
+// }
 
-.section-service-bg {
-    background-image: url("../images/course/BG-section.jpg");
-    background-size: 100% auto;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-}
+// .section-service-bg {
+//     background-image: url("../images/course/BG-section.jpg");
+//     background-size: 100% auto;
+//     background-repeat: no-repeat;
+//     display: flex;
+//     flex-direction: column;
+// }
 .course-list-info {
     background-color: #fff;
     box-shadow: 1px 0px 12px 5px rgba(0, 0, 0, 0.11);
@@ -75,9 +75,9 @@ $max-viewport-mb: 768;
     font-family: 'gothammedium';
 }
 @media (max-width: 1919px) {
-    .section-service {
-        padding-bottom: get-vw-dt(120px);
-    }
+    // .section-service {
+    //     padding-bottom: get-vw-dt(120px);
+    // }
     .course-list-info {
         box-shadow: get-vw-dt(1px) get-vw-dt(0px) get-vw-dt(12px) get-vw-dt(5px) rgba(0, 0, 0, 0.11);
     }
@@ -96,22 +96,22 @@ $max-viewport-mb: 768;
     .text-drakble {
         color: #2d4c9d;
     }
-    .section-service {
-        position: relative;
-        background-image: url("../images/course/BG-section-2.png");
-        background-size: 100% auto;
-        background-repeat: repeat;
-        min-height: 100dvh;
-        padding-bottom: get-vw-mb(120px);
-    }
+    // .section-service {
+    //     position: relative;
+    //     background-image: url("../images/course/BG-section-2.png");
+    //     background-size: 100% auto;
+    //     background-repeat: repeat;
+    //     min-height: 100dvh;
+    //     padding-bottom: get-vw-mb(120px);
+    // }
     
-    .section-service-bg {
-        background-image: url("../images/course/BG-section.jpg");
-        background-size: 100% auto;
-        background-repeat: no-repeat;
-        display: flex;
-        flex-direction: column;
-    }
+    // .section-service-bg {
+    //     background-image: url("../images/course/BG-section.jpg");
+    //     background-size: 100% auto;
+    //     background-repeat: no-repeat;
+    //     display: flex;
+    //     flex-direction: column;
+    // }
     .course-list-info {
         background-color: #fff;
         box-shadow: get-vw-mb(1px) get-vw-mb(0px) get-vw-mb(12px) get-vw-mb(5px) rgba(0, 0, 0, 0.11);

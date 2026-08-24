@@ -1,0 +1,37 @@
+.register-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 353px;
+  background-image: url("../images/register/swan_head.png");
+  background-size: 100% auto;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+}
+
+.register-profile-img {
+  border: 10px solid #f6f9fc;
+  box-shadow: 0 3px 4px rgba(69, 114, 167, 0.35);
+}
+
+@media (max-width: 1919px) {
+  .register-header {
+    height: 18.3949973945vw;
+  }
+  .register-profile-img {
+    border: 0.5211047421vw solid #f6f9fc;
+    box-shadow: 0 0.1563314226vw 0.2084418968vw rgba(69, 114, 167, 0.35);
+  }
+}
+@media (max-width: 768px) {
+  .register-header {
+    height: 45.9635416667vw;
+  }
+  .register-profile-img {
+    border: 1.3020833333vw solid #f6f9fc;
+    box-shadow: 0 0.390625vw 0.5208333333vw rgba(69, 114, 167, 0.35);
+  }
+}
+
+/*# sourceMappingURL=registerHeader.css.map */

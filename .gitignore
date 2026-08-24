@@ -42,3 +42,5 @@ next-env.d.ts
 
 # Ignore local history from Cursor/VS Code extension
 .history/
+
+/src/generated/prisma

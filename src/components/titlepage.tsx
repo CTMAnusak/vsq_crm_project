@@ -13,13 +13,11 @@ export default function Titlepage({title}) {
 
   const handleClick = () => {
     if (OpenFilter) {
-      console.log(OpenFilter);
       setOpenFilter(false);
     } else {
       setOpenFilter(true);
     }
   };
-
 
   return (
     <div className="title relative flex">
@@ -30,7 +28,7 @@ export default function Titlepage({title}) {
           </h2>
           <div className="icon-title pr-49 mb-pr-49">
           <button className="btn-filter" onClick={handleClick}>
-          <Image src={icontitle} alt="icontitle"  width={34} height={25} data-target="redem-1" className="icon-img" />
+          <Image src={icontitle} alt="icontitle"  width={34} height={25} data-target="redem-1" className="icon-img w-34 h-25 mb-w-34 mb-h-25" />
           </button>
           </div>
         </div>

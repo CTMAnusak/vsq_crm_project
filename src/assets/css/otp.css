@@ -1,0 +1,72 @@
+@charset "UTF-8";
+/* Otp Page */
+/* OTP Input */
+.otp-input {
+  border: 3px solid var(--color-blue);
+}
+
+.otp-input.input-error {
+  color: var(--color-red-base);
+  border-color: var(--color-red);
+}
+
+.otp-input-error,
+.otp-input.otp-input-error {
+  color: var(--color-red-base);
+  border-color: var(--color-red-base);
+}
+
+.otp-input input,
+.otp-input input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.otp-input-error input {
+  color: var(--color-red-base);
+}
+
+.otp-input input:placeholder-shown,
+.otp-input input::placeholder {
+  font-size: 62px;
+  color: var(--color-blue);
+  opacity: 1;
+}
+
+.otp-input.disabled {
+  color: #fff;
+  pointer-events: none;
+  border-color: var(--color-gray-soft);
+  background-color: var(--color-gray-soft);
+}
+
+.otp-input.disabled input {
+  color: #fff;
+}
+
+/**************** ขนาดหน้าจอ ไม่เกิน 1919  ****************/
+@media (max-width: 1919px) {
+  /* Otp Page */
+  /* OTP Input */
+  .otp-input {
+    border: 0.1563314226vw solid var(--color-blue);
+  }
+  .otp-input input:placeholder-shown,
+  .otp-input input::placeholder {
+    font-size: 3.2308494007vw;
+  }
+}
+/**************** ขนาดหน้าจอ ไม่เกิน 768  ****************/
+@media (max-width: 768px) {
+  /* Otp Page */
+  /* OTP Input */
+  .otp-input {
+    border: 0.390625vw solid var(--color-blue);
+  }
+  .otp-input input:placeholder-shown,
+  .otp-input input::placeholder {
+    font-size: 8.0729166667vw;
+  }
+}
+
+/*# sourceMappingURL=otp.css.map */

@@ -1,60 +1,146 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { CheckIcon } from "lucide-react"
-import Image from "next/image"
-import ButtonSubmit from "../../../components/register/button-submit"
+import Image from "next/image";
+import { useEffect } from "react";
+import ButtonSubmit from "@/components/register/button-submit";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import SkeletonHome from "@/components/SkeletonHome";
+
+import logo from "@/assets/images/register/vsq-text-logo.png";
+import bgSuccess from "@/assets/images/register/bg-success.png";
+import iconSuccess from "@/assets/images/register/icon-success.png";
+import bgcheckIconComplete from "@/assets/images/register/check-icon-complete-page.png";
+
+import "@/assets/css/success.css";
+import "@/assets/css/pxtovw.css";
 
 export default function SuccessPage() {
   return (
-    <div className="register-container h-auto flex-start-center flex-col">
+    <>
+      <SuccessContent />
+    </>
+  );
+}
 
-      <div className="register-card flex-center flex-col mt-106 mb-mt-106">
-        <div className="relative w-562 h-270 mb-w-562 mb-h-270">
-          <Image
-            src="/register/vsq-text-logo.png"
-            alt="VSquare Clinic Logo"
-            fill
-            className="w-auto h-full mx-auto"
-          />
-        </div>
-        <div className="register-content h-auto flex-start-center flex-col mx-auto w-700 mb-244  mb-w-700 mb-mb-244">
-          <div className="flex flex-col items-center">
-            <div className="check-icon-complete relative flex-center w-768 h-431 mt-29 mb-w-768 mb-h-431 mb-mt-29">
+const SuccessContent = () => {
+  const { user, isAuthenticated, isLoading, closeWindow } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/");
+    }
+  }, [user, isAuthenticated, router]);
+
+  if (!isLoading && !isAuthenticated) {
+    return (
+      <main className="w-full">
+        <div className="register-container">
+          <div className="w-full pt-106 mb-pt-106">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 40 }}
+              transition={{
+                duration: 0.9,
+                ease: [0.17, 0.55, 0.55, 1],
+              }}  
+              className="relative w-562 mx-auto mb-w-562">
               <Image
-              src="/register/check-icon-complete-page.png"
-              alt="VSquare Clinic Logo"
-              fill
-              className="w-full h-auto mx-auto"
-            />
+                src={logo}
+                alt="VSquare Clinic Logo"
+                className="w-full h-auto mx-auto"
+              />
+            </motion.div>
+            <div className="relative w-full pt-29 mb-pt-29 pb-244 mb-pb-244">
+              <div className="absolute top--85 left-0 w-full mb-top--85">
+                <Image
+                  src={bgSuccess}
+                  alt="bg"
+                  className="w-full h-auto mx-auto"
+                />
+              </div>
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 40 }}
+                transition={{
+                  duration: 0.9,
+                  ease: [0.17, 0.55, 0.55, 1],
+                  delay: 0.1,
+                }} 
+                className="relative w-291 mx-auto z-9 mb-w-291">
+                <Image
+                  src={iconSuccess}
+                  alt="icon"
+                  className="w-full h-auto mx-auto"
+                />
+              </motion.div>
+              <div className="relative w-490 mx-auto mb-w-490">
+                <motion.p
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 40 }}
+                  transition={{
+                    duration: 0.9,
+                    ease: [0.17, 0.55, 0.55, 1],
+                    delay: 0.2,
+                  }}
+                  className="character-divider w-full text-color-blue-deep line-14 font-normal text-center mt-19 mb-mt-19 pb-63 font-size-54 mb-pb-63 mb-font-size-54">
+                  การลงทะเบียนสมาชิก
+                  <br />
+                  เสร็จสมบูรณ์
+                </motion.p>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 40 }}
+                  transition={{
+                    duration: 0.9,
+                    ease: [0.17, 0.55, 0.55, 1],
+                    delay: 0.3,
+                  }}
+                  className="text-center text-color-blue font-normal line-14 mb-70 mt-56 font-size-39 mb-mb-70 mb-mt-56 mb-font-size-39">
+                  V Square Clinic ขอขอบคุณ
+                  <br />
+                  ติดตามสิทธิสุดพิเศษได้เลย !
+                  <br />
+                  ทาง LINE@ V Square Clinic
+                </motion.p>
+
+                <motion.button
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 40 }}
+                  transition={{
+                    duration: 0.9,
+                    ease: [0.17, 0.55, 0.55, 1],
+                    delay: 0.4,
+                  }}
+                  className="flex-center font-light font-kanit font-size-30 mb-font-size-30 rounded-17 mb-rounded-17 text-color-white-light bg-color-blue w-full h-81 mb-h-81"
+                  onClick={closeWindow}
+                >
+                  เข้าสู่ LINE@ V Square Clinic
+                </motion.button>
+              </div>
+              {/* <ButtonSubmit
+                onClick={closeWindow}
+                variant="blue_bg"
+                className="w-490 h-81 mb-w-490 mb-h-81"
+              >
+                เข้าสู่ LINE@ V Square Clinic
+              </ButtonSubmit> */}
             </div>
           </div>
-
-
-            <p className="character-divider text-color-blue-deep line-14 font-normal text-center mt-19 mb-mt-19 pb-63 font-size-54  mb-pb-63 mb-font-size-54">
-              การลงทะเบียนสมาชิก
-              <br />
-              เสร็จสมบูรณ์
-            </p>
-
-            <p className="text-center text-color-blue font-normal line-14 mb-70 mt-56 font-size-39  mb-mb-70 mb-mt-56 mb-font-size-39">
-              V Square Clinic ขอขอบคุณ
-              <br />
-              ติดตามสิทธิสุดพิเศษได้เลย !
-              <br />
-              ทาง LINE@ V Square Clinic
-            </p>
-
-            <ButtonSubmit 
-              href="#"
-              variant="blue_bg"
-              className="w-490 h-81 mb-w-490 mb-h-81"
-            >
-              เข้าสู่ LINE@ V Square Clinic
-            </ButtonSubmit>
-          </div>
         </div>
-      </div>
+      </main>
+    )
+  }
 
+  return (
+    <SkeletonHome />
   )
 }

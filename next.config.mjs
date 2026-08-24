@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    // allowedDevOrigins: [
+    //     'staging-crm-frontend.vsqdev.com',
+    //     'member.vsquareclinic.com',
+    // ],
     images: {
         remotePatterns: [
             {
@@ -10,6 +14,11 @@ const nextConfig = {
             },
         ],
     },
+    // devIndicators: {
+    //     allowedDevOrigins: ["https://*.ngrok-free.app"],
+    // },
+    // ปิด development indicators ทั้งหมด (ไม่แสดง icon ใดๆ)
+    devIndicators: false,
 };
 
 export default nextConfig;

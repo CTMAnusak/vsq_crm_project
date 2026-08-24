@@ -1,128 +1,208 @@
-"use client"
+"use client";
 
-import React from "react"
-import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
-import Image from "next/image"
-import RegisterHeader from "../../../components/register/register-header"
-import ButtonSubmit from "../../../components/register/button-submit"
-import ConfirmSkeleton from "../../../components/register/register-skeleton/confirm-skeleton"
-import liff from "@line/liff"
+import Image from "next/image";
+import { useState, useEffect, Fragment } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
+import { type RegistrationSessionData } from "@/types";
+import RegisterHeader from "@/components/register/RegisterHeader";
+import RegisterForm from "@/components/register/RegisterForm";
+import { motion } from "framer-motion";
 
-type FormData = {
-  firstName: string
-  lastName: string
-  phone: string
-  email: string
-  isExistingCustomer?: boolean // เพิ่มฟิลด์เพื่อระบุว่าเป็นลูกค้าเดิมหรือลูกค้าใหม่
-}
+import "@/assets/css/register.css";
+import "@/assets/css/confirm.css";
+import "@/assets/css/pxtovw.css";
+
+import spinnerUrl from "@/assets/images/spinner.svg";
 
 export default function ConfirmPage() {
-  const router = useRouter()
-  const [formData, setFormData] = useState<FormData | null>(null)
-  const [profileImage, setProfileImage] = useState<string | null>(null)
+  return (
+    <>
+      <ConfirmContent />
+    </>
+  );
+}
+
+const ConfirmContent = () => {
+  const {user, isAuthenticated, isLoading} = useAuth();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [registrationData, setRegistrationData] = useState<RegistrationSessionData | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
-    // ดึงข้อมูลจาก localStorage
-    const storedData = localStorage.getItem("registrationData")
-    if (storedData) {
-      setFormData(JSON.parse(storedData))
+    const data = JSON.parse(
+      sessionStorage.getItem("registrationData") || "null"
+    );
+
+    if (!isLoading && (!data?.lineUserId || !data?.first_name || !data?.last_name || !data?.tel_no)) {
+      router.push("/register");
     } else {
-      // ถ้าไม่มีข้อมูล ให้กลับไปหน้าลงทะเบียน
-      router.push("/register")
+      setRegistrationData(data);
     }
+  }, [isAuthenticated, isLoading, router]);
 
-    const initializeLiff = async () => {
-      try {
-        await liff.init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID! })
-        if (liff.isLoggedIn()) {
-          const profile = await liff.getProfile()
-          setProfileImage(profile.pictureUrl || null)
-        }
-      } catch (err) {
-        console.error("LIFF initialization failed on confirm page:", err)
-      }
+  const confirmFields = registrationData ? [
+    { label: "ชื่อ :", value: registrationData.first_name },
+    { label: "นามสกุล :", value: registrationData.last_name },
+    { label: "Email :", value: registrationData.email ?? "" },
+    { label: "เบอร์โทรศัพท์ :", value: registrationData.tel_no },
+  ] : [];
+
+  const handleConfirm = async () => {
+    if (!registrationData) {
+      console.error("Registration data is not available");
+      return;
     }
-    initializeLiff()
-  }, [router])
+    setIsSubmitting(true);
+    router.push("/register/otp");
+  };
 
-  const handleEdit = () => {
-    if (formData) {
-      // ตรวจสอบสถานะ PDPA ก่อนบันทึกข้อมูล
-      const pdpaAccepted = localStorage.getItem("vsquare_pdpa_accepted")
-      if (pdpaAccepted === "true") {
-        // เก็บข้อมูลที่ต้องการแก้ไขไว้ใน localStorage พร้อมสถานะ PDPA
-        const dataWithPDPA = {
-          ...formData,
-          isPDPAAccepted: true
-        }
-        localStorage.setItem("editingRegistrationData", JSON.stringify(dataWithPDPA))
-        router.push("/register")
-      } else {
-        // ถ้ายังไม่ยอมรับ PDPA ให้กลับไปหน้าแรก
-        router.push("/")
-      }
-    }
-  }
+  const handleEdit = async () => {
+    router.push("/register");
+  };
 
-  const handleConfirm = () => {
-    router.push("/register/otp")
-  }
-
-  if (!formData) {
+  if (isLoading || !registrationData) {
     return (
-      <ConfirmSkeleton />
-    )
-  }
-
-  const confirmFields = [
-    { label: "ชื่อ :", value: formData.firstName },
-    { label: "นามสกุล :", value: formData.lastName },
-    { label: "Email :", value: formData.email },
-    { label: "เบอร์โทรศัพท์ :", value: formData.phone },
-  ];
-
-  return (
-    <div className="register-container h-auto flex-start-center flex-col">
-      <div className="register-card">
-        {/* Header เหมือนหน้า register */}
-        <RegisterHeader profileImage={profileImage} />
-        <div className="register-content w-656 mx-auto mt-60  mb-w-656 mb-mx-auto mb-mt-60">
-          {/* กล่องแสดงข้อมูลยืนยัน */}
-          <div className="bg-white w-651 mb-59 pt-80 pl-50 pr-50 pb-80 rounded-10  mb-w-651 mb-mb-59 mb-pt-80 mb-pl-50 mb-pr-50 mb-pb-80 mb-rounded-10">
-            <div className="confirm-data-box grid grid-cols-2">
-              {confirmFields.map((item, idx) => (
-                <React.Fragment key={idx}>
-                  <div className="confirm-text font-size-35 mb-font-size-35 font-normal text-color-blue text-left pr-46 mb-pr-46">{item.label}</div>
-                  <div className="confirm-data font-size-35 mb-font-size-35 font-normal text-color-blue-deep text-left">{item.value}</div>
-                </React.Fragment>
-              ))}
+      <main className="w-full">
+        <div className="register-container">
+          <div className="w-full">
+            <RegisterHeader isAuthenticated={isAuthenticated} isLoading={isLoading} profileImage={user?.profileImage} />
+            <div className="register-content w-656 mx-auto mt-40 mb-w-656 mb-mx-auto mb-mt-40">
+              <RegisterForm
+                key={user?.lineUserId || "form"}
+                isAuthenticated={isAuthenticated}
+                isLoading={isLoading}
+                profile={registrationData}
+              />
             </div>
           </div>
-          {/* ปุ่ม */}
-          <div className="flex-start-center flex-col gap-25 mb-gap-25">
-            <ButtonSubmit 
-              onClick={handleConfirm} 
-              variant="blue_bg"
-              className="w-553 h-81 mb-w-553 mb-h-81"
-            >
-              ยืนยันข้อมูล
-            </ButtonSubmit>
-            <ButtonSubmit 
-              onClick={handleEdit} 
-              variant="blue_border"
-              className="w-557 h-85 mb-w-557 mb-h-85"
-            >
-              แก้ไขข้อมูล
-            </ButtonSubmit>
-          </div>
+        </div>
+      </main>
+    );
+  }
 
-          <p className="text-exceeds-w-box translateX-minus-1-2 relative text-center text-color-blue-deep font-light top-0 left-1-2 font-size-26 mt-80 mb-60 mb-top-0 mb-left-1-2  mb-font-size-26 mb-mt-80 mb-mb-60">
-          *ชื่อ–นามสกุล ไม่ถูกต้องโปรดแจ้งได้ที่หน้าสาขา <span className="font-gotham-book font-normal font-size-24 mb-font-size-24">V Square Clinic</span>
-        </p>
-        
+  return (
+    <main className="w-full">
+      <div className="register-container">
+        <div className="w-full">
+          <RegisterHeader
+            isAuthenticated={isAuthenticated}
+            isLoading={isLoading}
+            profileImage={user?.profileImage}
+          />
+          <div className="register-content w-656 mx-auto mt-40 mb-w-656 mb-mx-auto mb-mt-40">
+            {/* กล่องแสดงข้อมูลยืนยัน */}
+            <div className="bg-white w-651 mb-59 pt-80 pl-50 pr-50 pb-80 rounded-10 mb-w-651 mb-mb-59 mb-pt-80 mb-pl-50 mb-pr-50 mb-pb-80 mb-rounded-10">
+              <div className="flex-start flex-wrap gap-row-55 mb-gap-row-55">
+                {confirmFields.map((item, idx) => (
+                  <Fragment key={idx}>
+                    <motion.div
+                      initial={{ opacity: 0, y: 40 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 40 }}
+                      transition={{
+                        duration: 0.9,
+                        ease: [0.17, 0.55, 0.55, 1],
+                        delay: 0.3 + idx * 0.1,
+                      }}
+                      className="w-210 font-size-35 mb-font-size-35 font-normal text-color-blue text-right line-14 mb-w-210"
+                    >
+                      {item.label}
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 40 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 40 }}
+                      transition={{
+                        duration: 0.9,
+                        ease: [0.17, 0.55, 0.55, 1],
+                        delay: 0.3 + idx * 0.1,
+                      }}
+                      className="w-338 font-size-35 mb-font-size-35 font-normal text-color-blue-deep text-left line-14 break-word pl-50 mb-w-338 mb-pl-50"
+                    >
+                      {item.value}
+                    </motion.div>
+                  </Fragment>
+                ))}
+              </div>
+            </div>
+            {/* ปุ่ม */}
+            <div className="flex-start-center flex-col gap-25 mb-gap-25">
+              <motion.button
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 40 }}
+                transition={{
+                  duration: 0.9,
+                  ease: [0.17, 0.55, 0.55, 1],
+                  delay: 0.7,
+                }}
+                onClick={handleConfirm}
+                className={`flex-center font-light font-kanit font-size-30 mb-font-size-30 rounded-17 mb-rounded-17 w-553 h-81 mb-w-553 mb-h-81 ${isSubmitting ? "text-color-white-light bg-color-gray-soft" : "text-color-white-light bg-color-blue"}`}>
+                {isSubmitting ? (
+                  <>
+                    <Image
+                      width={36}
+                      height={36}
+                      src={spinnerUrl.src}
+                      alt="spinner"
+                      className="w-36 h-36 mr-15 mb-w-36 mb-h-36 mb-mr-15"
+                    />
+                    {/* <img src={spinnerUrl.src} alt="spinner" className="w-36 h-36 mr-15 mb-w-36 mb-h-36 mb-mr-15" /> */}
+                    กำลังดำเนินการ...
+                  </>
+                ) : (
+                  <>ยืนยันข้อมูล</>
+                )}
+              </motion.button>
+              <motion.button 
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 40 }}
+                transition={{ 
+                  duration: 0.9,
+                  ease: [0.17, 0.55, 0.55, 1],
+                  delay: 0.8,
+                }}
+                onClick={handleEdit}
+                className="flex-center font-light font-kanit font-size-30 mb-font-size-30 rounded-17 mb-rounded-17 text-color-blue bg-white border-color-blue w-553 h-81 mb-w-553 mb-h-81">
+                แก้ไขข้อมูล
+              </motion.button>
+              {/* <ButtonSubmit
+                onClick={handleConfirm}
+                variant="blue_bg"
+                className="w-553 h-81 mb-w-553 mb-h-81"
+              >
+                ยืนยันข้อมูล
+              </ButtonSubmit>
+              <ButtonSubmit
+                onClick={handleEdit}
+                variant="blue_border"
+                className="w-557 h-85 mb-w-557 mb-h-85"
+              >
+                แก้ไขข้อมูล
+              </ButtonSubmit> */}
+            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 40 }}
+              transition={{ 
+                duration: 0.9,
+                ease: [0.17, 0.55, 0.55, 1],
+                delay: 0.9,
+              }}
+              className="text-exceeds-w-box relative flex-center-start flex-col font-size-26 mt-35 mb-mt-35">
+              <p className="text-center text-color-blue-deep font-light font-size-26 mb-font-size-26">
+                *ชื่อ–นามสกุล ไม่ถูกต้องโปรดแจ้งได้ที่หน้าสาขา{" "}
+                <span className="font-gotham-book font-normal font-size-24 mb-font-size-24">
+                  V Square Clinic
+                </span>
+              </p>
+            </motion.div>
+          </div>
         </div>
       </div>
-    </div>
-  )
-}
+    </main>
+  );
+};

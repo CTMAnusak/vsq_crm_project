@@ -1,0 +1,95 @@
+$max-viewport-nb: 1919;
+$max-viewport-mb: 768;
+
+@function get-vw-nb($target) {
+    $vw-context: ($max-viewport-nb * .01) * 1px;
+    @return ($target/$vw-context) * 1vw;
+}
+@function get-vw-mb($target) {
+    $vw-context: ($max-viewport-mb * .01) * 1px;
+    @return ($target/$vw-context) * 1vw;
+}
+
+/* PDPA Modal */
+.pdpa-modal {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.pdpa-content {
+    height: 87dvh;
+    background-color: var(--color-light-surface);
+    box-shadow: 0px 1px 13px #4572a7;
+}
+.headText-pdpa {
+    color: var(--color-blue);
+    display: inline;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    text-decoration-thickness: 2px;
+}
+.box-text-pdpa {
+    height: calc(77dvh - 43px - 110px);
+    background-image: url("../images/register/shadow_pdpa.png");
+    background-size: 100% auto;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+}
+.text-indent {
+    text-indent: 50px;
+}
+.text-gray {
+    color: #333;
+}
+.custom-scrollbar strong {
+    color: #111;
+    font-weight: 500;
+}
+.custom-scrollbar ul, 
+.custom-scrollbar ul > li {
+    list-style: disc;
+}
+.custom-scrollbar ol, 
+.custom-scrollbar ol > li {
+    list-style: decimal;
+}
+.custom-scrollbar ul, 
+.custom-scrollbar ol {
+    padding-left: 30px;
+}
+.custom-scrollbar hr {
+    border: 0;
+    height: 1px;
+    background-color: #ccc;
+}
+
+@media (max-width: 1919px) {
+    .pdpa-content {
+        box-shadow: 0 1px get-vw-nb(13px) #4572a7;
+    }
+    .headText-pdpa {
+        text-underline-offset: get-vw-nb(5px);
+        text-decoration-thickness: get-vw-nb(2px);
+    }
+    .box-text-pdpa {
+        height: calc(77dvh - get-vw-nb(43px) - get-vw-nb(110px));
+    }
+    .text-indent {
+        text-indent: get-vw-nb(50px);
+    }
+}
+
+/**************** ขนาดหน้าจอ ไม่เกิน 768  ****************/
+@media (max-width: 768px) {
+    .pdpa-content {
+        box-shadow: 0 1px get-vw-mb(13px) #4572a7;
+    }
+    .headText-pdpa {
+        text-underline-offset: get-vw-mb(5px);
+        text-decoration-thickness: get-vw-mb(2px);
+    }
+    .box-text-pdpa {
+        height: calc(77dvh - get-vw-mb(43px) - get-vw-mb(110px));
+    }
+    .text-indent {
+        text-indent: get-vw-mb(50px);
+    }
+}

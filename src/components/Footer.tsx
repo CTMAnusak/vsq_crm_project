@@ -65,7 +65,7 @@ export default function Footer() {
             icon: iconCourse, 
             activeIcon: iconCourseActive,
             notificationCount: 4, 
-            href: '/course', 
+            href: '/service', 
             label: 'บริการของคุณ' 
         },
         { 
@@ -73,7 +73,7 @@ export default function Footer() {
             icon: iconGift, 
             activeIcon: iconGiftActive,
             notificationCount: 3, 
-            href: '#gifts', 
+            href: '/course', 
             label: 'สิทธิพิเศษ' 
         },
         { 
@@ -81,14 +81,15 @@ export default function Footer() {
             icon: iconAppointment, 
             activeIcon: iconAppointmentActive,
             notificationCount: 2, 
-            href: '#gifts', 
+            href: '/appointment', 
             label: 'นัดหมาย' 
         }
     ];
 
     return (
-        <footer className="relative bottom-0 shadow-footer-container z-9 h-180 mb-h-180">
-            <div className="shadow-footer-item bg-white flex-center mx-auto w-728 h-129 rounded-80 gap-35 mb-w-728 mb-h-129 mb-rounded-80 mb-gap-35">
+        // <footer className="relative bottom-0 shadow-footer-container z-9 h-180 mb-h-180">
+        <footer className="fixed bottom-0 left-0 z-9 w-full h-180 mb-h-180">
+            <div className="shadow-footer-item shadow-footer-container bg-white flex-center mx-auto w-728 h-129 rounded-80 gap-35 mb-w-728 mb-h-129 mb-rounded-80 mb-gap-35">
                 {buttons.map(({ id, icon, activeIcon, notificationCount, href, label }) => (
                     <FooterButton
                         key={id}

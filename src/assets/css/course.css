@@ -3,21 +3,12 @@
   color: #2d4c9d;
 }
 
-.section-course {
-  position: relative;
-  background-image: url("../images/course/BG-section-2.png");
-  background-size: 100% auto;
-  background-repeat: repeat;
-  min-height: 100dvh;
-  padding-bottom: 120px;
+.text-red {
+  color: #a50000;
 }
 
-.section-course-bg {
-  background-image: url("../images/course/BG-section.jpg");
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  display: flex;
-  flex-direction: column;
+.bg-black-opacity {
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .dropdown-menu-vip-hed.sticky {
@@ -59,6 +50,16 @@
   box-shadow: 0px 0px 11px 2px rgba(0, 0, 0, 0.21);
 }
 
+.btn-dropdown.bg-gold {
+  color: #2d4c9d;
+  background-image: url("../images/course/bg-gold.png");
+}
+
+.btn-dropdown.bg-platinum {
+  color: #fff;
+  background-image: url("../images/course/bg-patinum.png");
+}
+
 .btn-dropdown:before {
   content: "";
   position: absolute;
@@ -90,9 +91,13 @@
   position: relative;
   top: -15px;
   z-index: 93;
-  cursor: pointer;
   border-radius: 0px 0px 18px 18px;
   background-color: #f6f6f6;
+}
+
+.dropdown-disable {
+  overflow: hidden;
+  border-radius: 0 0 38px 38px;
 }
 
 .dropdown-search {
@@ -176,7 +181,7 @@
   color: #b10303;
   line-height: 1.4;
   text-align: center;
-  padding: 1px 8px;
+  padding: 1px 4px;
   border: 2px solid #fefcfc;
   border-radius: 11px;
   background-color: #fff1f1;
@@ -309,7 +314,6 @@
 .text-activity {
   position: relative;
   overflow: hidden;
-  padding-top: 14px;
 }
 
 .date-text {
@@ -333,7 +337,7 @@
 
 @media (max-width: 1919px) {
   .section-course {
-    padding-bottom: 6.2532569046vw;
+    padding-bottom: 13.0276185513vw;
   }
   .dropdown-menu-vip-hed.sticky {
     top: 3.4392912976vw;
@@ -401,7 +405,7 @@
     margin-top: 0.6253256905vw;
   }
   .all-service-btn {
-    padding: 0.0521104742vw 0.4168837936vw;
+    padding: 0.0521104742vw 0.2084418968vw;
     border: 0.1042209484vw solid #fefcfc;
     border-radius: 0.5732152163vw;
   }
@@ -426,9 +430,6 @@
     height: 0.1042209484vw;
     max-width: 11.7248566962vw;
   }
-  .text-activity {
-    padding-top: 0.7295466389vw;
-  }
   .date-text {
     bottom: -0.0521104742vw;
     width: 9.1193329859vw;
@@ -439,21 +440,6 @@
 @media (max-width: 768px) {
   .text-drakble {
     color: #2d4c9d;
-  }
-  .section-course {
-    position: relative;
-    background-image: url("../images/course/BG-section-2.png");
-    background-size: 100% auto;
-    background-repeat: repeat;
-    min-height: 100dvh;
-    padding-bottom: 15.625vw;
-  }
-  .section-course-bg {
-    background-image: url("../images/course/BG-section.jpg");
-    background-size: 100% auto;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
   }
   .dropdown-menu-vip-hed.sticky {
     position: fixed;
@@ -518,7 +504,6 @@
     position: relative;
     top: -1.953125vw;
     z-index: 93;
-    cursor: pointer;
     border-radius: 0vw 0vw 2.34375vw 2.34375vw;
     background-color: #f6f6f6;
   }
@@ -595,7 +580,7 @@
     color: #b10303;
     line-height: 1.4;
     text-align: center;
-    padding: 0.1302083333vw 1.0416666667vw;
+    padding: 0.1302083333vw 0.5208333333vw;
     border: 0.2604166667vw solid #fefcfc;
     border-radius: 1.4322916667vw;
     background-color: #fff1f1;
@@ -703,11 +688,6 @@
   }
   .span-text-content {
     font-family: "gotham-book";
-  }
-  .text-activity {
-    position: relative;
-    overflow: hidden;
-    padding-top: 1.8229166667vw;
   }
   .date-text {
     position: absolute;

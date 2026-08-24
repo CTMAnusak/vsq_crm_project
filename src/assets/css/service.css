@@ -2,23 +2,6 @@
   color: #2d4c9d;
 }
 
-.section-service {
-  position: relative;
-  background-image: url("../images/course/BG-section-2.png");
-  background-size: 100% auto;
-  background-repeat: repeat;
-  min-height: 100dvh;
-  padding-bottom: 120px;
-}
-
-.section-service-bg {
-  background-image: url("../images/course/BG-section.jpg");
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  display: flex;
-  flex-direction: column;
-}
-
 .course-list-info {
   background-color: #fff;
   box-shadow: 1px 0px 12px 5px rgba(0, 0, 0, 0.11);
@@ -71,9 +54,6 @@
 }
 
 @media (max-width: 1919px) {
-  .section-service {
-    padding-bottom: 6.2532569046vw;
-  }
   .course-list-info {
     box-shadow: 0.0521104742vw 0vw 0.6253256905vw 0.260552371vw rgba(0, 0, 0, 0.11);
   }
@@ -90,21 +70,6 @@
 @media (max-width: 768px) {
   .text-drakble {
     color: #2d4c9d;
-  }
-  .section-service {
-    position: relative;
-    background-image: url("../images/course/BG-section-2.png");
-    background-size: 100% auto;
-    background-repeat: repeat;
-    min-height: 100dvh;
-    padding-bottom: 15.625vw;
-  }
-  .section-service-bg {
-    background-image: url("../images/course/BG-section.jpg");
-    background-size: 100% auto;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
   }
   .course-list-info {
     background-color: #fff;

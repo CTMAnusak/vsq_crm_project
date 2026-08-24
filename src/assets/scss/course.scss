@@ -15,23 +15,29 @@ $max-viewport-mb: 768;
 .text-drakble {
   color: #2d4c9d;
 }
-
-.section-course {
-  position: relative;
-  background-image: url("../images/course/BG-section-2.png");
-  background-size: 100% auto;
-  background-repeat: repeat;
-  min-height: 100dvh;
-  padding-bottom: 120px;
+.text-red {
+  color: #a50000;
+}
+.bg-black-opacity {
+  background-color: rgba(0,0,0,0.7);
 }
 
-.section-course-bg {
-  background-image: url("../images/course/BG-section.jpg");
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  display: flex;
-  flex-direction: column;
-}
+// .section-course {
+//   position: relative;
+//   background-image: url("../images/course/BG-section-2.png");
+//   background-size: 100% auto;
+//   background-repeat: repeat;
+//   min-height: 100dvh;
+//   padding-bottom: 250px;
+// }
+
+// .section-course-bg {
+//   background-image: url("../images/course/BG-section.jpg");
+//   background-size: 100% auto;
+//   background-repeat: no-repeat;
+//   display: flex;
+//   flex-direction: column;
+// }
 
 .dropdown-menu-vip-hed.sticky {
   position: fixed;
@@ -72,6 +78,15 @@ $max-viewport-mb: 768;
   box-shadow: 0px 0px 11px 2px rgba(0, 0, 0, 0.21);
 }
 
+.btn-dropdown.bg-gold {
+  color: #2d4c9d;
+  background-image: url("../images/course/bg-gold.png");
+}
+.btn-dropdown.bg-platinum {
+  color: #fff;
+  background-image: url("../images/course/bg-patinum.png");
+}
+
 .btn-dropdown:before {
   content: "";
   position: absolute;
@@ -103,9 +118,13 @@ $max-viewport-mb: 768;
   position: relative;
   top: -15px;
   z-index: 93;
-  cursor: pointer;
   border-radius: 0px 0px 18px 18px;
   background-color: #f6f6f6;
+}
+
+.dropdown-disable {
+  overflow: hidden;
+  border-radius: 0 0 38px 38px;
 }
 
 .dropdown-search {
@@ -189,7 +208,7 @@ $max-viewport-mb: 768;
   color: #b10303;
   line-height: 1.4;
   text-align: center;
-  padding: 1px 8px;
+  padding: 1px 4px;
   border: 2px solid #fefcfc;
   border-radius: 11px;
   background-color: #fff1f1;
@@ -322,7 +341,6 @@ $max-viewport-mb: 768;
 .text-activity {
   position: relative;
   overflow: hidden;
-  padding-top: 14px;
 }
 
 .date-text {
@@ -347,7 +365,7 @@ $max-viewport-mb: 768;
 @media (max-width: 1919px) {
   
   .section-course {
-    padding-bottom: get-vw-dt(120px);
+    padding-bottom: get-vw-dt(250px);
   }
   
   .dropdown-menu-vip-hed.sticky {
@@ -429,7 +447,7 @@ $max-viewport-mb: 768;
   }
   
   .all-service-btn {
-    padding: get-vw-dt(1px) get-vw-dt(8px);
+    padding: get-vw-dt(1px) get-vw-dt(4px);
     border: get-vw-dt(2px) solid #fefcfc;
     border-radius: get-vw-dt(11px);
   }
@@ -461,10 +479,6 @@ $max-viewport-mb: 768;
     max-width: get-vw-dt(225px);
   }
   
-  .text-activity {
-    padding-top: get-vw-dt(14px);
-  }
-  
   .date-text {
     bottom: get-vw-dt(-1px);
     width: get-vw-dt(175px);
@@ -478,22 +492,22 @@ $max-viewport-mb: 768;
     color: #2d4c9d;
   }
   
-  .section-course {
-    position: relative;
-    background-image: url("../images/course/BG-section-2.png");
-    background-size: 100% auto;
-    background-repeat: repeat;
-    min-height: 100dvh;
-    padding-bottom: get-vw-mb(120px);
-  }
+  // .section-course {
+  //   position: relative;
+  //   background-image: url("../images/course/BG-section-2.png");
+  //   background-size: 100% auto;
+  //   background-repeat: repeat;
+  //   min-height: 100dvh;
+  //   padding-bottom: get-vw-mb(250px);
+  // }
   
-  .section-course-bg {
-    background-image: url("../images/course/BG-section.jpg");
-    background-size: 100% auto;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-  }
+  // .section-course-bg {
+  //   background-image: url("../images/course/BG-section.jpg");
+  //   background-size: 100% auto;
+  //   background-repeat: no-repeat;
+  //   display: flex;
+  //   flex-direction: column;
+  // }
   
   .dropdown-menu-vip-hed.sticky {
     position: fixed;
@@ -565,7 +579,6 @@ $max-viewport-mb: 768;
     position: relative;
     top: get-vw-mb(-15px);
     z-index: 93;
-    cursor: pointer;
     border-radius: get-vw-mb(0px) get-vw-mb(0px) get-vw-mb(18px) get-vw-mb(18px);
     background-color: #f6f6f6;
   }
@@ -651,7 +664,7 @@ $max-viewport-mb: 768;
     color: #b10303;
     line-height: 1.4;
     text-align: center;
-    padding: get-vw-mb(1px) get-vw-mb(8px);
+    padding: get-vw-mb(1px) get-vw-mb(4px);
     border: get-vw-mb(2px) solid #fefcfc;
     border-radius: get-vw-mb(11px);
     background-color: #fff1f1;
@@ -780,13 +793,7 @@ $max-viewport-mb: 768;
   .span-text-content {
     font-family: "gotham-book";
   }
-  
-  .text-activity {
-    position: relative;
-    overflow: hidden;
-    padding-top: get-vw-mb(14px);
-  }
-  
+
   .date-text {
     position: absolute;
     bottom: get-vw-mb(-1px);

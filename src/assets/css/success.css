@@ -1,0 +1,20 @@
+@charset "UTF-8";
+/*Success Page*/
+.success-container {
+  background-color: #ffffff;
+  min-height: 100dvh;
+}
+
+.character-divider {
+  border-bottom: 1px solid #b5b5b5;
+}
+
+@media (max-width: 1919px) {
+  /*Success Page*/
+}
+/**************** ขนาดหน้าจอ ไม่เกิน 768  ****************/
+@media (max-width: 768px) {
+  /*Success Page*/
+}
+
+/*# sourceMappingURL=success.css.map */

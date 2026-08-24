@@ -1,0 +1,55 @@
+$max-viewport-nb: 1919;
+$max-viewport-mb: 768;
+
+@function get-vw-nb($target) {
+  $vw-context: ($max-viewport-nb * 0.01) * 1px;
+  @return ($target/$vw-context) * 1vw;
+}
+
+@function get-vw-mb($target) {
+  $vw-context: ($max-viewport-mb * 0.01) * 1px;
+  @return ($target/$vw-context) * 1vw;
+}
+
+/*Success Page*/
+.success-container {
+  background-color: #ffffff;
+  min-height: 100dvh;
+}
+.character-divider {
+  border-bottom: 1px solid #b5b5b5;
+  // width: 490px;
+}
+// .check-icon-complete {
+//   margin-top: -86px;
+// }
+// .successSkeleton-title {
+//   margin-top: -15px;
+// }
+
+@media (max-width: 1919px) {
+  /*Success Page*/
+  // .character-divider {
+  //   width: get-vw-nb(490px);
+  // }
+  // .check-icon-complete {
+  //   margin-top: get-vw-nb(-86px);
+  // }
+  // .successSkeleton-title {
+  //   margin-top: get-vw-nb(-15px);
+  // }
+}
+
+/**************** ขนาดหน้าจอ ไม่เกิน 768  ****************/
+@media (max-width: 768px) {
+  /*Success Page*/
+  // .character-divider {
+  //   width: get-vw-mb(490px);
+  // }
+  // .check-icon-complete {
+  //   margin-top: get-vw-mb(-86px);
+  // }
+  // .successSkeleton-title {
+  //   margin-top: get-vw-mb(-15px);
+  // }
+}
